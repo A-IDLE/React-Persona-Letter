@@ -1,6 +1,6 @@
 import React from 'react';
 import './LetterPage.css';  // Make sure to import the CSS styles
-import letterImage from "C:/Users/201-24/Desktop/html/React-Persona-Letter/src/images/letter_image.png"
+import letterImage from '../images/letter_image.png';
 import { Link } from 'react-router-dom';
 
 export function LetterPage() {
