@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import Main from './Main';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './Main.css';
-import  MailApp  from './mailList/mailList/mailList';
+import  MailApp  from './mailList/mailList.js';
 import LetterPage from './letterPage/LetterPage.js';
 
 
