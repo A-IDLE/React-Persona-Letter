@@ -1,0 +1,68 @@
+.table{
+    width: 80%;
+    height: 700px;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.mailbox {
+    position: absolute;
+    top: 500px; /* 적절한 값으로 조정하세요 */
+    left: 200px; /* 적절한 값으로 조정하세요 */
+    /* 다른 스타일 속성들 */
+    cursor: pointer;
+}
+
+.writingPadContainer{
+    position: absolute;
+    top: 300px; /* 적절한 값으로 조정하세요 */
+    left: 1100px; /* 적절한 값으로 조정하세요 */
+    /* 다른 스타일 속성들 */
+}
+
+.FountainPen{
+    width: 400px;
+    position: absolute;
+    top: 600px; /* 적절한 값으로 조정하세요 */
+    left: 1350px; /* 적절한 값으로 조정하세요 */
+    /* 다른 스타일 속성들 */
+}
+
+.paperAirplane{
+    width: 200px;
+    position: absolute;
+    top: 750px; /* 적절한 값으로 조정하세요 */
+    left: 1710px; /* 적절한 값으로 조정하세요 */
+    cursor: pointer; /* 마우스를 가져다 대면 포인터 모양으로 변경 */
+}
+
+.letterContainerr {
+    position: relative; /* 부모 요소에 position: relative; 설정 */
+}
+
+.letter {
+    width: 360px;
+    height: 510px;
+    resize: none; /* 크기 조절 비활성화 */
+    padding: 10px;
+    /* 다른 스타일 속성들 */
+    position: absolute; /* textarea에 position: absolute; 설정 */
+    left: 1080px; /* 원하는 위치로 조절 */
+    bottom: 70px;
+    font-size: 13px;
+    background-color: white;
+    background-attachment: local;
+    background-image:
+      linear-gradient(to right, white 10px, transparent 10px),
+      linear-gradient(to left, white 10px, transparent 10px),
+      repeating-linear-gradient(white, white 30px, #ccc 30px, #ccc 31px, white 31px);
+    line-height: 31px;
+    padding: 8px 10px;
+}
+
+.displayedLetter{
+    width: 200px;
+    position: absolute;
+    top: 300px; /* 적절한 값으로 조정하세요 */
+    right: 1350px;
+}
