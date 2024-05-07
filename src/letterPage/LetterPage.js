@@ -28,7 +28,9 @@ function LetterImage() {
 function ButtonContainer() {
   return (
     <div className='buttonContainer'>
-      <LetterButton name="편지쓰기" onClick={writeLetterHandler} />
+      <Link to="/SendLetter">
+        <LetterButton name="편지쓰기"/>
+      </Link>
       <Link to="/mail">
         <LetterButton name="편지기록" />
       </Link>
