@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f0f0;
+    color: #333;
+}
+
+.series-container {
+    max-width: 1200px; /* Adjust based on your preference */
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.character-row {
+    display: flex;
+    flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+    justify-content: space-around; /* Evenly spaces the characters across the container */
+    align-items: center; /* Vertically centers items in their flex container */
+    gap: 20px; /* Adds space between rows and items */
+}
+
+.character {
+    text-align: center; /* Centers the text under the image */
+    width: 150px; /* Sets a fixed width for each character block */
+}
+
+.character img {
+    width: 100px; /* You can adjust this width */
+    height: 100px; /* Fixed height for all images */
+    object-fit: cover; /* Ensures the image covers the set area without distorting */
+    border-radius: 50%; /* Keeps the images circular */
+    display: block; /* Removes bottom space/margin */
+    margin: 0 auto; /* Centers the image horizontally */
+}
+
+h2 {
+    color: #333;
+    text-align: center; /* Centers the series title */
+}
