@@ -1,5 +1,3 @@
-import axios from "axios";
-
 // const BACKEND_URL = process.env.BACKEND_URL;
 // const accessToken = localStorage.getItem("accessToken")
 
