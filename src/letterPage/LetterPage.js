@@ -1,6 +1,7 @@
 import React from 'react';
 import './LetterPage.css';  // Make sure to import the CSS styles
-import letterImage from "/Users/user/Documents/aix4/dev/practice/React-Persona-Letter/src/images/letter_image.png"
+import letterImage from "C:/Users/201-24/Desktop/html/React-Persona-Letter/src/images/letter_image.png"
+import { Link } from 'react-router-dom';
 
 export function LetterPage() {
   return (
@@ -19,15 +20,19 @@ function LetterImage() {
   );
 }
 
+
 function ButtonContainer() {
   return (
     <div className='buttonContainer'>
       <LetterButton name="편지쓰기" onClick={writeLetterHandler} />
-      <LetterButton name="편지기록" onClick={letterHistoryHandler} />
+      <Link to="/mail">
+        <LetterButton name="편지기록" />
+      </Link>
       <LetterButton name="뒤로가기" onClick={returnHandler} />
     </div>
   );
 }
+
 
 export const LetterButton = ({ name, onClick }) => {
   return (
