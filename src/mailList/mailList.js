@@ -1,5 +1,5 @@
 import React from 'react';
-import './mailList.css'; // mail40.css 파일을 import하여 스타일을 적용합니다.
+import '../mailList/mailList.css';
 
 function MailApp() {
     return (
