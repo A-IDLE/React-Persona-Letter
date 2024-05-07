@@ -12,6 +12,10 @@ export function LetterPage() {
   );
 }
 
+export default LetterPage;
+
+
+
 function LetterImage() {
   return (
     <div className='letterImage'>
