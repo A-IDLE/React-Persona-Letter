@@ -28,7 +28,7 @@ export default App;
 
 const CharacterButton = ({ characterName }) => {
 
-  const imageUrl = `/images/${characterName}.jpg`; // Construct the image URL
+  const imageUrl = `/images/main/${characterName}.jpg`; // Construct the image URL
 
   return (
     <div className="character">
