@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './receivedLetter.css'
-import axios from 'axios';
+import { getALetter } from '../../apis/letterApi';
 
 function ReceivedLetter() {
     const [flipped, setFlipped] = useState(false);
@@ -15,21 +15,37 @@ function ReceivedLetter() {
     const letterContentRef = useRef(null);
     const [letterSectionHeight, setLetterSectionHeight] = useState('800px');
 
-    useEffect(() => {
-        const fetchLetter = async () => {
-          try {
-            const response = await axios.get(`http://localhost:9000/getALetter/${letterId}`);
-            console.log("API Response:", response.data);  // 로그 추가
-            setLetter(response.data);
-          } catch (error) {
-            console.error('Failed to fetch letter', error);
-          }
-        };
+    // useEffect(() => {
+    //     const fetchLetter = async () => {
+    //       try {
+    //         const response = await axios.get(`http://localhost:9000/getALetter/${letterId}`);
+    //         console.log("API Response:", response.data);  // 로그 추가
+    //         setLetter(response.data);
+    //       } catch (error) {
+    //         console.error('Failed to fetch letter', error);
+    //       }
+    //     };
     
+    //     if (letterId) {
+    //       fetchLetter();
+    //     }
+    //   }, [letterId]);
+
+      useEffect(() => {
+        const fetchLetter = async () => {
+            try {
+                const response = await getALetter(letterId);
+                console.log(response)
+                setLetter(response);
+            } catch (error) {
+                console.error('Error fetching letter', error);
+            }
+        };
+
         if (letterId) {
-          fetchLetter();
+            fetchLetter();
         }
-      }, [letterId]);
+    }, [letterId]);
 
     // letter_content의 높이를 계산하여 letter_section의 높이를 설정
     useEffect(() => {
