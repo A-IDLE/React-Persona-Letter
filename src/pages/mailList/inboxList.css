@@ -19,7 +19,8 @@ body, html {
 
 .main-container {
   display: flex;
-  height: calc(100vh - 50px); /* Adjust height taking header height into account */
+  height: calc(100vh - 50px);
+    background-color: #F1EDE2; /* Adjust height taking header height into account */
 }
 
 .sidebar {

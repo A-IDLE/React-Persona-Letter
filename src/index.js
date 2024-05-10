@@ -7,6 +7,7 @@ import  MailAppInbox  from './pages/mailList/inboxList';
 import  MailAppOutbox  from './pages/mailList/outboxList';
 import { LetterPage } from './pages/letterPage/LetterPage';
 import SendLetter from './pages/sendLetter/SendLetter';
+import ReceivedLetter from './pages/receivedLetter/receivedLetter';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +19,8 @@ root.render(
     <Route path="/mailOut" element={<MailAppOutbox />} />
     <Route path="/LetterPage" element={<LetterPage/>}/>
     <Route path="/SendLetter" element={<SendLetter/>}/>
+    <Route path='/Sending' element={<Sending/>}/>
+    <Route path="/receivedLetter/:letterId" element={<ReceivedLetter />} />
   </Routes>
   </BrowserRouter>
   

@@ -1,39 +1,58 @@
-function App() {
-  return (
-    <div className="series-container">
-      <h2>Harry Potter series</h2>
-      <div className="character-row">
-        <CharacterButton characterName="Harry Potter" />
-        <CharacterButton characterName="Hermione Granger" />
-        <CharacterButton characterName="Ron Weasley" />
-        <CharacterButton characterName="Ginny Weasley" />
-        <CharacterButton characterName="Severus Snape" />
-        <CharacterButton characterName="Luna Lovegood" />
-      </div>
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { getCharacters } from "../../apis/characterApi";
+import './Main.css';
 
-      <h2>The Walking Dead</h2>
-      <div className="character-row">
-      <CharacterButton characterName="Glenn Rhee" />
-      <CharacterButton characterName="Daryl Dixon" />
-      <CharacterButton characterName="Michonne" />
-      <CharacterButton characterName="Carl Grimes" />
-      <CharacterButton characterName="Carol Peletier" />
-      <CharacterButton characterName="Maggie Greene" />
-      </div>
-    </div>
-  );
+// Character Component
+function Character({ name, imageUrl }) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/LetterPage");
+    };
+
+    return (
+        <div className="character" onClick={handleClick}>
+            <img src={imageUrl} alt={name} />
+            <p>{name}</p>
+        </div>
+    );
+}
+
+// App Component
+function App() {
+    const [seriesList, setSeriesList] = useState([]);
+
+    useEffect(() => {
+        const fetchSeriesData = async () => {
+            try {
+                const response = await getCharacters();
+                console.log(response.data);
+                setSeriesList(response.data);
+                // setSeriesList(response);
+            } catch (error) {
+                console.error('Failed to fetch series data:', error);
+            }
+        };
+
+        fetchSeriesData();
+    }, []);
+
+    return (
+        <div className="series-container">
+            {seriesList.map(series => (
+                <div key={series.series}>
+                    <h2>{series.series}</h2>
+                    <div className="character-row">
+                        {series.characters.map(character => (
+                            <Character key={character.character_name} name={character.character_name} imageUrl={character.character_image_url} />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
 }
 
 export default App;
-
-const CharacterButton = ({ characterName }) => {
-
-  const imageUrl = `/images/main/${characterName}.jpg`; // Construct the image URL
-
-  return (
-    <div className="character">
-      <img src={imageUrl} alt={characterName} />
-      <p>{characterName}</p>
-    </div>
-  );
-}
