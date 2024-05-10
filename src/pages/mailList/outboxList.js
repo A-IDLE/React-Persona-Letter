@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './mailList.css'; 
+import './inboxList.css'; 
 
 // 문자열을 주어진 길이로 자르고 필요한 경우 줄임표를 추가하는 함수
 function truncateString(str, num) {
@@ -11,7 +11,7 @@ function truncateString(str, num) {
   return str.slice(0, num) + '...';
 }
 
-function MailApp() {
+function MailAppOutbox() {
 
     const [letters, setLetters] = useState([]);
 
@@ -20,7 +20,7 @@ function MailApp() {
         
         const userId = 3;
         // 백엔드 API를 호출하여 사용자의 편지함 데이터를 가져오는 비동기 함수를 실행합니다.
-        fetch(`http://localhost:9000/inboxLetter?user_id=${userId}`)
+        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}`)
             .then(response => response.json()) 
             .then(data => {
                 console.log(data); // 데이터 콘솔로그 추가
@@ -74,4 +74,4 @@ function MailApp() {
     );
 }
 
-export default MailApp;
+export default MailAppOutbox;
