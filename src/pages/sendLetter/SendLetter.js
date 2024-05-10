@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import table from "../images/table.jpg";
-import mailbox from "../images/mailbox.png";
-import FountainPen from "../images/FountainPen.png";
-import paperAirplane from "../images/paperAirplane.png";
-import { getLetterList, writeLetter} from "../apis/letterApii";
+import { getLetterList, writeLetter} from '../../apis/letterApi';
 import "./SendLetter.css";
 
 const SendLetter = () => {
@@ -80,8 +76,8 @@ const SendLetter = () => {
 
     return (
         <div className="sendletterMainPage">
-            <img src={table} alt="책상 이미지" className="table" />
-            <img src={mailbox} alt="편지함" className="mailbox" onClick={viewLetter} />
+            <img src="/images/sendLetter/table.jpg" alt="책상 이미지" className="table" />
+            <img src="/images/sendLetter/mailbox.png" alt="편지함" className="mailbox" onClick={viewLetter} />
             {showAllLetters && (
                 <div>
                     {letters.length > 0 && (
@@ -109,9 +105,9 @@ const SendLetter = () => {
                     placeholder="여기에 편지를 작성하세요"
                 />
             </div>
-            <img src={FountainPen} alt="만년필" className="FountainPen" />
+            <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" />
             {/* 전송 버튼 */}
-            <img src={paperAirplane} alt="종이비행기" className="paperAirplane" onClick={handleSendLetter} />
+            <img src="/images/sendLetter/paperAirplane.png" alt="종이비행기" className="paperAirplane" onClick={handleSendLetter} />
         </div>
     );
 };

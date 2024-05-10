@@ -36,7 +36,7 @@ function ReceivedLetter() {
             try {
                 const response = await getALetter(letterId);
                 console.log(response)
-                setLetter(response);
+                setLetter(response.data);
             } catch (error) {
                 console.error('Error fetching letter', error);
             }

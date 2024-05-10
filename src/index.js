@@ -7,6 +7,7 @@ import  MailAppInbox  from './pages/mailList/inboxList';
 import  MailAppOutbox  from './pages/mailList/outboxList';
 import { LetterPage } from './pages/letterPage/LetterPage';
 import SendLetter from './pages/sendLetter/SendLetter';
+import Sending from './pages/sendLetter/Sending';
 import ReceivedLetter from './pages/receivedLetter/receivedLetter';
 
 

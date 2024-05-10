@@ -14,11 +14,16 @@ export const callJournalList = async () => {
 
   // 편지 리스트를 조회하는 API
 export const getLetterList = async () => {
-      return await request.get("/leadLetter");
+      return await request.get("/readLetter");
+    }
+
+  // 편지 리스트를 조회하는 API
+export const getALetter = async (letterId) => {
+      return await request.get("/getALetter/"+letterId);
     }
     // 편지를 생성하는 API
 export const writeLetter = async ({ data }) => {
-      return await request.post("/writeLetter", {data});
+      return await request.post("/writeLetter", data);
     }
 
     // 편지를 수정하는 API
