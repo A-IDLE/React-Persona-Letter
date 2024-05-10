@@ -6,6 +6,7 @@ import './Main.css';
 import  MailApp  from './mailList/mailList';
 import { LetterPage } from './letterPage/LetterPage';
 import SendLetter from './sendLetter/SendLetter';
+import Sending from './sendLetter/Sending';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,6 +17,7 @@ root.render(
     <Route path="/mail" element={<MailApp />} />
     <Route path="/LetterPage" element={<LetterPage/>}/>
     <Route path="/SendLetter" element={<SendLetter/>}/>
+    <Route path='/Sending' element={<Sending/>}/>
   </Routes>
   </BrowserRouter>
   

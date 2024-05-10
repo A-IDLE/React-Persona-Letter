@@ -61,8 +61,60 @@
 }
 
 .displayedLetter{
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     width: 200px;
     position: absolute;
     top: 300px; /* 적절한 값으로 조정하세요 */
     right: 1350px;
+}
+
+.displayedLetter p {
+    height: 200px;
+    overflow-y: auto;
+}
+
+.letterList{
+    width: 200px;
+    position: absolute;
+    top: 300px; /* 적절한 값으로 조정하세요 */
+    right: 1350px;
+}
+
+.letterGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.letterCard {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 300px;
+    padding: 20px;
+    margin-left: 250px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.letterCard h3 {
+    margin-top: 0;
+}
+
+.letterCard p {
+    color: #666;
+}
+
+.letterCard p {
+    height: 200px;
+    overflow-y: auto;
 }
