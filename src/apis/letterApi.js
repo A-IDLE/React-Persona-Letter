@@ -11,6 +11,17 @@ import { request } from "./api";
 // };
 
 
+// 개별 편지 조회 API
+export const getALetter = async (letterId) => {
+  try {
+      const response = await request.get(`/getALetter/${letterId}`);
+      console.log("API Response:", response.data); // 로그 추가
+      return response.data;
+  } catch (error) {
+      console.error('Failed to fetch letter', error);
+      throw error; // 에러를 던지면 호출한 쪽에서 처리할 수 있습니다.
+  }
+};
 
   // 편지 리스트를 조회하는 API
 export const getLetterList = async () => {
