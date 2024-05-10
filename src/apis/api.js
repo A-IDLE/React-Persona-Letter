@@ -12,7 +12,7 @@
 
 import axios from "axios";
 
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // axios 기본 인스턴스 생성
 export const request = axios.create({
