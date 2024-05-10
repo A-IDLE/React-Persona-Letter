@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', serif; /* More of a classic, old-world typeface */
+  height: 100vh;
+  background-color: #F1EDE2; /* Light parchment color for the background */
+}
 
 .header {
   color: #65564E;
@@ -27,6 +36,7 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Caveat';
 }
 
 .sidebar .menu-item:hover, .sidebar .contact:hover {
@@ -45,20 +55,55 @@
   overflow-y: scroll; /* Adds scrolling to the content area */
 }
 
+/* Table styles */
 table {
   width: 100%;
   border-collapse: collapse;
   color: #65564E; /* Dark brown for text */
 }
-th {
-  background-color: #D5D3CD; /* Light grey for header cells */
-  font-size: 16px;
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #E5E4DF; /* Added elegant dividers */
 }
 
-tbody tr:hover {
-  background-color: #D5D3CD; /* Light grey for row hover */
+th {
+  background-color: #F1EDE2; /* Modified header background color */
+  color: #65564E;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+}
+
+td {
+  font-size: 16px;
+  font-family: 'Times New Roman', serif;
 }
 
 input[type="checkbox"] {
   margin-right: 10px; /* Space out the checkbox a bit */
+  accent-color: #65564E; /* Adjusted checkbox color */
+}
+
+tbody tr:hover {
+  background-color: #E5E4DF; /* Modified hover color */
+  cursor: pointer; /* Changed cursor on hover */
+}
+
+/* Scrollbar design */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #D5D3CD; 
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #B3B1AD;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #FEFBF4;
 }
