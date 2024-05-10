@@ -1,13 +1,4 @@
 
-
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Times New Roman', serif; /* More of a classic, old-world typeface */
-  height: 100vh;
-  background-color: #F1EDE2; /* Light parchment color for the background */
-}
-
 .header {
   color: #65564E;
   padding: 15px 20px;
@@ -19,7 +10,8 @@ body, html {
 
 .main-container {
   display: flex;
-  height: calc(100vh - 50px); /* Adjust height taking header height into account */
+  height: calc(100vh - 50px);
+    background-color: #F1EDE2; /* Adjust height taking header height into account */
 }
 
 .sidebar {

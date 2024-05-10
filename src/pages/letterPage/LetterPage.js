@@ -1,6 +1,5 @@
 import React from 'react';
 import './LetterPage.css';  // Make sure to import the CSS styles
-import letterImage from '../images/letter_image.png';
 import { Link } from 'react-router-dom';
 
 export function LetterPage() {
@@ -19,7 +18,7 @@ export default LetterPage;
 function LetterImage() {
   return (
     <div className='letterImage'>
-      <img src={letterImage} alt="Letter" />
+    <img src="/images/letterPage/letter_image.png" alt="Letter Image" />
     </div>
   );
 }
@@ -28,7 +27,9 @@ function LetterImage() {
 function ButtonContainer() {
   return (
     <div className='buttonContainer'>
-      <LetterButton name="편지쓰기" onClick={writeLetterHandler} />
+      <Link to="/SendLetter">
+        <LetterButton name="편지쓰기"/>
+      </Link>
       <Link to="/mail">
         <LetterButton name="편지기록" />
       </Link>
