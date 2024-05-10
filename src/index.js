@@ -9,6 +9,7 @@ import { LetterPage } from './pages/letterPage/LetterPage';
 import SendLetter from './pages/sendLetter/SendLetter';
 import Sending from './pages/sendLetter/Sending';
 import ReceivedLetter from './pages/receivedLetter/receivedLetter';
+import LoginPage from './pages/auth/LoginPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,7 @@ root.render(
     <Route path="/SendLetter" element={<SendLetter/>}/>
     <Route path='/Sending' element={<Sending/>}/>
     <Route path="/receivedLetter/:letterId" element={<ReceivedLetter />} />
+    <Route path="login" element={<LoginPage/>}/>
   </Routes>
   </BrowserRouter>
   
