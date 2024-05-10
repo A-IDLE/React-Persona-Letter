@@ -68,7 +68,7 @@ const SendLetter = () => {
         lettersData();
     }, []);
 
-    // 다음
+    // 다음버튼
     const nextLetter = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % letters.length);
     };
