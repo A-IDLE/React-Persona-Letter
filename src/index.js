@@ -16,6 +16,7 @@ root.render(
     <Route path="/mail" element={<MailApp />} />
     <Route path="/LetterPage" element={<LetterPage/>}/>
     <Route path="/SendLetter" element={<SendLetter/>}/>
+    <Route path='/Sending' element={<Sending/>}/>
     <Route path="/receivedLetter/:letterId" element={<ReceivedLetter />} />
   </Routes>
   </BrowserRouter>
