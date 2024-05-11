@@ -33,8 +33,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
     
-    const signInWithGooglePopup = async () => {
-    
+    const handleGoogleLogin = async () => {
     
         await signInWithPopup(auth, provider)
             .then((result) => {
@@ -72,37 +71,20 @@ const LoginPage = () => {
             // 로그인 실패시 에러 출력
             console.error("Google Login Failed \n", error);
             alert("로그인 실패했습니다")
-            
         }
-       
-    
-    
     }
     
     const logoutHandler = () => {
-        console.log("LOGOUT");
-        const accessTokenBefore = localStorage.getItem("accessToken");
-        console.log(accessTokenBefore);
-    
+        // 로그아웃시 local storage에 저장된 accessToken, userId 삭제
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
         
         alert("로그아웃 되었습니다.");
-    
-    
-        const accessToken = localStorage.getItem("accessToken");
-        console.log(accessToken);
     }
 
     const testHandler = async () => {
         const response = await request.get("/test");
         console.log(response.data);
-    }
-
-
-    const handleGoogleLogin = () => {
-        console.log("Google Login is clicked");
-        signInWithGooglePopup();
     }
 
     return (
