@@ -4,26 +4,19 @@ import { getAnalytics } from "firebase/analytics";
 import 'firebase/auth';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { googleLogin } from '../../apis/auth';
-import {request} from "../../apis/api"
-
-
-const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
-const FIREBASE_AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
-const FIREBASE_PROJECT_ID = process.env.REACT_APP_FIREBASE_PROJECT_ID;
-const FIREBASE_STORAGE_BUCKET = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
-const FIREBASE_MESSAGING_SENDER_ID = process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID;
-const FIREBASE_APP_ID = process.env.REACT_APP_FIREBASE_APP_ID;
-const FIREBASE_MEASUREMENT_ID = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID;
-
+import { request } from "../../apis/api"
+import './LoginPage.css';
+import googleIcon from '../../assets/images/web_neutral_rd_ctn.svg';
+import { useNavigate } from 'react-router-dom';
 
 const firebaseConfig = {
-    apiKey: FIREBASE_API_KEY,
-    authDomain: FIREBASE_AUTH_DOMAIN,
-    projectId: FIREBASE_PROJECT_ID,
-    storageBucket: FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
-    appId: FIREBASE_APP_ID,
-    measurementId: FIREBASE_MEASUREMENT_ID
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -35,57 +28,76 @@ provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 const auth = getAuth();
 
-const signInWithGooglePopup = async () => {
-
-
-    await signInWithPopup(auth, provider)
-        .then((result) => {
-            // user's access token for firebase
-            const accessToken = result.user.accessToken;
-            // store the access token in local storage
-            localStorage.setItem("accessToken", accessToken); 
-
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-        });
-
-    const accessToken = await localStorage.getItem("accessToken");
-
-    // after firebase login, call googleLogin api
-    const response = await googleLogin( accessToken );
-    const userId = response.userId;
-
-    // store the userId in local storage
-    await localStorage.setItem("userId", userId);
-
-}
-
-const logoutHandler = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("userId");
-    console.log("Logout");
-
-
-    const accessToken =localStorage.getItem("accessToken");
-    console.log(accessToken);
-}
-
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
+    
+    const signInWithGooglePopup = async () => {
+    
+    
+        await signInWithPopup(auth, provider)
+            .then((result) => {
+                // user's access token for firebase
+                const accessToken = result.user.accessToken;
+                // access token을 local storage에 저장
+                localStorage.setItem("accessToken", accessToken);
+    
+            }).catch((error) => {
+                // 에러 핸들링
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+            });
+    
+        const accessToken = localStorage.getItem("accessToken");
+    
+        // after firebase login, call googleLogin api
+        const funcGoogleLogin = async (accessToken) => {
+            const response = await googleLogin(accessToken);
+            const userId = response.userId;
+    
+            // store the userId in local storage
+            localStorage.setItem("userId", userId);
+    
+        }
+        
+        try {
+            // 백엔드로 구글 로그인 요청
+            funcGoogleLogin(accessToken);
+            // 로그인 성공시 메인페이지로 이동
+            navigate('/');
+        }catch (error) {
+            // 로그인 실패시 에러 출력
+            console.error("Google Login Failed \n", error);
+            alert("로그인 실패했습니다")
+            
+        }
+       
+    
+    
+    }
+    
+    const logoutHandler = () => {
+        console.log("LOGOUT");
+        const accessTokenBefore = localStorage.getItem("accessToken");
+        console.log(accessTokenBefore);
+    
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userId");
+        
+        alert("로그아웃 되었습니다.");
+    
+    
+        const accessToken = localStorage.getItem("accessToken");
+        console.log(accessToken);
+    }
 
     const testHandler = async () => {
         const response = await request.get("/test");
         console.log(response.data);
     }
-    
-   
 
 
     const handleGoogleLogin = () => {
@@ -94,11 +106,20 @@ const LoginPage = () => {
     }
 
     return (
-        <div>
-            <h1>Login Page</h1>
-            <button onClick={handleGoogleLogin}>Login with Google</button>
-            <button onClick={testHandler}>Test</button>
-            <button onClick={logoutHandler}>Logout</button>
+        <div className='LoginPage'>
+            <div className='personaLetter'>
+                <h1>Persona Letter</h1>
+            </div>
+            <div className='LoginContainer'>
+
+                <div id="gSignInWrapper">
+                    <div className="google-login-button" onClick={handleGoogleLogin}>
+                        <img src={googleIcon} />
+                    </div>
+                </div>
+                <button onClick={testHandler}>Test</button>
+                <button onClick={logoutHandler}>Logout</button>
+            </div>
         </div>
     );
 }
