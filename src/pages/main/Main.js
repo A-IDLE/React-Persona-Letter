@@ -5,10 +5,11 @@ import { getCharacters } from "../../apis/characterApi";
 import './Main.css';
 
 // Character Component
-function Character({ name, imageUrl }) {
+function Character({ name, imageUrl, characterId }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
+        localStorage.setItem("characterId", characterId);
         navigate("/LetterPage");
     };
 
@@ -46,7 +47,7 @@ function App() {
                     <h2>{series.series}</h2>
                     <div className="character-row">
                         {series.characters.map(character => (
-                            <Character key={character.character_name} name={character.character_name} imageUrl={character.character_image_url} />
+                            <Character key={character.character_id} name={character.character_name} imageUrl={character.character_image_url} characterId={character.character_id} />
                         ))}
                     </div>
                 </div>

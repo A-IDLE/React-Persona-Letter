@@ -70,6 +70,7 @@ const signInWithGooglePopup = async () => {
 const logoutHandler = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userId");
+    localStorage.removeItem("characterId");
     console.log("Logout");
 
 
