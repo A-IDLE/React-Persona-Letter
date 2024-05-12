@@ -63,7 +63,7 @@ const signInWithGooglePopup = async () => {
     const userId = response.userId;
 
     // store the userId in local storage
-    await localStorage.setItem("userId", userId);
+    localStorage.setItem("userId", userId);
 
 }
 
