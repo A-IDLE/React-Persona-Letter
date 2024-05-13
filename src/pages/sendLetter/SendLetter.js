@@ -35,12 +35,14 @@ const SendLetter = () => {
         // `writeLetter` 함수를 호출할 때, 적절한 데이터 구조로 전달
         alert("편지가 전송되었습니다.");
         navigate("/sending");
+
         const data = {
             character_id: characterId,
             user_id: userId,
             letter_content: letterContent
         }
         console.log(data)
+
         const response = await writeLetter(data);
         // console.log(response.data)
       } catch (error) {
