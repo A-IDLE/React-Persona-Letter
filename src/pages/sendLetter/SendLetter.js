@@ -32,13 +32,13 @@ const SendLetter = () => {
         // `writeLetter` 함수를 호출할 때, 적절한 데이터 구조로 전달
         alert("편지가 전송되었습니다.");
         navigate("/sending");
-        const response = await writeLetter({
-          data: {
+
+        const data = {
             character_id: 2,
             user_id: userId,
             letter_content: letterContent,
-          },
-        });
+        }
+        const response = await writeLetter(data);
         // console.log(response.data)
       } catch (error) {
         alert("전송 실패:", error.message);

@@ -26,7 +26,7 @@ export const getALetter = async (letterId) => {
       return await request.get("/getALetter/"+letterId);
     }
     // 편지를 생성하는 API
-export const writeLetter = async ({ data }) => {
+export const writeLetter = async ( data ) => {
       return await request.post("/writeLetter", data);
     }
 

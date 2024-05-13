@@ -5,8 +5,8 @@ import 'firebase/auth';
 import { request } from "../../apis/api"
 import './LoginPage.css';
 import { GoogleLogin } from './GoogleLogin';
-import { Logout } from './Logout';
-import { FacebookLogin } from './FacebookLogin';
+
+
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -45,9 +45,8 @@ const LoginPage = () => {
             </div>
             <div className='LoginContainer'>
                 <GoogleLogin />
-                <FacebookLogin />
-                <button onClick={testHandler}>Test</button>
-                <Logout />
+                {/* <FacebookLogin />
+                <button onClick={testHandler}>Test</button> */}
             </div>
         </div>
     );

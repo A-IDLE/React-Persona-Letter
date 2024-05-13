@@ -40,3 +40,30 @@ h2 {
     color: #333;
     text-align: center; /* Centers the series title */
 }
+
+.logout-button {
+    cursor: pointer;
+    padding: 8px 16px;  /* Reduced padding for a smaller button */
+    margin-top : 5rem;  /* Spacing from the top of the button to other elements above */
+    margin-bottom: 5rem;  /* Spacing from the button to other elements below */
+    background-color: rgba(101, 86, 78, 0.8); /* Red color for logout to indicate an action like stopping or exiting */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for a modern look */
+    font-size: 16px; /* Smaller text size for a smaller button */
+    font-weight: bold; /* Makes the text bold */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for 3D effect */
+}
+
+.logout-button:hover, .logout-button:focus {
+    background-color: #d32f2f; /* A darker shade of red on hover for visual feedback */
+    transform: translateY(-2px); /* Slightly raise the button when hovered/focused */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover for more depth */
+}
+
+.logout-button:active {
+    background-color: #b71c1c; /* Even darker shade of red to simulate a button press */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Less shadow to simulate the button being pressed down */
+    transform: translateY(1px); /* Move button down slightly to mimic a pressing action */
+}

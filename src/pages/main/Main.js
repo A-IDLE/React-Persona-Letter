@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getCharacters } from "../../apis/characterApi";
 import './Main.css';
+import { Logout } from '../auth/Logout';
 
 // Character Component
 function Character({ name, imageUrl, characterId }) {
@@ -41,6 +42,7 @@ function App() {
     }, []);
 
     return (
+        <>
         <div className="series-container">
             {seriesList.map(series => (
                 <div key={series.series}>
@@ -53,6 +55,9 @@ function App() {
                 </div>
             ))}
         </div>
+        <Logout />
+        </>
+        
     );
 }
 
