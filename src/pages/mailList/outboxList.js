@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; 
 import './inboxList.css'; 
 
 
@@ -15,6 +15,16 @@ function truncateString(str, num) {
   return str.slice(0, num) + '...';
 }
 
+function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    };
+    return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
+  }
+  
 function MailAppOutbox() {
 
     const [letters, setLetters] = useState([]);
@@ -86,8 +96,13 @@ function MailAppOutbox() {
                                     <td>{letter.character_name}</td>
                                     <td onClick={() => handleLetterClick(letter.letter_id)}>
                                         {truncateString(letter.letter_content, 80)}
+<<<<<<< HEAD
+                                    </td>                                    
+                                    <td>{formatDateTime(letter.created_time)}</td>
+=======
                                     </td>
                                     <td>{letter.created_time}</td> 
+>>>>>>> main
                                 </tr>
                             ))}
                         </tbody>
