@@ -10,12 +10,15 @@ const SendLetter = () => {
   const [letters, setLetters] = useState([]); // 편지 목록 상태
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userId, setUserId] = useState("");
+  const [characterId, setCharacterId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     // localStorage에서 userId 가져오기
     const storedUserId = localStorage.getItem("userId");
+    const storedChId = localStorage.getItem("characterId");
     setUserId(storedUserId); // userId 상태 설정
+    setCharacterId(storedChId);
   }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
   console.log("현재 유저아이디" + userId);
@@ -34,10 +37,12 @@ const SendLetter = () => {
         navigate("/sending");
 
         const data = {
-            character_id: 2,
+            character_id: characterId,
             user_id: userId,
-            letter_content: letterContent,
+            letter_content: letterContent
         }
+        console.log(data)
+
         const response = await writeLetter(data);
         // console.log(response.data)
       } catch (error) {
