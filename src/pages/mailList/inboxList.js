@@ -21,18 +21,27 @@ function MailAppInbox() {
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
         
-        const userId = 3;
-        // 백엔드 API를 호출하여 사용자의 편지함 데이터를 가져오는 비동기 함수를 실행합니다.
-        fetch(`http://localhost:9000/inboxLetter?user_id=${userId}`)
-            .then(response => response.json()) 
-            .then(data => {
-                console.log(data); // 데이터 콘솔로그 추가
-                setLetters(data);
-            })
-            .catch(error => console.error("Fetching letters failed:", error)); 
-    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행됩니다.
+        const userId = localStorage.getItem("userId");
+        const accessToken = localStorage.getItem("accessToken"); 
+        
+        console.log("loggedin user id:", userId);
 
-    
+        fetch(`http://localhost:9000/inboxLetter?user_id=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}` // Bearer 토큰을 헤더에 추가
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setLetters(data);
+        })
+        .catch(error => console.error("Fetching letters failed:", error));
+    }, []);
+
+    const handleLetterClick = (letterId) => {
+        console.log("clicked letter id:", letterId);
+    };
+
     return (
         <div>
             
@@ -65,7 +74,9 @@ function MailAppInbox() {
                             {letters.map((letter, index) => (
                                 <tr key={index}>
                                     <td>{letter.character_name}</td>
-                                    <td>{truncateString(letter.letter_content, 30)}</td> 
+                                    <td onClick={() => handleLetterClick(letter.letter_id)}>
+                                        {truncateString(letter.letter_content, 80)}
+                                    </td>
                                     <td>{letter.created_time}</td> 
                                 </tr>
                             ))}

@@ -22,7 +22,7 @@ root.render(
     <Route path="/LetterPage" element={<LetterPage/>}/>
     <Route path="/SendLetter" element={<SendLetter/>}/>
     <Route path='/Sending' element={<Sending/>}/>
-    <Route path="/receivedLetter/:letterId" element={<ReceivedLetter />} />
+    <Route path="/letter/:letterId" element={<ReceivedLetter />} />
     <Route path="login" element={<LoginPage/>}/>
   </Routes>
   </BrowserRouter>
