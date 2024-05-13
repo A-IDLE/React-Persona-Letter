@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './inboxList.css'; 
 
+
+
+
 // 문자열을 주어진 길이로 자르고 필요한 경우 줄임표를 추가하는 함수
 function truncateString(str, num) {
   // 문자열이 주어진 길이보다 짧거나 같으면 그대로 반환합니다.
@@ -29,15 +32,16 @@ function MailAppOutbox() {
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
-        
         const userId = localStorage.getItem("userId");
+        const characterId = localStorage.getItem("characterId")
         const accessToken = localStorage.getItem("accessToken"); 
+    
+        console.log("@@@@@User, Character:", userId, characterId);
+    
         
-        console.log("loggedin user id:", userId);
-
-        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}`, {
+        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}&character_id=${characterId}`, {
             headers: {
-                'Authorization': `Bearer ${accessToken}` // Bearer 토큰을 헤더에 추가
+                'Authorization': `Bearer ${accessToken}`
             }
         })
         .then(response => response.json())
@@ -48,11 +52,16 @@ function MailAppOutbox() {
     }, []);
 
     const handleLetterClick = (letterId) => {
-        console.log("Clicked letter ID:", letterId);
-        navigate(`/letter/${letterId}`);
+        console.log("clicked letter id:", letterId);
     };
 
-    
+    const navigateToOutbox = () => {
+        navigate('/outbox'); // Navigate to the 'outbox' route when clicked
+    };
+    const navigateToInbox = () => {
+        navigate('/inbox'); // Navigate to the 'outbox' route when clicked
+    };
+
     return (
         <div>
             
@@ -62,8 +71,8 @@ function MailAppOutbox() {
                
                 <div className="sidebar">
                     <div className="contact active">Hermione Jean Granger</div>
-                    <div className="contact">받은 편지함</div>
-                    <div className="contact">보낸 편지함</div>
+                    <div className="contact" onClick={navigateToInbox}>받은 편지함</div>
+                    <div className="contact" onClick={navigateToOutbox}>보낸 편지함</div>
                     <div className="menu-item">My page</div>
                     <div className="menu-item">Log out</div>
                 </div>
@@ -87,8 +96,13 @@ function MailAppOutbox() {
                                     <td>{letter.character_name}</td>
                                     <td onClick={() => handleLetterClick(letter.letter_id)}>
                                         {truncateString(letter.letter_content, 80)}
+<<<<<<< HEAD
                                     </td>                                    
                                     <td>{formatDateTime(letter.created_time)}</td>
+=======
+                                    </td>
+                                    <td>{letter.created_time}</td> 
+>>>>>>> main
                                 </tr>
                             ))}
                         </tbody>
