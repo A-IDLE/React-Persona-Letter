@@ -22,6 +22,7 @@ const SendLetter = () => {
   }, []); // 컴포넌트가 처음 렌더링될 때만 실행
 
   console.log("현재 유저아이디" + userId);
+  console.log("현재 캐릭터아이디" + characterId)
 
   const handleInputChange = (event) => {
     setLetterContent(event.target.value);
@@ -38,7 +39,8 @@ const SendLetter = () => {
         const data = {
             character_id: characterId,
             user_id: userId,
-            letter_content: letterContent
+            letter_content: letterContent,
+            reception_status: "sending",
         }
         console.log(data)
         const response = await writeLetter(data);
@@ -52,7 +54,7 @@ const SendLetter = () => {
   // 편지 조회
   const viewLetter = async () => {
     try {
-      const response = await getLetterList(userId); // 현재 사용자의 편지 목록만 가져옴
+      const response = await getLetterList(userId,characterId); // 현재 사용자의 편지 목록만 가져옴
       setLetters(response.data);
       setIsOpen(true); // 편지함을 열어줌
     } catch (error) {
@@ -70,11 +72,11 @@ const SendLetter = () => {
 
   // 편지 조회
   useEffect(() => {
-    if (userId && isOpen) {
+    if ((userId || characterId) && isOpen) {
       // userId가 있고 편지함이 열려있을 때만 실행
       const fetchLetters = async () => {
         try {
-          const response = await getLetterList(userId); // userId를 이용하여 편지 목록 가져오기
+          const response = await getLetterList(userId,characterId); // userId를 이용하여 편지 목록 가져오기
           setLetters(response.data);
         } catch (error) {
           console.error("Failed to fetch letter data:", error);
@@ -83,7 +85,7 @@ const SendLetter = () => {
 
       fetchLetters();
     }
-  }, [userId, isOpen]); // userId나 isOpen가 변경될 때마다 실행
+  }, [userId, characterId, isOpen]); // userId나 isOpen가 변경될 때마다 실행
 
   // 다음버튼
   const nextLetter = () => {

@@ -17,8 +17,8 @@ export const allLetterList = async () => {
       return await request.get("/readLetter");
     }
 
-export const getLetterList = async (userId) => {
-      return await request.get("/readLetter/"+userId);
+export const getLetterList = async (userId,characterId) => {
+      return await request.get("/readLetter/"+userId+"/"+characterId);
     }
 
   // 편지 리스트를 조회하는 API
