@@ -13,8 +13,12 @@ export const callJournalList = async () => {
 
 
   // 편지 리스트를 조회하는 API
-export const getLetterList = async () => {
+export const allLetterList = async () => {
       return await request.get("/readLetter");
+    }
+
+export const getLetterList = async (userId) => {
+      return await request.get("/readLetter/"+userId);
     }
 
   // 편지 리스트를 조회하는 API
