@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './inboxList.css'; 
 
 
@@ -17,6 +18,7 @@ function truncateString(str, num) {
 function MailAppInbox() {
 
     const [letters, setLetters] = useState([]);
+    const navigate = useNavigate();
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
@@ -42,6 +44,14 @@ function MailAppInbox() {
         console.log("clicked letter id:", letterId);
     };
 
+    const navigateToOutbox = () => {
+        navigate('/outbox'); // Navigate to the 'outbox' route when clicked
+    };
+
+    const navigateToInbox = () => {
+        navigate('/inbox'); // Navigate to the 'outbox' route when clicked
+    };
+
     return (
         <div>
             
@@ -51,8 +61,8 @@ function MailAppInbox() {
                
                 <div className="sidebar">
                     <div className="contact active">Hermione Jean Granger</div>
-                    <div className="contact">받은 편지함</div>
-                    <div className="contact">보낸 편지함</div>
+                    <div className="contact" onClick={navigateToInbox}>받은 편지함</div>
+                    <div className="contact" onClick={navigateToOutbox}>보낸 편지함</div>
                     <div className="menu-item">My page</div>
                     <div className="menu-item">Log out</div>
                 </div>
