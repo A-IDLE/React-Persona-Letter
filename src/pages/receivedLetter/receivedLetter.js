@@ -50,7 +50,8 @@ function ReceivedLetter() {
     // letter_content의 높이를 계산하여 letter_section의 높이를 설정
     useEffect(() => {
         if (letterContentRef.current) {
-            setLetterSectionHeight(`${letterContentRef.current.offsetHeight + 100}px`); // 내용 높이 + 100px
+            const newHeight = letterContentRef.current.offsetHeight + 150;
+            setLetterSectionHeight(newHeight < 900 ? '800px' : `${newHeight}px`);
         }
     }, [letter]); // letter 데이터가 업데이트 될 때마다 실행
       
@@ -66,7 +67,7 @@ function ReceivedLetter() {
                     </div>
                 </div>
             </div>
-            <div className='letter_section' style={{ minHeight: letterSectionHeight }}>
+            <div className='letter_section' style={{ height: letterSectionHeight }}>
             <div className='letter_content' ref={letterContentRef}>
                 {letter && letter.letter_content}
                 </div>
