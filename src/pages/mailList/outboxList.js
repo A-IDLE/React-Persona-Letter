@@ -22,15 +22,16 @@ function MailAppOutbox() {
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
-        
         const userId = localStorage.getItem("userId");
+        const characterId = localStorage.getItem("characterId")
         const accessToken = localStorage.getItem("accessToken"); 
+    
+        console.log("@@@@@User, Character:", userId, characterId);
+    
         
-        console.log("loggedin user id:", userId);
-
-        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}`, {
+        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}&character_id=${characterId}`, {
             headers: {
-                'Authorization': `Bearer ${accessToken}` // Bearer 토큰을 헤더에 추가
+                'Authorization': `Bearer ${accessToken}`
             }
         })
         .then(response => response.json())
