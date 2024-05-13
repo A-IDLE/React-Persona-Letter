@@ -30,8 +30,11 @@ function ButtonContainer() {
       <Link to="/SendLetter">
         <LetterButton name="편지쓰기"/>
       </Link>
-      <Link to="/mail">
-        <LetterButton name="편지기록" />
+      <Link to="/inbox">
+        <LetterButton name="받은 편지함" />
+      </Link>
+      <Link to="/outbox">
+        <LetterButton name="보낸 편지함" />
       </Link>
       <LetterButton name="뒤로가기" onClick={returnHandler} />
     </div>
