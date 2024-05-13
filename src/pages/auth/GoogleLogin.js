@@ -1,3 +1,4 @@
+import React from 'react';
 import { googleLogin } from '../../apis/auth';
 import googleIcon from '../../assets/images/web_neutral_rd_ctn.svg';
 import { useNavigate } from 'react-router-dom';

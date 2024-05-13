@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './inboxList.css'; 
 
 // 문자열을 주어진 길이로 자르고 필요한 경우 줄임표를 추가하는 함수
@@ -11,23 +12,45 @@ function truncateString(str, num) {
   return str.slice(0, num) + '...';
 }
 
+function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    };
+    return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
+  }
+  
 function MailAppOutbox() {
 
     const [letters, setLetters] = useState([]);
+    const navigate = useNavigate();
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
         
-        const userId = 3;
-        // 백엔드 API를 호출하여 사용자의 편지함 데이터를 가져오는 비동기 함수를 실행합니다.
-        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}`)
-            .then(response => response.json()) 
-            .then(data => {
-                console.log(data); // 데이터 콘솔로그 추가
-                setLetters(data);
-            })
-            .catch(error => console.error("Fetching letters failed:", error)); 
-    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때만 실행됩니다.
+        const userId = localStorage.getItem("userId");
+        const accessToken = localStorage.getItem("accessToken"); 
+        
+        console.log("loggedin user id:", userId);
+
+        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}` // Bearer 토큰을 헤더에 추가
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setLetters(data);
+        })
+        .catch(error => console.error("Fetching letters failed:", error));
+    }, []);
+
+    const handleLetterClick = (letterId) => {
+        console.log("Clicked letter ID:", letterId);
+        navigate(`/letter/${letterId}`);
+    };
 
     
     return (
@@ -62,8 +85,10 @@ function MailAppOutbox() {
                             {letters.map((letter, index) => (
                                 <tr key={index}>
                                     <td>{letter.character_name}</td>
-                                    <td>{truncateString(letter.letter_content, 30)}</td> 
-                                    <td>{letter.created_time}</td> 
+                                    <td onClick={() => handleLetterClick(letter.letter_id)}>
+                                        {truncateString(letter.letter_content, 80)}
+                                    </td>                                    
+                                    <td>{formatDateTime(letter.created_time)}</td>
                                 </tr>
                             ))}
                         </tbody>

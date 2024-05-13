@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './inboxList.css'; 
-
-
-
 
 // 문자열을 주어진 길이로 자르고 필요한 경우 줄임표를 추가하는 함수
 function truncateString(str, num) {
@@ -14,9 +12,20 @@ function truncateString(str, num) {
   return str.slice(0, num) + '...';
 }
 
+function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    };
+    return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
+  }
+  
 function MailAppInbox() {
 
     const [letters, setLetters] = useState([]);
+    const navigate = useNavigate();
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
@@ -40,6 +49,7 @@ function MailAppInbox() {
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
+        navigate(`/letter/${letterId}`);
     };
 
     return (
@@ -77,7 +87,7 @@ function MailAppInbox() {
                                     <td onClick={() => handleLetterClick(letter.letter_id)}>
                                         {truncateString(letter.letter_content, 80)}
                                     </td>
-                                    <td>{letter.created_time}</td> 
+                                    <td>{formatDateTime(letter.created_time)}</td>
                                 </tr>
                             ))}
                         </tbody>

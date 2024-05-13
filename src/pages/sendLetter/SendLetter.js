@@ -39,7 +39,8 @@ const SendLetter = () => {
         const data = {
             character_id: characterId,
             user_id: userId,
-            letter_content: letterContent
+            letter_content: letterContent,
+            reception_status: "sending"
         }
         console.log(data)
 
