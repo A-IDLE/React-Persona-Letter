@@ -9,6 +9,13 @@ export const googleLogin = async (accessToken) => {
 
 // accesstoken validation api
 export const validateToken = async (accessToken) => {
-  const response = await request.post("/validateToken", { accessToken });
-  return response.data;
+
+  try {
+    const response = await request.post("/validateToken", { accessToken });
+    return response.data;
+  } catch (error) {
+    console.error("Error validating token:", error);
+    localStorage.removeItem('accessToken');
+    return false;
+  }
 }

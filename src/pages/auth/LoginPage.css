@@ -54,7 +54,9 @@
 
 
 h1 {
-    font-size: 300%
+    font-size: 6em;
+    font-family: Caveat, cursive;
+    color: #5a4632;
 }
 
 
