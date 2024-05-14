@@ -23,14 +23,21 @@ function formatDateTime(isoString) {
 function MailAppInbox() {
     const [letters, setLetters] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [CharacterName, setCharacterName] = useState('');
+
     const navigate = useNavigate();
 
     useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    const characterId = localStorage.getItem("characterId")
-    const accessToken = localStorage.getItem("accessToken"); 
+        const userId = localStorage.getItem("userId");
+        const characterId = localStorage.getItem("characterId");
+        const characterName = localStorage.getItem("characterName");
+        const accessToken = localStorage.getItem("accessToken");
+        
+        setCharacterName(characterName); // 로컬 스토리지에서 캐릭터 이름 가져오기
 
-    console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId);
+        
+
+    console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
 
     
     fetch(`http://localhost:9000/inboxLetter?user_id=${userId}&character_id=${characterId}`, {
@@ -68,7 +75,7 @@ function MailAppInbox() {
             
             <div className="main-container">
                 <div className="sidebar">
-                    <div className="contact active">Hermione Jean Granger</div>
+                    <div className="contact active">{CharacterName}</div>
                     <div className="contact" onClick={navigateToInbox}>받은 편지함</div>
                     <div className="contact" onClick={navigateToOutbox}>보낸 편지함</div>
                     <div className="menu-item">My page</div>

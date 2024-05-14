@@ -28,15 +28,25 @@ function formatDateTime(isoString) {
 function MailAppOutbox() {
 
     const [letters, setLetters] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [CharacterName, setCharacterName] = useState('');
+
     const navigate = useNavigate();
+
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
         const userId = localStorage.getItem("userId");
         const characterId = localStorage.getItem("characterId")
+        const characterName = localStorage.getItem("characterName");
         const accessToken = localStorage.getItem("accessToken"); 
     
         console.log("@@@@@User, Character:", userId, characterId);
+    
+        
+        setCharacterName(characterName);
+    
+        console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
     
         
         fetch(`http://localhost:9000/outboxLetter?user_id=${userId}&character_id=${characterId}`, {
@@ -56,10 +66,14 @@ function MailAppOutbox() {
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox'); // Navigate to the 'outbox' route when clicked
+        navigate('/outbox'); 
     };
     const navigateToInbox = () => {
-        navigate('/inbox'); // Navigate to the 'outbox' route when clicked
+        navigate('/inbox'); 
+    };
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
     };
 
     return (
@@ -70,7 +84,7 @@ function MailAppOutbox() {
             <div className="main-container">
                
                 <div className="sidebar">
-                    <div className="contact active">Hermione Jean Granger</div>
+                    <div className="contact active">{CharacterName}</div>
                     <div className="contact" onClick={navigateToInbox}>받은 편지함</div>
                     <div className="contact" onClick={navigateToOutbox}>보낸 편지함</div>
                     <div className="menu-item">My page</div>
@@ -78,6 +92,15 @@ function MailAppOutbox() {
                 </div>
                
                 <div className="content">
+                    <div className="search-box"> {/* Add search box container */}
+                        <input
+                            type="text"
+                            placeholder="검색..."
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
+                    </div>
+
                     
                     <table>
                        
@@ -90,19 +113,15 @@ function MailAppOutbox() {
                         </thead>
                         
                         <tbody>
-                            {/* letters 배열을 순회하면서 각 편지 데이터를 출력합니다. */}
                             {letters.map((letter, index) => (
+                                (letter.character_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    letter.letter_content.toLowerCase().includes(searchTerm.toLowerCase())) && 
                                 <tr key={index}>
                                     <td>{letter.character_name}</td>
                                     <td onClick={() => handleLetterClick(letter.letter_id)}>
                                         {truncateString(letter.letter_content, 80)}
-<<<<<<< HEAD
                                     </td>                                    
                                     <td>{formatDateTime(letter.created_time)}</td>
-=======
-                                    </td>
-                                    <td>{letter.created_time}</td> 
->>>>>>> main
                                 </tr>
                             ))}
                         </tbody>
