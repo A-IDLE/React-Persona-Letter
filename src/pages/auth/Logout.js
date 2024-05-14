@@ -1,9 +1,11 @@
 import { getAuth, signOut } from "firebase/auth";
-import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 
 export const Logout = () => {
     const auth = getAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         signOut(auth).then(() => {
@@ -12,6 +14,7 @@ export const Logout = () => {
             localStorage.removeItem("userId");
             
             alert("로그아웃 되었습니다.");
+            navigate('/')
         }).catch((error) => {
             // An error happened.
             alert("로그아웃 실패했습니다");
@@ -19,11 +22,10 @@ export const Logout = () => {
     }
 
     return (
-        <div id="Logout">
-            <button className="logout-button" onClick={handleLogout}>
+        
+            <button className="button" onClick={handleLogout}>
                 <span>Logout</span>
             </button>
-        </div>
     )
 
 }

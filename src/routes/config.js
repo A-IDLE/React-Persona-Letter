@@ -7,6 +7,7 @@ import SendLetter from '../pages/sendLetter/SendLetter';
 import Sending from '../pages/sendLetter/Sending';
 import ReceivedLetter from '../pages/receivedLetter/receivedLetter';
 import LoginPage from '../pages/auth/LoginPage';
+import { Test3 } from '../pages/main/test3';
 
 const routes = [
   { path: '/', component: Main, isPrivate: false },
@@ -16,7 +17,8 @@ const routes = [
   { path: '/SendLetter', component: SendLetter, isPrivate: true },
   { path: '/Sending', component: Sending, isPrivate: true },
   { path: '/letter/:letterId', component: ReceivedLetter, isPrivate: true },
-  { path: '/login', component: LoginPage, isPrivate: false }
+  { path: '/login', component: LoginPage, isPrivate: false },
+  { path: '/test3', component: Test3, isPrivate: false }
 ];
 
 export default routes;

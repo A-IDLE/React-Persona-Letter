@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persona Letter</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #faf3e0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 50px;
+        }
+        .header h1 {
+            font-size: 3em;
+            font-family: 'Cursive', serif;
+            color: #5a4632;
+        }
+        .header p {
+            font-size: 1.2em;
+            color: #766953;
+            margin: 20px 0;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #d4a373;
+            color: white;
+            border-radius: 5px;
+            font-family: 'Cursive', serif;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            margin-top: 30px;
+        }
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel .character {
+            flex: 0 0 auto;
+            width: 200px;
+            margin: 0 20px;
+            text-align: center;
+        }
+        .carousel .character img {
+            width: 100%;
+            border-radius: 50%;
+            border: 3px solid #d4a373;
+        }
+        .carousel .character h3 {
+            font-size: 1.2em;
+            margin: 10px 0 5px 0;
+            color: #5a4632;
+        }
+        .carousel .character p {
+            font-size: 1em;
+            color: #766953;
+        }
+        .carousel-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .carousel-buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            background-color: #d4a373;
+            color: white;
+            border-radius: 5px;
+            font-family: 'Cursive', serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Persona Letter</h1>
+            <p>A service where users can choose a character and exchange handwritten-style letters with them, with the characters having distinct personalities powered by a large language model.</p>
+            <div class="buttons">
+                <button>Sign In</button>
+                <button>Sign Up</button>
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="scrollCarousel(-1)">&#10094; Prev</button>
+            <button onclick="scrollCarousel(1)">Next &#10095;</button>
+        </div>
+        <div class="carousel" id="carousel">
+            <div class="character">
+                <img src="character1.jpg" alt="Character 1">
+                <h3>Character 1</h3>
+                <p>A brief description of Character 1.</p>
+            </div>
+            <div class="character">
+                <img src="character2.jpg" alt="Character 2">
+                <h3>Character 2</h3>
+                <p>A brief description of Character 2.</p>
+            </div>
+            <div class="character">
+                <img src="character3.jpg" alt="Character 3">
+                <h3>Character 3</h3>
+                <p>A brief description of Character 3.</p>
+            </div>
+            <div class="character">
+                <img src="character4.jpg" alt="Character 4">
+                <h3>Character 4</h3>
+                <p>A brief description of Character 4.</p>
+            </div>
+            <div class="character">
+                <img src="character5.jpg" alt="Character 5">
+                <h3>Character 5</h3>
+                <p>A brief description of Character 5.</p>
+            </div>
+            <div class="character">
+                <img src="character6.jpg" alt="Character 6">
+                <h3>Character 6</h3>
+                <p>A brief description of Character 6.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('carousel');
+            const scrollAmount = direction * 240;
+            carousel.scrollBy({
+                top: 0,
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
