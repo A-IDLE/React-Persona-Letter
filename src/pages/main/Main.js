@@ -6,11 +6,12 @@ import './Main.css';
 import { Logout } from '../auth/Logout';
 
 // Character Component
-function Character({ name, imageUrl, characterId }) {
+function Character({ name, imageUrl, characterId, }) {
     const navigate = useNavigate();
 
     const handleClick = () => {
         localStorage.setItem("characterId", characterId);
+        localStorage.setItem("characterName", name);
         navigate("/LetterPage");
     };
 
