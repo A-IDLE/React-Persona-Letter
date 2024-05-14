@@ -74,7 +74,7 @@ const SendLetter = () => {
 
   // 편지 조회
   useEffect(() => {
-    if ((userId || characterId) && isOpen) {
+    if (userId && characterId && isOpen) {
       // userId가 있고 편지함이 열려있을 때만 실행
       const fetchLetters = async () => {
         try {
