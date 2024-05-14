@@ -96,13 +96,8 @@ function MailAppOutbox() {
                                     <td>{letter.character_name}</td>
                                     <td onClick={() => handleLetterClick(letter.letter_id)}>
                                         {truncateString(letter.letter_content, 80)}
-<<<<<<< HEAD
                                     </td>                                    
                                     <td>{formatDateTime(letter.created_time)}</td>
-=======
-                                    </td>
-                                    <td>{letter.created_time}</td> 
->>>>>>> main
                                 </tr>
                             ))}
                         </tbody>
