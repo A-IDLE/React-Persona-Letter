@@ -11,6 +11,7 @@
     left: 10%; /* 적절한 값으로 조정하세요 */
     /* 다른 스타일 속성들 */
     cursor: pointer;
+    width: 20rem;
 }
 
 .writingPadContainer{
