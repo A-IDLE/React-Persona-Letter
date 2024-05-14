@@ -41,11 +41,7 @@ const SendLetter = () => {
             character_id: characterId,
             user_id: userId,
             letter_content: letterContent,
-<<<<<<< HEAD
             reception_status: "sending"
-=======
-            reception_status: "sending",
->>>>>>> main
         }
         console.log(data)
 
