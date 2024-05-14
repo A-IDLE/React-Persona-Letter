@@ -11,8 +11,8 @@ import { Test3 } from '../pages/main/test3';
 
 const routes = [
   { path: '/', component: Main, isPrivate: false },
-  { path: '/mailIn', component: MailAppInbox, isPrivate: true },
-  { path: '/mailOut', component: MailAppOutbox, isPrivate: true },
+  { path: '/inbox', component: MailAppInbox, isPrivate: true },
+  { path: '/outbox', component: MailAppOutbox, isPrivate: true },
   { path: '/LetterPage', component: LetterPage, isPrivate: true },
   { path: '/SendLetter', component: SendLetter, isPrivate: true },
   { path: '/Sending', component: Sending, isPrivate: true },

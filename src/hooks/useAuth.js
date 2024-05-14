@@ -1,4 +1,5 @@
 import { validateToken } from "../apis/auth";
+import { useNavigate } from 'react-router-dom';
 
 // export function useAuth() {
 //     const accessToken = localStorage.getItem('accessToken');
@@ -8,18 +9,16 @@ import { validateToken } from "../apis/auth";
 
   export function useAuth() {
     const accessToken = localStorage.getItem('accessToken');
+    const navigate = useNavigate();
   
-    if (accessToken) {
-      try {
-        // 먼저 해당 토큰이 유효한지 확인
-        const response = validateToken(accessToken);
-        return true;
-      } catch (error) {
-        console.error("Error validating token:", error);
-        // 토큰이 유효하지 않으면 localStorage에서 삭제
-        localStorage.removeItem('accessToken');
-        return false;
-      }
+    const response = validateToken(accessToken, navigate);
+    const validateAccessToken = localStorage.getItem('accessToken');
+    console.log("validateAccessToken:", validateAccessToken);
+    if (validateAccessToken) {
+      return true;
+    }else{
+      // validateAccessToken 없으면 login 페이지로 이동
+      return false;
     }
     // Return false if there is no accessToken
     return false;
