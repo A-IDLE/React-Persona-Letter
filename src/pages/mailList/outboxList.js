@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import { outboxLetter } from "../../apis/letterApi";
 import './inboxList.css'; 
 
-
-
-
-// 문자열을 주어진 길이로 자르고 필요한 경우 줄임표를 추가하는 함수
+// Function to truncate a string with ellipsis if it exceeds a certain length
 function truncateString(str, num) {
-  // 문자열이 주어진 길이보다 짧거나 같으면 그대로 반환합니다.
   if (str.length <= num) {
     return str;
   }
-  // 그렇지 않으면 주어진 길이까지 자른 후 줄임표를 추가하여 반환합니다.
   return str.slice(0, num) + '...';
 }
 
+// Function to format a date and time string
 function formatDateTime(isoString) {
     const date = new Date(isoString);
     const options = {
@@ -23,42 +20,45 @@ function formatDateTime(isoString) {
       hour12: false
     };
     return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
-  }
-  
+}
+
 function MailAppOutbox() {
 
     const [letters, setLetters] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [CharacterName, setCharacterName] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
-
-    // useEffect 훅을 사용하여 컴포넌트가 마운트될 때 한 번만 실행되는 비동기 효과를 설정합니다.
     useEffect(() => {
         const userId = localStorage.getItem("userId");
-        const characterId = localStorage.getItem("characterId")
+        const characterId = localStorage.getItem("characterId");
         const characterName = localStorage.getItem("characterName");
-        const accessToken = localStorage.getItem("accessToken"); 
-    
-        console.log("@@@@@User, Character:", userId, characterId);
-    
-        
+        const accessToken = localStorage.getItem("accessToken");
+
         setCharacterName(characterName);
-    
+
         console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
-    
-        
-        fetch(`http://localhost:9000/outboxLetter?user_id=${userId}&character_id=${characterId}`, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            setLetters(data);
-        })
-        .catch(error => console.error("Fetching letters failed:", error));
+
+        if (userId && characterId && accessToken) {
+            // outboxLetter API를 사용하여 편지 목록을 가져옵니다.
+            outboxLetter(userId, characterId, accessToken)
+              .then(data => {
+                  // data가 배열인지 확인하고 설정합니다.
+                  if (Array.isArray(data)) {
+                  setLetters(data);
+                  setLoading(false); // 로딩 상태를 해제합니다.
+                  } else {
+                  console.error("Invalid response format for letters:", data);
+                  setLoading(false); // 오류 발생 시 로딩 상태를 해제합니다.
+                  }
+              })
+              .catch(error => {
+                  console.error("Fetching letters failed:", error);
+                  setLoading(false); // 오류 발생 시 로딩 상태를 해제합니다.
+              });
+          }
     }, []);
 
     const handleLetterClick = (letterId) => {
@@ -83,10 +83,10 @@ function MailAppOutbox() {
             
             <div className="main-container">
                
-                <div className="sidebar">
+            <div className="sidebar">
                     <div className="contact active">{CharacterName}</div>
-                    <div className="contact" onClick={navigateToInbox}>받은 편지함</div>
-                    <div className="contact" onClick={navigateToOutbox}>보낸 편지함</div>
+                    <div className="contact" onClick={navigateToInbox}>Inbox</div>
+                    <div className="contact" onClick={navigateToOutbox}>Outbox</div>
                     <div className="menu-item">My page</div>
                     <div className="menu-item">Log out</div>
                 </div>
@@ -95,37 +95,43 @@ function MailAppOutbox() {
                     <div className="search-box"> {/* Add search box container */}
                         <input
                             type="text"
-                            placeholder="검색..."
+                            placeholder="Search..."
                             value={searchTerm}
                             onChange={handleSearchChange}
                         />
                     </div>
 
-                    
-                    <table>
-                       
-                        <thead>
-                            <tr>
-                                <th>Character</th>
-                                <th>Letter Content</th>
-                                <th>Created Time</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {letters.map((letter, index) => (
-                                (letter.character_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                    letter.letter_content.toLowerCase().includes(searchTerm.toLowerCase())) && 
-                                <tr key={index}>
-                                    <td>{letter.character_name}</td>
-                                    <td onClick={() => handleLetterClick(letter.letter_id)}>
-                                        {truncateString(letter.letter_content, 80)}
-                                    </td>                                    
-                                    <td>{formatDateTime(letter.created_time)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        letters.length === 0 ? (
+                            <div>No letters yet.</div>
+                        ) : (
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Character</th>
+                                        <th>Letter Content</th>
+                                        <th>Created Time</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    {letters.map((letter, index) => (
+                                        (letter.character_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                            letter.letter_content.toLowerCase().includes(searchTerm.toLowerCase())) && 
+                                        <tr key={index}>
+                                            <td>{letter.character_name}</td>
+                                            <td onClick={() => handleLetterClick(letter.letter_id)}>
+                                                {truncateString(letter.letter_content, 80)}
+                                            </td>                                    
+                                            <td>{formatDateTime(letter.created_time)}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )
+                    )}
                 </div>
             </div>
         </div>
