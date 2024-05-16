@@ -84,7 +84,7 @@ body {
     width: 200px;
     margin: 0 20px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.4s;
 }
 
 .character:hover {

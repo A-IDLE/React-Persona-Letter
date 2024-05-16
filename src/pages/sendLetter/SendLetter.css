@@ -36,7 +36,7 @@
     cursor: pointer; /* 마우스를 가져다 대면 포인터 모양으로 변경 */
 }
 
-.letterContainerr {
+.letterContainer {
     position: relative; /* 부모 요소에 position: relative; 설정 */
 }
 
