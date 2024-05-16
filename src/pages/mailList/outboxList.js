@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import { outboxLetter } from "../../apis/letterApi";
+import { getLettersByReceptionStatus } from "../../apis/letterApi";
 import './inboxList.css'; 
 
 // Function to truncate a string with ellipsis if it exceeds a certain length
@@ -36,6 +36,7 @@ function MailAppOutbox() {
         const characterId = localStorage.getItem("characterId");
         const characterName = localStorage.getItem("characterName");
         const accessToken = localStorage.getItem("accessToken");
+        const receptionStatus = "sending";
 
         setCharacterName(characterName);
 
@@ -43,7 +44,7 @@ function MailAppOutbox() {
 
         if (userId && characterId && accessToken) {
             // outboxLetter API를 사용하여 편지 목록을 가져옵니다.
-            outboxLetter(userId, characterId, accessToken)
+            getLettersByReceptionStatus(characterId, receptionStatus)
               .then(data => {
                   // data가 배열인지 확인하고 설정합니다.
                   if (Array.isArray(data)) {

@@ -56,7 +56,7 @@ const SendLetter = () => {
   // 편지 조회
   const viewLetter = async () => {
     try {
-      const response = await getLetterList(userId,characterId); // 현재 사용자의 편지 목록만 가져옴
+      const response = await getLetterList(characterId); // 현재 사용자의 편지 목록만 가져옴
       setLetters(response.data);
       setIsOpen(true); // 편지함을 열어줌
     } catch (error) {
@@ -78,7 +78,7 @@ const SendLetter = () => {
       // userId가 있고 편지함이 열려있을 때만 실행
       const fetchLetters = async () => {
         try {
-          const response = await getLetterList(userId,characterId); // userId를 이용하여 편지 목록 가져오기
+          const response = await getLetterList(characterId); // userId를 이용하여 편지 목록 가져오기
           setLetters(response.data);
         } catch (error) {
           console.error("Failed to fetch letter data:", error);
@@ -127,7 +127,7 @@ const SendLetter = () => {
           <p>{displayedLetter.letter_content}</p>
         </div>
       )}
-      <div className="letterContainerr">
+      <div className="letterContainer">
         {/* 편지 작성 */}
         <textarea
           className="letter"
