@@ -15,23 +15,30 @@ export function LetterPage() {
     setUserId(storedUserId);
     setCharacterId(storedCharacterId);
 
-    if (storedUserId && storedCharacterId) {
-      fetchLetters(storedUserId, storedCharacterId);
-    }
+
+    const fetchLetters = async (characterId) => {
+      try {
+        const response = await getLetterList(characterId);
+        setLetters(response.data);
+
+        console.log("fetchLetters response:")
+        console.log(response.data)
+      } catch (error) {
+        console.error("Failed to fetch letter data:", error);
+      }
+    };
+
+
+
+    fetchLetters(storedCharacterId);
+
     // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
-    hasUnreadLetters = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+    setHasUnreadLetters(letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status))
   }, []);
 
-  const fetchLetters = async (userId, characterId) => {
-    try {
-      const response = await getLetterList(userId, characterId);
-      setLetters(response.data);
-    } catch (error) {
-      console.error("Failed to fetch letter data:", error);
-    }
-  };
 
-  
+
+
 
   return (
     <div className='letterContainer'>
