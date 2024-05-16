@@ -85,11 +85,13 @@ const SendLetter = () => {
   };
 
   useEffect(() => {
-    if (userId && characterId && isOpen) {
+    if (characterId && isOpen) {
       const fetchLetters = async () => {
         try {
           const response = await getLetterList(characterId); // userId를 이용하여 편지 목록 가져오기
           setLetters(response.data);
+          console.log(characterId)
+          console.log(response)
         } catch (error) {
           console.error("Failed to fetch letter data:", error);
         }
@@ -108,7 +110,7 @@ const SendLetter = () => {
   };
 
   return (
-    <div>
+    <div className="letterContainer">
       <img
         src={isOpen ? "/images/sendLetter/opened_envelope.png" : "/images/sendLetter/closed_envelope.png"}
         alt="편지함"
@@ -116,9 +118,9 @@ const SendLetter = () => {
         onClick={() => setIsOpen((prev) => !prev)}
       />
       {isOpen && (
-        <div>
+        <div className="letterCard">
           {letters.length > 0 && (
-            <div className="letterCard">
+            <div>
               <p>{letters[currentIndex].letter_content}</p>
               <button onClick={prevLetter}>이전</button>
               <button onClick={selectLetter}>선택</button>
@@ -135,7 +137,7 @@ const SendLetter = () => {
           <button onClick={changeLetter}>변경</button>
         </div>
       )}
-      <div className="letterContainer">
+      <div>
         {/* 편지 작성 */}
         <textarea
           className="letter"
