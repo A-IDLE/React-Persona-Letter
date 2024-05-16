@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './LetterPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getLetterList } from '../../apis/letterApi';  // API 함수 임포트
+import { set } from 'firebase/database';
 
 export function LetterPage() {
   const [letters, setLetters] = useState([]);
   const [hasUnreadLetters, setHasUnreadLetters] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [characterId, setCharacterId] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [characterId, setCharacterId] = useState("");
+  const location = useLocation();
+  const { characterId } = location.state || {};
+
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem("userId");
-    const storedCharacterId = localStorage.getItem("characterId");
-    setUserId(storedUserId);
-    setCharacterId(storedCharacterId);
 
     const fetchLetters = async (characterId) => {
       try {
@@ -27,20 +27,20 @@ export function LetterPage() {
       }
     };
 
-    fetchLetters(storedCharacterId);
+    fetchLetters(characterId);
 
     // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
     setHasUnreadLetters(letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status))
   }, []);
 
 
-
+  console.log("first check of characterId: ", characterId);
 
 
   return (
     <div className='letterContainer'>
       <LetterImage shake={hasUnreadLetters} />
-      <ButtonContainer />
+      <ButtonContainer characterId={characterId} />
     </div>
   );
 }
@@ -98,18 +98,25 @@ function LetterImage({ shake }) {
   );
 }
 
-function ButtonContainer() {
+function ButtonContainer({ characterId }) {
+
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+    navigate(path, { state: { characterId } });
+  };
+
   return (
     <div className='buttonContainer'>
-      <Link to="/SendLetter">
+      <div onClick={() => handleClick("/SendLetter")}>
         <LetterButton name="편지쓰기" />
-      </Link>
-      <Link to="/inbox">
+      </div>
+      <div onClick={() => handleClick("/inbox")}>
         <LetterButton name="받은 편지함" />
-      </Link>
-      <Link to="/outbox">
+      </div>
+      <div onClick={() => handleClick("/outbox")}>
         <LetterButton name="보낸 편지함" />
-      </Link>
+      </div>
       <LetterButton name="뒤로가기" onClick={returnHandler} />
     </div>
   );

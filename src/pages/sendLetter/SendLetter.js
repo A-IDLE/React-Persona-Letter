@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getLetterList, writeLetter, updateStatusLetter } from "../../apis/letterApi";
 import "./SendLetter.css";
 
@@ -10,25 +10,33 @@ const SendLetter = () => {
   const [letters, setLetters] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userId, setUserId] = useState("");
-  const [characterId, setCharacterId] = useState("");
+  // const [characterId, setCharacterId] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const { characterId } = location.state || {};
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    const storedChId = localStorage.getItem("characterId");
+    // const storedChId = localStorage.getItem("characterId");
     setUserId(storedUserId);
-    setCharacterId(storedChId);
+    // setCharacterId(storedChId);
   }, []);
 
   const handleInputChange = (event) => {
     setLetterContent(event.target.value);
   };
 
+
+  console.log("characterId: ", characterId);
+
+
   const handleSendLetter = async () => {
+
+    console.log("characterId: ", characterId);  
     if (window.confirm("전송")) {
       try {
         alert("편지가 전송되었습니다.");
-        navigate("/sending");
+        navigate("/sending", { state: { characterId } });
 
         const data = {
           character_id: characterId,
