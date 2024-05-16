@@ -1,17 +1,5 @@
 import { request } from "./api";
 
-// 매매일지 목록 조회
-export const callJournalList = async () => {
-    return await request.get("/journals/search");
-  };
-  
-  // 매매일지 검색
-  export const callJournalListBySearch = async ({ data }) => {
-    return await request.post("/journals/search", { data });
-  };
-
-
-
   // 편지 리스트를 조회하는 API
 export const allLetterList = async () => {
       return await request.get("/readLetter");
@@ -40,3 +28,15 @@ export const deleteLetter = async ({ data }) => {
     
     }
 
+// 사용자 이름을 업데이트하는 API
+export const updateUser = async (tokenData, newUserName) => {
+  return await request.post("/updateUser", {
+    accessToken: tokenData.accessToken,
+    new_user_name: newUserName,
+  });
+}
+
+// 사용자 정보를 가져오는 API
+export const getUserInfo = async () => {
+  return await request.get("/userInfo");
+}
