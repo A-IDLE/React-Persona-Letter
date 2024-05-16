@@ -7,6 +7,7 @@ export function LetterPage() {
   const [letters, setLetters] = useState([]);
   const [userId, setUserId] = useState("");
   const [characterId, setCharacterId] = useState("");
+  const [hasUnreadLetters, setHasUnreadLetters] = useState([]);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -28,8 +29,11 @@ export function LetterPage() {
     }
   };
 
-  // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
-  const hasUnreadLetters = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+  useEffect(() => {
+    // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
+    const unreadExists = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+    setHasUnreadLetters(unreadExists);
+  }, [letters]);
 
   return (
     <div className='letterContainer'>
