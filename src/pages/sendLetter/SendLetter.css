@@ -38,7 +38,7 @@
 }
 
 .letterContainer {
-    position: relative; /* 부모 요소에 position: relative; 설정 */
+    position: flex; /* 부모 요소에 position: relative; 설정 */
 }
 
 .letter {

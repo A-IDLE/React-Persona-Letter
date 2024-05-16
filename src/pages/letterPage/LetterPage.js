@@ -5,6 +5,7 @@ import { getLetterList } from '../../apis/letterApi';  // API 함수 임포트
 
 export function LetterPage() {
   const [letters, setLetters] = useState([]);
+  const [hasUnreadLetters, setHasUnreadLetters] = useState(false);
   const [userId, setUserId] = useState("");
   const [characterId, setCharacterId] = useState("");
 
@@ -17,6 +18,8 @@ export function LetterPage() {
     if (storedUserId && storedCharacterId) {
       fetchLetters(storedUserId, storedCharacterId);
     }
+    // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
+    hasUnreadLetters = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
   }, []);
 
   const fetchLetters = async (userId, characterId) => {
@@ -28,8 +31,7 @@ export function LetterPage() {
     }
   };
 
-  // reception_status가 'receiving'이고 read_status가 false인 편지가 있는지 확인
-  const hasUnreadLetters = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+  
 
   return (
     <div className='letterContainer'>
