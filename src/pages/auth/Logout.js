@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export const Logout = () => {
+export const Logout = ({className}) => {
     const auth = getAuth();
     const navigate = useNavigate();
 
@@ -21,11 +21,16 @@ export const Logout = () => {
         });
     }
 
+    // className이 없으면 "logout"으로 설정합니다.
+    if (!className) {
+        className = "logout";
+    }
+
     return (
         
-            <button className="button" onClick={handleLogout}>
-                <span>Logout</span>
-            </button>
+            <div className={className} onClick={handleLogout}>
+                Logout
+            </div>
     )
 
 }

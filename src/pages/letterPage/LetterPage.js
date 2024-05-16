@@ -15,7 +15,6 @@ export function LetterPage() {
     setUserId(storedUserId);
     setCharacterId(storedCharacterId);
 
-
     const fetchLetters = async (characterId) => {
       try {
         const response = await getLetterList(characterId);
@@ -27,8 +26,6 @@ export function LetterPage() {
         console.error("Failed to fetch letter data:", error);
       }
     };
-
-
 
     fetchLetters(storedCharacterId);
 
