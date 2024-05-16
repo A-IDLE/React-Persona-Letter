@@ -45,7 +45,8 @@ const SendLetter = () => {
     }
   };
 
-  const selectLetter = async () => {
+  // 편지 선택
+  const selectLetter = async() => {
     if (letters.length > 0) {
       const selectedLetter = letters[currentIndex];
       setDisplayedLetter(selectedLetter);
@@ -79,7 +80,7 @@ const SendLetter = () => {
     if (userId && characterId && isOpen) {
       const fetchLetters = async () => {
         try {
-          const response = await getLetterList(userId, characterId);
+          const response = await getLetterList(characterId); // userId를 이용하여 편지 목록 가져오기
           setLetters(response.data);
         } catch (error) {
           console.error("Failed to fetch letter data:", error);
@@ -126,7 +127,8 @@ const SendLetter = () => {
           <button onClick={changeLetter}>변경</button>
         </div>
       )}
-      <div className="letterContainerr">
+      <div className="letterContainer">
+        {/* 편지 작성 */}
         <textarea
           className="letter"
           value={letterContent}
