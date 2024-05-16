@@ -5,6 +5,13 @@ export const getLetterList = async (characterId) => {
   return await request.get(`/character/${characterId}/letters`);
 }
 
+
+
+// 편지상태를 수정하는 API
+export const updateStatusLetter = async (letterId) => {
+  return await request.put(`/letterStatus/${letterId}`);
+};
+
 // 편지 리스트를 조회하는 API
 export const getALetter = async (letterId) => {
   return await request.get(`/letters/${letterId}`);
@@ -24,19 +31,6 @@ export const updateLetter = async ({ data }) => {
 export const deleteLetter = async ({ data }) => {
 
 }
-
-// inboxLetter를 조회하는 API
-export const inboxLetter = async (userId, characterId) => {
-  const response = await request.get(`/inboxLetter?user_id=${userId}&character_id=${characterId}`);
-  return response.data; // 응답 객체에서 데이터만 반환
-};
-
-// inboxLetter를 조회하는 API
-export const outboxLetter = async (userId, characterId) => {
-  const response = await request.get(`/outboxLetter?user_id=${userId}&character_id=${characterId}`);
-  return response.data; // 응답 객체에서 데이터만 반환
-};
-
 
 // inboxLetter를 조회하는 API
 export const getLettersByReceptionStatus = async (characterId, receptionStatus) => {
