@@ -11,6 +11,7 @@
     left: 10%; /* 적절한 값으로 조정하세요 */
     /* 다른 스타일 속성들 */
     cursor: pointer;
+    width: 20rem;
 }
 
 .writingPadContainer{
@@ -36,8 +37,8 @@
     cursor: pointer; /* 마우스를 가져다 대면 포인터 모양으로 변경 */
 }
 
-.letterContainerr {
-    position: relative; /* 부모 요소에 position: relative; 설정 */
+.letterContainer {
+    position: flex; /* 부모 요소에 position: relative; 설정 */
 }
 
 .letter {
@@ -66,7 +67,7 @@
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 40rem;
+    width: 35rem;
     height: 40%;
     position: absolute;
     top: 20%; /* 적절한 값으로 조정하세요 */
@@ -76,6 +77,7 @@
 .displayedLetter p {
     height: 20%;
     overflow-y: auto;
+    white-space: pre-wrap;
 }
 
 .letterCard {
@@ -87,11 +89,12 @@
     width: 40rem;
     height: 40%;
     padding: 20px;
-    left: 50%;
+    left: 5%;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: white;
+    white-space: pre-wrap; /* 줄바꿈 */
 }
 
 .letterCard h3 {
