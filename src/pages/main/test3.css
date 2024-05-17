@@ -84,7 +84,7 @@ body {
     width: 200px;
     margin: 0 20px;
     text-align: center;
-    transition: transform 0.4s;
+    transition: transform 0.3s;
 }
 
 .character:hover {
@@ -92,11 +92,9 @@ body {
 }
 
 .character-img {
-    width: 150px; /* Set a fixed width for the character images */
-    height: 150px; /* Set a fixed height for the character images */
+    width: 100%;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto; /* Center the image within the character div */
 }
 
 .character-title {
@@ -111,3 +109,16 @@ body {
     justify-content: space-between;
     margin: 20px 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

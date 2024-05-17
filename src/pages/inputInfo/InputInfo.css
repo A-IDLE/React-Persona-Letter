@@ -1,0 +1,35 @@
+.input_wrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column; 
+    align-items: center;
+    background-color: #D5D3CD;
+    gap: 20px;
+    /* height: 100vh; */
+    overflow-x: auto;
+}
+@media (max-width: 1200px) { /* 화면 크기에 따라 조정 가능 */
+    .input_wrapper {
+        min-width: 1200px; /* 컨테이너의 최소 너비를 설정 */
+    }
+}
+.info_header {
+    color: #1B1513;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 32px;
+    font-family: 'Caveat', cursive; /* Using Google Fonts for Caveat */
+    border-bottom: none;
+    position: absolute; 
+    left: 20px;
+    top: 20px;
+
+  }
+.info_letter_section{
+    width: 650px;
+    height: 800px;
+    perspective: 1000px;
+    background-color: #F1EDE2;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
