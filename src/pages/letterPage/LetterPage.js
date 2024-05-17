@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './LetterPage.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getLetterList } from '../../apis/letterApi';  // API 함수 임포트
+import { set } from 'firebase/database';
 
 export function LetterPage() {
-  const [letters, setLetters] = useState([]);  // 편지 목록을 저장할 상태
-  const [hasUnreadLetters, setHasUnreadLetters] = useState([]);  // 읽지 않은 편지가 있는지 여부를 저장할 상태
-  const [userId, setUserId] = useState("");  // 사용자 ID를 저장할 상태
-  const [characterId, setCharacterId] = useState("");  // 캐릭터 ID를 저장할 상태
+  const [letters, setLetters] = useState([]);
+  const [hasUnreadLetters, setHasUnreadLetters] = useState(false);
+  // const [userId, setUserId] = useState("");
+  // const [characterId, setCharacterId] = useState("");
+  const location = useLocation();
+  const { characterId } = location.state || {};
+
   const [isModalOpen, setIsModalOpen] = useState(false);  // 모달 창의 열림/닫힘 상태를 저장할 상태
   const [letterContent, setLetterContent] = useState("");  // 선택된 편지 내용을 저장할 상태
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅
 
+
   useEffect(() => {
-    // 로컬 스토리지에서 userId와 characterId 가져오기
-    const storedUserId = localStorage.getItem("userId");
-    const storedCharacterId = localStorage.getItem("characterId");
-    setUserId(storedUserId);
-    setCharacterId(storedCharacterId);
 
     // 편지 목록을 가져오는 함수
     const fetchLetters = async (characterId) => {
@@ -32,11 +32,11 @@ export function LetterPage() {
       }
     };
 
-    fetchLetters(storedCharacterId);  // 편지 목록 가져오기
+    fetchLetters(characterId);  // 편지 목록 가져오기
 
     // 읽지 않은 편지가 있는지 여부 확인
     setHasUnreadLetters(letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status));
-  }, [letters]);
+  }, []);
 
   useEffect(() => {
     // 읽지 않은 편지가 있는지 여부 확인
@@ -48,12 +48,15 @@ export function LetterPage() {
   const toggleModal = () => {
     if (!isModalOpen) {
       // 가장 최근에 온 편지 찾기
+      console.log("before set modal is open"+isModalOpen)
+
       const latestLetter = letters
         .filter(letter => letter.reception_status === 'receiving')
         .sort((a, b) => new Date(b.received_at) - new Date(a.received_at))[0];
       setLetterContent(latestLetter ? latestLetter.letter_content : "No new letters");  // 편지 내용 상태 업데이트
     }
     setIsModalOpen(!isModalOpen);  // 모달 창 상태 토글
+    console.log("after set modal open: "+isModalOpen)
   };
 
   // "답장하기" 버튼 클릭 시 호출되는 함수
@@ -64,11 +67,15 @@ export function LetterPage() {
   return (
     <>
       <div className='homeButton'>
-        <HomeButtonContainer/>  {/* 홈 버튼 컨테이너 컴포넌트 */}
+        <HomeButtonContainer />  {/* 홈 버튼 컨테이너 컴포넌트 */}
       </div>
+
       <div className='letterContainer'>
+
         <LetterImage shake={hasUnreadLetters} onClick={toggleModal} />  {/* 편지 이미지 컴포넌트 */}
-        <ButtonContainer />  {/* 버튼 컨테이너 컴포넌트 */}
+
+        <ButtonContainer characterId={characterId}/>  {/* 버튼 컨테이너 컴포넌트 */}
+
         {isModalOpen && (  // 모달 창이 열려있을 때
           <Modal onClose={toggleModal}>
             <div className="modalContent">
@@ -130,8 +137,34 @@ function LetterImage({ shake, onClick }) {
   }, [shake, cycleCount]);
 
   return (
-    <div className='letterImage' onClick={onClick}>
-      <img src="/images/letterPage/letter_image.png" alt="Letter Image" />
+    <>
+      <div className='letterImage'>
+        <img src="/images/letterPage/letter_image.png" alt="Letter Image" onClick={onClick} />
+      </div>
+    </>
+  );
+}
+
+function ButtonContainer({ characterId }) {
+
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+    navigate(path, { state: { characterId } });
+  };
+
+  return (
+    <div className='buttonContainer'>
+      <div onClick={() => handleClick("/SendLetter")}>
+        <LetterButton name="편지쓰기" />
+      </div>
+      <div onClick={() => handleClick("/inbox")}>
+        <LetterButton name="편지함" />
+      </div>
+      {/* <div onClick={() => handleClick("/outbox")}>
+        <LetterButton name="보낸 편지함" />
+      </div>
+      <LetterButton name="뒤로가기" onClick={returnHandler} /> */}
     </div>
   );
 }
@@ -148,27 +181,11 @@ function Modal({ children, onClose }) {
   );
 }
 
-// 버튼 컨테이너 컴포넌트
-function ButtonContainer() {
-  return (
-    <div className='buttonContainer'>
-      <Link to="/SendLetter">
-        <LetterButton name="편지 작성" />
-      </Link>
-      <Link to="/inbox">
-        <LetterButton name="편지함" />
-      </Link>
-    </div>
-  );
-}
-
 // 홈 버튼 컨테이너 컴포넌트
-function HomeButtonContainer(){
-  return(
+function HomeButtonContainer() {
+  return (
     <div className='homeButton'>
-      <Link to="/">
-        <HomeButton name="Persona Letter"/>
-      </Link>
+        <HomeButton name="Persona Letter" />
     </div>
   )
 }
@@ -184,10 +201,16 @@ export const LetterButton = ({ name, onClick }) => {
 
 // 홈 버튼 컴포넌트
 export const HomeButton = ({ name, onClick }) => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/');
+  } 
   return (
-    <button className='homeButton' onClick={onClick}>
+    <dev className='homeButton' onClick={handleClick}>
       {name}
-    </button>
+    </dev>
   );
 }
 

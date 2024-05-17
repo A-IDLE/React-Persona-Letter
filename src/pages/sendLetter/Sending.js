@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { useNavigate, } from 'react-router-dom';
+import { useLocation, useNavigate, } from 'react-router-dom';
 
 const Sending = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { characterId } = location.state || {};
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/LetterPage'); // 이동할 경로로 변경
+      navigate('/LetterPage', {state: {characterId}}); // 이동할 경로로 변경
     }, 3000); // 3초 뒤에 이동
 
     return () => clearTimeout(timer);

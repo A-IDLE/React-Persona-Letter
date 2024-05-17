@@ -103,7 +103,7 @@ export const Main = () => {
                     </p>
                     <div className="buttons">
                         {isLoggedIn ? (
-                            <Logout />
+                            <Logout className="button"/>
                         ) : (
                             <button className="button" onClick={handleSignIn}>Sign In</button>
                         )}

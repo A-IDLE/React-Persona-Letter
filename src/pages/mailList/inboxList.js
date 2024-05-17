@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom'; 
 import { getLettersByReceptionStatus } from "../../apis/letterApi";
 import './inboxList.css'; 
+import { Logout } from '../auth/Logout';
 
 // Function to truncate a string with ellipsis if it exceeds a certain length
 function truncateString(str, num) {
@@ -29,10 +30,12 @@ function MailAppInbox() {
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const { characterId } = location.state || {};
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
-        const characterId = localStorage.getItem("characterId");
+        // const characterId = localStorage.getItem("characterId");
         const characterName = localStorage.getItem("characterName");
         const accessToken = localStorage.getItem("accessToken");
         const receptionStatus = "receiving";
@@ -67,11 +70,11 @@ function MailAppInbox() {
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox');
+        navigate('/outbox', {state: { characterId }});
     };
 
     const navigateToInbox = () => {
-        navigate('/inbox');
+        navigate('/inbox', {state: { characterId }});
     };
 
     const handleSearchChange = (event) => {
@@ -88,7 +91,7 @@ function MailAppInbox() {
                     <div className="contact" onClick={navigateToInbox}>Inbox</div>
                     <div className="contact" onClick={navigateToOutbox}>Outbox</div>
                     <div className="menu-item">My page</div>
-                    <div className="menu-item">Log out</div>
+                    <Logout className="menu-item"/>
                 </div>
                 
                 <div className="content">
