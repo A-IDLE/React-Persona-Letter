@@ -5,8 +5,6 @@ export const getLetterList = async (characterId) => {
   return await request.get(`/character/${characterId}/letters`);
 }
 
-
-
 // 편지상태를 수정하는 API
 export const updateStatusLetter = async (letterId) => {
   return await request.put(`/letterStatus/${letterId}`);
@@ -40,3 +38,15 @@ export const getLettersByReceptionStatus = async (characterId, receptionStatus) 
 
 
 
+// 사용자 이름을 업데이트하는 API
+export const updateUser = async (tokenData, newUserName) => {
+  return await request.post("/updateUser", {
+    accessToken: tokenData.accessToken,
+    new_user_name: newUserName,
+  });
+}
+
+// 사용자 정보를 가져오는 API
+export const getUserInfo = async () => {
+  return await request.get("/userInfo");
+}
