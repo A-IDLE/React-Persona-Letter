@@ -83,17 +83,25 @@ export const Main = () => {
             <div className="container">
                 <div className="header">
                     <h1 className="header-title">Persona Letter</h1>
-                    <p className="header-paragraph">
-                        A service where users can choose a character and exchange handwritten-style letters with them, with the characters having distinct personalities powered by a large language model.
+                </div>
+                <div className='main_intro'>
+                    <p className="intro_phrase">
+                        Exchange letters with your beloved characters. <br />Express your affection in every word.
                     </p>
+                    <p className="intro_explanation">
+                        Connect deeply, share your stories, and receive letters. Let your <br />
+                        favorite character be a part of your life, discovering the joy of transcending <br />
+                        reality and fiction. Dive into a unique experience by sending the first letter!                    
+                    </p>
+                </div>
                     <div className="buttons">
                         {isLoggedIn ? (
-                            <Logout className="button" />
+                            <Logout className="logout_button" />
                         ) : (
                             <button className="button" onClick={handleSignIn}>Sign In</button>
                         )}
                     </div>
-                </div>
+
                 <Carousel>
                     {characters.map(character => (
                         <Character

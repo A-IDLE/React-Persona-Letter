@@ -68,8 +68,16 @@ function Inputinfo() {
         }
     };
 
+    const handleClickHeader = () => {
+      navigate('/');
+    } 
+
     return (
+        
         <section className={`input_wrapper section-${currentSection} ${reverse ? 'reverse' : ''}`}>
+            <div className="header_info" onClick={handleClickHeader}>
+                <h1 className="header-title_info">Persona Letter</h1>
+            </div>
             <div className='letter_cover_section'>
                 <div className='letter_cover_img' style={{backgroundImage: "url('/images/info/cover_img2.jpg')"}}></div>
                 <div className='letter_cover_text_container'>

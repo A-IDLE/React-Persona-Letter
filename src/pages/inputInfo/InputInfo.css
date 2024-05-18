@@ -227,13 +227,32 @@
     position: relative;
     margin-left: 400px;
     margin-top: 100px;
-    width: 50px;
-    box-shadow: inset 0 -10px 0 #cbc2c2; 
+    width: 60px;
+    cursor: pointer;
 }
+.reply_button:hover {
+box-shadow: inset 0 -10px 0 #cbc2c2; 
+}
+
 .reply_text{
     color: #1A1514;
     font-family: 'Caveat', cursive;
-    font-size: 24px;
+    font-size: 28px;
     display: inline;
-    
+}
+.header_info {
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
+.header-title_info {
+    font-size: 42px;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
+    top: 7px;
+    left: 80px;
+    position: absolute;
 }
