@@ -46,6 +46,12 @@ export const updateUser = async (tokenData, newUserName) => {
   });
 }
 
+export const updateUserNickname = async (tokenData, newUserNickname) => {
+  return await request.post("/updateUserNickname", {
+    accessToken: tokenData.accessToken,
+    new_user_nickname: newUserNickname,
+  });
+}
 // 사용자 정보를 가져오는 API
 export const getUserInfo = async () => {
   return await request.get("/userInfo");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './InputInfo.css';
-import { updateUser, getUserInfo } from '../../apis/letterApi';
+import { updateUser, getUserInfo, updateUserNickname } from '../../apis/letterApi';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Inputinfo() {
@@ -9,6 +9,8 @@ function Inputinfo() {
     const [tokenData, setTokenData] = useState(null);
     const [currentSection, setCurrentSection] = useState(0);
     const [reverse, setReverse] = useState(false);  // 애니메이션 방향을 관리하는 상태
+    const [userNickname, setUserNickname] = useState('');
+    const [newUserNickname, setNewUserNickname] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,17 +33,23 @@ function Inputinfo() {
         }
     }, []);
 
-    const handleUpdateUserName = async () => {
+    const handleUpdateUserInfo = async () => {
         if (tokenData) {
             const nameToUpdate = newUserName || userName;
+            const nicknameToUpdate = newUserNickname || userNickname;
             try {
-                const response = await updateUser(tokenData, nameToUpdate);
+                const nameResponse = await updateUser(tokenData, nameToUpdate);
                 setUserName(nameToUpdate);
                 setNewUserName('');
-                alert(response.data.message);
+
+                const nicknameResponse = await updateUserNickname(tokenData, nicknameToUpdate);
+                setUserNickname(nicknameToUpdate);
+                setNewUserNickname('');
+                alert("Your letter has been received.");
+
                 navigate('/LetterPage', { state: { characterId } });  // characterId를 그대로 전달
             } catch (error) {
-                alert('Error updating user name.');
+                alert('Error updating user information.');
             }
         }
     };
@@ -63,7 +71,8 @@ function Inputinfo() {
     return (
         <section className={`input_wrapper section-${currentSection} ${reverse ? 'reverse' : ''}`}>
             <div className='letter_cover_section'>
-                <div className='letter_cover_img' style={{backgroundImage: "url('/images/info/cover_img2.jpg')"}}>
+                <div className='letter_cover_img' style={{backgroundImage: "url('/images/info/cover_img2.jpg')"}}></div>
+                <div className='letter_cover_text_container'>
                     <div className='letter_cover_text'>
                         From Persona Letter
                     </div>
@@ -110,9 +119,11 @@ function Inputinfo() {
                     <input
                         className='nickname_input'
                         type="text"
+                        value={newUserNickname || userNickname}
+                        onChange={(e) => setNewUserNickname(e.target.value)}
                     /><br />
                 </div>
-                <button className='reply_button' onClick={handleUpdateUserName}>
+                <button className='reply_button' onClick={handleUpdateUserInfo}>
                     <div className='reply_text'>reply</div>
                 </button>
                 {currentSection === 2 && (
