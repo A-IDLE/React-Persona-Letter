@@ -1,6 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import React from 'react';
 
 
 export const Logout = ({className}) => {

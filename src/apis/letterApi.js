@@ -50,3 +50,7 @@ export const updateUser = async (tokenData, newUserName) => {
 export const getUserInfo = async () => {
   return await request.get("/userInfo");
 }
+
+export const getUserName = async () => {
+  return await request.get('/getUserName');
+}

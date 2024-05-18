@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getCharacters } from "../../apis/characterApi";
+import { getUserName } from '../../apis/letterApi';
 import './Main.css';
 import { Logout } from '../auth/Logout';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import useCharacterStore from '../../store/useCharacterStore';
 
-
-export const Character = ({ imageUrl, name, characterId }) => {
-
-    const navigate = useNavigate();
-
-    const handleClickCharacter = () => {
-        navigate('/LetterPage', { state: { characterId } });
-    }
+export const Character = ({ imageUrl, name, characterId, handleClickCharacter }) => {
     return (
-        <div className="character" onClick={handleClickCharacter}>
+        <div className="character" onClick={() => handleClickCharacter(characterId)}>
             <img src={imageUrl} alt={name} className="character-img" />
             <h3 className="character-title">{name}</h3>
         </div>
-    )
-
+    );
 }
-
-
-
 
 export const Carousel = ({ children }) => {
     const scrollCarousel = (direction) => {
@@ -50,12 +40,9 @@ export const Carousel = ({ children }) => {
                     </div>
                 </div>
             </div>
-
         </>
     );
 };
-
-
 
 export const Main = () => {
     const [characterList, setCharacterList] = useState([]);
@@ -64,33 +51,31 @@ export const Main = () => {
 
     const navigate = useNavigate();
 
-
     const loginStatus = useAuth();
-    
-    
 
     const handleSignIn = () => {
         navigate('/login');
     }
 
+    const handleClickCharacter = async (characterId) => {
+        try {
+            const response = await getUserName();
+            const userName = response.data.user_name;
+
+            if (userName) {
+                navigate('/LetterPage', { state: { characterId } });
+            } else {
+                navigate('/info', { state: { characterId } }); // characterId를 함께 전달
+            }
+        } catch (error) {
+            console.error('Failed to fetch user name:', error);
+        }
+    }
+
     useEffect(() => {
         setIsLoggedIn(loginStatus);
 
-        // const fetchCharactersData = async () => {
-        //     try {
-        //         const response = await getCharacters();
-        //         setCharacterList(response.data[0].characters);
-        //         console.log(response.data[0].characters);
-        //     } catch (error) {
-        //         console.error('Failed to fetch series data:', error);
-        //     }
-        // };
-
-        // fetchCharactersData();
-
         fetchCharacters();
-        
-
     }, [loginStatus, fetchCharacters]);
 
     return (
@@ -103,7 +88,7 @@ export const Main = () => {
                     </p>
                     <div className="buttons">
                         {isLoggedIn ? (
-                            <Logout className="button"/>
+                            <Logout className="button" />
                         ) : (
                             <button className="button" onClick={handleSignIn}>Sign In</button>
                         )}
@@ -116,6 +101,7 @@ export const Main = () => {
                             imageUrl={character.character_image_url}
                             name={character.character_name}
                             characterId={character.character_id}
+                            handleClickCharacter={handleClickCharacter}
                         />
                     ))}
                 </Carousel>
