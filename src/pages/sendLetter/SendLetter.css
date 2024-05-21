@@ -159,3 +159,142 @@
     margin: 2rem;
     cursor: pointer;
 }
+
+/* 튜토리얼 */
+.tutorialOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center;
+    align-items: center; */
+    z-index: 1000;
+}
+
+.tutorialContent {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    z-index: 1001;
+    position: relative;
+}
+
+.tutorialContent h2 {
+    margin-top: 0;
+}
+
+.tutorialContent button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.highlight {
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    z-index: 1001;
+    font-size: 20px;
+}
+
+.mailboxHighlight {
+    top: 85%;
+    left: 16.5%;
+    width: 12rem;
+    height: 10rem;
+    transform: translate(-50%, -50%);
+}
+
+.arrow1 {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    z-index: 1002;
+}
+
+.mailboxHighlightText {
+    position: absolute;
+    top: 55%;
+    left: 10%;
+    width: 20rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+}
+
+
+.letterHighlight {
+    top: 55%;
+    left: 65.5%;
+    width: 50rem;
+    height: 50rem;
+    transform: translate(-50%, -50%);
+}
+
+.sendHighlight {
+    top: 88%;
+    left: 88%;
+    width: 10rem;
+    height: 10rem;
+    transform: translate(-50%, -50%);
+}
+
+.sendHighlightText {
+    position: absolute;
+    top: 55%;
+    left: 85%;
+    width: 20rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+}
+
+.arrow2 {
+    position: absolute;
+    top: 60%;
+    left: 93%;
+    z-index: 1002;
+}
+
+.tutorialButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.closeTutorial {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 1002;
+    color: red;
+}
+
+.helpIcon {
+    width: 3rem;
+    position: absolute;
+    top: 85%;
+    left: 22%;
+    cursor: pointer;
+    z-index: 1002;
+}

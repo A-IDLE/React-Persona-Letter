@@ -4,6 +4,9 @@ import { getLetterList, writeLetter, updateStatusLetter } from "../../apis/lette
 import { getCharacterName } from "../../apis/characterApi";
 import "./SendLetter.css";
 
+// 편지 작성 페이지
+// 캐릭터에게 편지를 쓸 수 있는 페이지이며 편지함을 눌러서 보내고 받은 편지를 확인 가능, ? 아이콘 누를 시 가이드 제공
+
 const SendLetter = () => {
   const [letterContent, setLetterContent] = useState("");
   const [displayedLetter, setDisplayedLetter] = useState(null);
@@ -12,18 +15,22 @@ const SendLetter = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
+  const [showTutorial, setShowTutorial] = useState(false);  // 튜토리얼은 기본적으로 숨김 ?아이콘 누를 시 활성화
   const navigate = useNavigate();
   const location = useLocation();
   const { characterId } = location.state || {};
 
   useEffect(() => {
+    // userId를 받아옴
     const storedUserId = localStorage.getItem("userId");
     setUserId(storedUserId);
+    // 캐릭터 아이디가 존재하면 캐릭터 이름을 받아옴
     if (characterId) {
       fetchCharacterName(characterId);
     }
   }, [characterId]);
 
+  // 캐릭터 이름 가져오기
   const fetchCharacterName = async (characterId) => {
     try {
       const characterName = await getCharacterName(characterId); // 캐릭터 이름을 가져오는 API 호출
@@ -34,13 +41,15 @@ const SendLetter = () => {
     }
   };
 
+  // 작성한 편지의 데이터 전송
   const handleInputChange = (event) => {
     setLetterContent(event.target.value);
   };
 
-  console.log("characterId: ", characterId);
-  console.log("characterName: ", name);
+  // console.log("characterId: ", characterId);
+  // console.log("characterName: ", name);
 
+  // 편지 작성
   const handleSendLetter = async () => {
     if (letterContent.trim() === "") {
       alert("편지 내용을 작성해 주세요.");
@@ -60,7 +69,7 @@ const SendLetter = () => {
           reception_status: "sending",
           read_status: true,
         };
-        console.log(data)
+        // console.log(data)
         await writeLetter(data);
       } catch (error) {
         alert("전송 실패:", error.message);
@@ -68,11 +77,13 @@ const SendLetter = () => {
     }
   };
 
+  // 편지함에서 편지 선택
   const selectLetter = async () => {
     if (letters.length > 0) {
       const selectedLetter = letters[currentIndex];
       setDisplayedLetter(selectedLetter);
 
+      // 만약 read_status가 0인 편지를 선택시 read_status가 1로 변경됨
       if (!selectedLetter.read_status) {
         try {
           await updateStatusLetter(selectedLetter.letter_id);
@@ -88,6 +99,7 @@ const SendLetter = () => {
     }
   };
 
+  // 편지함 닫기
   const closeLetter = () => {
     setDisplayedLetter(null);
   };
@@ -107,14 +119,17 @@ const SendLetter = () => {
     }
   }, [userId, characterId, isOpen]);
 
+  // 다음편지
   const nextLetter = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % letters.length);
   };
 
+  // 이전편지
   const prevLetter = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + letters.length) % letters.length);
   };
 
+  // 홈으로
   const HomeButtonContainer = () => {
     return (
       <div className='homeButton'>
@@ -122,7 +137,7 @@ const SendLetter = () => {
       </div>
     )
   }
-
+  
   const HomeButton = ({ name, onClick }) => {
     const navigate = useNavigate();
     const handleClick = () => {
@@ -135,8 +150,36 @@ const SendLetter = () => {
     );
   }
 
+  // 튜토리얼 닫기
+  const handleCloseTutorial = () => {
+    setShowTutorial(false);
+  };
+
+  // 튜토리얼 열기
+  const handleShowTutorial = () => {
+    setShowTutorial(true);
+  };
+
   return (
     <div>
+      {/* <button className="tutorialButton" onClick={handleShowTutorial}>?</button> */}
+      <img src="/images/sendLetter/helpIcon.png" alt="도움말" className="helpIcon" onClick={handleShowTutorial} />
+      {showTutorial && (
+        <div className="tutorialOverlay">
+          <div>
+            <button className="closeTutorial" onClick={handleCloseTutorial}>X</button>
+          </div>
+          <div className="highlight mailboxHighlight"/>
+            <img src="/images/sendLetter/Arrow1.png" alt="편지함 화살표" className="arrow1"/>
+            <p className="mailboxHighlightText">주고 받은 편지를 확인 할 수 있어요</p>
+          <div className="highlight letterHighlight">
+            <p>캐릭터에게 편지를 작성할 수 있어요</p>
+          </div>
+          <div className="highlight sendHighlight"/>
+            <img src="/images/sendLetter/Arrow2.png" alt="편지함 화살표" className="arrow2"/>
+            <p className="sendHighlightText">작성한 편지를 전송할 수 있어요</p>
+        </div>
+      )}
       <HomeButtonContainer />
       <img
         src={isOpen ? "/images/sendLetter/opened_envelope.png" : "/images/sendLetter/closed_envelope.png"}
@@ -179,7 +222,6 @@ const SendLetter = () => {
           className="letter"
           value={letterContent}
           onChange={handleInputChange}
-          placeholder="여기에 편지를 작성하세요"
         />
       </div>
       <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" />
