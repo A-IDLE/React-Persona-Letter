@@ -12,6 +12,12 @@ export const getCharacters = async () => {
   return await request.get("/characters");
     }
 
+// 캐릭터 이름 조회하는 API
+export const getCharacterName = async (characterId) => {
+  const response = await request.get(`/character/${characterId}/name`);
+  return response.data.name;
+    };
+
     // 캐릭터를 생성하는 API
 export const writeCharacter = async ({ data }) => {
     

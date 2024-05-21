@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate, } from 'react-router-dom';
+import "./Sending.css";
 
 const Sending = () => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const Sending = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/LetterPage', {state: {characterId}}); // 이동할 경로로 변경
+      navigate('/', {state: {characterId}}); // 이동할 경로로 변경
     }, 3000); // 3초 뒤에 이동
 
     return () => clearTimeout(timer);

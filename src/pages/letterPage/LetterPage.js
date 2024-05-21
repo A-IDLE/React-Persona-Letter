@@ -1,42 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import './LetterPage.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getLetterList } from '../../apis/letterApi';  // API 함수 임포트
-import { set } from 'firebase/database';
 
 export function LetterPage() {
   const [letters, setLetters] = useState([]);
   const [hasUnreadLetters, setHasUnreadLetters] = useState(false);
-  // const [userId, setUserId] = useState("");
-  // const [characterId, setCharacterId] = useState("");
   const location = useLocation();
-  const { characterId } = location.state || {};
+  const { characterId, name } = location.state || {};
 
   const [isModalOpen, setIsModalOpen] = useState(false);  // 모달 창의 열림/닫힘 상태를 저장할 상태
   const [letterContent, setLetterContent] = useState("");  // 선택된 편지 내용을 저장할 상태
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅
 
-
   useEffect(() => {
-
     // 편지 목록을 가져오는 함수
     const fetchLetters = async (characterId) => {
       try {
         const response = await getLetterList(characterId);  // API 호출로 편지 목록 가져오기
-        setLetters(response.data);  // 편지 목록 상태 업데이트
+        const sortedLetters = response.data.sort((a, b) => new Date(b.received_at) - new Date(a.received_at));  // 최신순으로 정렬
+        setLetters(sortedLetters);  // 정렬된 편지 목록 상태 업데이트
 
-        console.log("fetchLetters response:");
-        console.log(response.data);
+        console.log("fetchLetters response:", sortedLetters);
+
+        // 읽지 않은 편지가 있는지 여부 확인
+        const unreadExists = sortedLetters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+        setHasUnreadLetters(unreadExists);  // 상태 업데이트
       } catch (error) {
         console.error("Failed to fetch letter data:", error);  // 에러 처리
       }
     };
 
     fetchLetters(characterId);  // 편지 목록 가져오기
-
-    // 읽지 않은 편지가 있는지 여부 확인
-    setHasUnreadLetters(letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status));
-  }, []);
+  }, [characterId]);
 
   useEffect(() => {
     // 읽지 않은 편지가 있는지 여부 확인
@@ -48,15 +44,13 @@ export function LetterPage() {
   const toggleModal = () => {
     if (!isModalOpen) {
       // 가장 최근에 온 편지 찾기
-      console.log("before set modal is open"+isModalOpen)
+      console.log("before set modal is open", isModalOpen);
 
-      const latestLetter = letters
-        .filter(letter => letter.reception_status === 'receiving')
-        .sort((a, b) => new Date(b.received_at) - new Date(a.received_at))[0];
+      const latestLetter = letters.filter(letter => letter.reception_status === 'receiving')[letters.filter(letter => letter.reception_status === 'receiving').length - 1];
       setLetterContent(latestLetter ? latestLetter.letter_content : "No new letters");  // 편지 내용 상태 업데이트
     }
     setIsModalOpen(!isModalOpen);  // 모달 창 상태 토글
-    console.log("after set modal open: "+isModalOpen)
+    console.log("after set modal open: ", isModalOpen);
   };
 
   // "답장하기" 버튼 클릭 시 호출되는 함수
@@ -71,10 +65,8 @@ export function LetterPage() {
       </div>
 
       <div className='letterContainer'>
-
         <LetterImage shake={hasUnreadLetters} onClick={toggleModal} />  {/* 편지 이미지 컴포넌트 */}
-
-        <ButtonContainer characterId={characterId}/>  {/* 버튼 컨테이너 컴포넌트 */}
+        <ButtonContainer characterId={characterId} name={name}/>  {/* 버튼 컨테이너 컴포넌트 */}
 
         {isModalOpen && (  // 모달 창이 열려있을 때
           <Modal onClose={toggleModal}>
@@ -115,7 +107,7 @@ function LetterImage({ shake, onClick }) {
             img.style.animationIterationCount = '4';
             img.style.animationFillMode = 'forwards';
           }, 10);  // 브라우저 재렌더링을 위해 약간의 딜레이
-        }, 700);  // 0.5초 동안 멈춤
+        }, 700);  // 0.7초 동안 멈춤
       }
     };
 
@@ -145,12 +137,13 @@ function LetterImage({ shake, onClick }) {
   );
 }
 
-function ButtonContainer({ characterId }) {
+function ButtonContainer({ characterId, name }) {
 
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-    navigate(path, { state: { characterId } });
+    console.log("레터페이지 캐릭아이디 : " + name)
+    navigate(path, { state: { characterId, name } });
   };
 
   return (
@@ -201,16 +194,14 @@ export const LetterButton = ({ name, onClick }) => {
 
 // 홈 버튼 컴포넌트
 export const HomeButton = ({ name, onClick }) => {
-
   const navigate = useNavigate();
-
   const handleClick = () => {
     navigate('/');
   } 
   return (
-    <dev className='homeButton' onClick={handleClick}>
+    <div className='homeButton' onClick={handleClick}>
       {name}
-    </dev>
+    </div>
   );
 }
 

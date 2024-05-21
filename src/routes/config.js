@@ -19,7 +19,7 @@ const routes = [
   { path: '/Sending', component: Sending, isPrivate: true },
   { path: '/letter/:letterId', component: ReceivedLetter, isPrivate: true },
   { path: '/login', component: LoginPage, isPrivate: false },
-  { path: '/info', component: Inputinfo, isPrivate: false }
+  { path: '/info', component: Inputinfo, isPrivate: false },
   { path: '/test3', component: Test3, isPrivate: false }
 ];
 
