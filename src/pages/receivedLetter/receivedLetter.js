@@ -68,12 +68,12 @@ function ReceivedLetter() {
                 </div>
             </div>
             <div className='letter_section' style={{ height: letterSectionHeight }}>
-            <div className='letter_content' ref={letterContentRef}>
-                {letter && letter.letter_content}
+                <div className='letter_content' ref={letterContentRef}>
+                    {letter && letter.letter_content}
                 </div>
-                <div className='letter_buttons'>
-                    <div className='translation_button'>번역하기</div>
-                    <div className='reply_button'>답장하기</div>
+                <div className='a_letter_buttons'>
+                    <span className='translation_button'>번역하기</span>
+                    <span className='reply_button'>답장하기</span>
                 </div>
             </div>
         </section>
