@@ -8,13 +8,6 @@ import { useAuth } from '../../hooks/useAuth';
 import useCharacterStore from '../../store/useCharacterStore';
 
 export const Character = ({ imageUrl, name, characterId, handleClickCharacter }) => {
-
-    const navigate = useNavigate();
-
-    const handleClickCharacter = () => {
-        console.log(name)
-        navigate('/LetterPage', { state: { characterId, name } });
-    }
     return (
         <div className="character" onClick={() => handleClickCharacter(characterId)}>
             <img src={imageUrl} alt={name} className="character-img" />
@@ -64,13 +57,13 @@ export const Main = () => {
         navigate('/login');
     }
 
-    const handleClickCharacter = async (characterId) => {
+    const handleClickCharacter = async (characterId, name) => {
         try {
             const response = await getUserName();
             const userName = response.data.user_name;
 
             if (userName) {
-                navigate('/LetterPage', { state: { characterId } });
+                navigate('/LetterPage', { state: { characterId, name } });
             } else {
                 navigate('/info', { state: { characterId } }); // characterId를 함께 전달
             }
