@@ -9,7 +9,7 @@ import useCharacterStore from '../../store/useCharacterStore';
 
 export const Character = ({ imageUrl, name, characterId, handleClickCharacter }) => {
     return (
-        <div className="character" onClick={() => handleClickCharacter(characterId)}>
+        <div className="character" onClick={() => handleClickCharacter(characterId, name)}>
             <img src={imageUrl} alt={name} className="character-img" />
             <h3 className="character-title">{name}</h3>
         </div>
