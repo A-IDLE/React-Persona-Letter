@@ -2,4 +2,8 @@
 .hidden {
     display: none;
   }
-  
+
+.owl {
+  width: 40%;
+  height: 40%;
+}

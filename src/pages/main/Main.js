@@ -12,7 +12,8 @@ export const Character = ({ imageUrl, name, characterId }) => {
     const navigate = useNavigate();
 
     const handleClickCharacter = () => {
-        navigate('/LetterPage', { state: { characterId } });
+        console.log(name)
+        navigate('/LetterPage', { state: { characterId, name } });
     }
     return (
         <div className="character" onClick={handleClickCharacter}>
