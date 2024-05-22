@@ -31,7 +31,9 @@ function MailAppInbox() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { characterId } = location.state || {};
+    const { characterId, name } = location.state || {}; // location.state에서 characterId와 name 가져오기
+
+    
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
@@ -40,7 +42,7 @@ function MailAppInbox() {
         const accessToken = localStorage.getItem("accessToken");
         const receptionStatus = "receiving";
         
-        setCharacterName(characterName);
+        setCharacterName(name);
 
         console.log("@@@@@User, CharacterID", userId, characterId);
         console.log("character name: ", characterName)
@@ -71,11 +73,11 @@ function MailAppInbox() {
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox', {state: { characterId }});
+        navigate('/outbox', {state: { characterId, name }}); // characterId와 name 함께 전달
     };
 
     const navigateToInbox = () => {
-        navigate('/inbox', {state: { characterId }});
+        navigate('/inbox', {state: { characterId, name }}); // characterId와 name 함께 전달
     };
 
     const handleSearchChange = (event) => {
