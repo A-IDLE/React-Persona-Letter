@@ -20,7 +20,7 @@ function formatDateTime(isoString) {
       hour: '2-digit', minute: '2-digit', second: '2-digit',
       hour12: false
     };
-    return new Intl.DateTimeFormat('en-US', options).format(date);
+    return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
 }
   
 function MailAppInbox() {
@@ -42,7 +42,8 @@ function MailAppInbox() {
         
         setCharacterName(characterName);
 
-        console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
+        console.log("@@@@@User, CharacterID", userId, characterId);
+        console.log("character name: ", characterName)
 
         if (userId && characterId && accessToken) {
             // inboxLetter API를 사용하여 편지 목록을 가져옵니다.
@@ -81,10 +82,15 @@ function MailAppInbox() {
         setSearchTerm(event.target.value);
     };
 
+    const handleClickHeader = () => {
+        navigate('/');
+      } 
+
     return (
-        <div>
-            <div className="header">Persona Letter</div>
-            
+        <div className='inbox_section'>
+            <div className="header_inbox" onClick={handleClickHeader}>
+                <h1 className="header-title_inbox">Persona Letter</h1>
+            </div>            
             <div className="main-container">
                 <div className="sidebar">
                     <div className="contact active">{CharacterName}</div>

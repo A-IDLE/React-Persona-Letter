@@ -78,11 +78,15 @@ export const Main = () => {
         fetchCharacters();
     }, [loginStatus, fetchCharacters]);
 
+    const handleClickHeader = () => {
+        navigate('/');
+      } 
+
     return (
         <>
             <div className="container">
                 <div className="header">
-                    <h1 className="header-title">Persona Letter</h1>
+                    <h1 className="header-title" onClick={handleClickHeader}>Persona Letter</h1>
                 </div>
                 <div className='main_intro'>
                     <p className="intro_phrase">

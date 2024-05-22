@@ -131,8 +131,8 @@ function Inputinfo() {
                         onChange={(e) => setNewUserNickname(e.target.value)}
                     /><br />
                 </div>
-                <button className='reply_button' onClick={handleUpdateUserInfo}>
-                    <div className='reply_text'>reply</div>
+                <button className='info_reply_button' onClick={handleUpdateUserInfo}>
+                    <div className='info_reply_text'>reply</div>
                 </button>
                 {currentSection === 2 && (
                     <div className='prev_button'>

@@ -217,7 +217,7 @@
     }
 }
 
-.reply_button {
+.info_reply_button {
     background: none;
     border: none;
     color: inherit;
@@ -230,11 +230,11 @@
     width: 60px;
     cursor: pointer;
 }
-.reply_button:hover {
+.info_reply_button:hover {
 box-shadow: inset 0 -10px 0 #cbc2c2; 
 }
 
-.reply_text{
+.info_reply_text{
     color: #1A1514;
     font-family: 'Caveat', cursive;
     font-size: 28px;

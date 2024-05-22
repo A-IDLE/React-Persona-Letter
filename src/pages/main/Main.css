@@ -27,6 +27,7 @@ body {
     top: 14px;
     left: 80px;
     position: absolute;
+    cursor: pointer;
 }
 
 .intro_phrase {

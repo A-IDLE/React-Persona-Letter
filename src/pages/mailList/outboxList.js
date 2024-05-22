@@ -68,6 +68,7 @@ function MailAppOutbox() {
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
+        navigate(`/letter/${letterId}`);
     };
 
     const navigateToOutbox = () => {
@@ -81,10 +82,15 @@ function MailAppOutbox() {
         setSearchTerm(event.target.value);
     };
 
+    const handleClickHeader = () => {
+        navigate('/');
+      } 
     return (
-        <div>
+        <div className='inbox_section'>
             
-            <div className="header">Persona Letter</div>
+            <div className="header_inbox" onClick={handleClickHeader}>
+                <h1 className="header-title_inbox">Persona Letter</h1>
+            </div>
             
             <div className="main-container">
                
