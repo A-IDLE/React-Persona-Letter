@@ -10,7 +10,7 @@ const Sending = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/', {state: {characterId}}); // 이동할 경로로 변경
-    }, 400000); // 3초 뒤에 이동
+    }, 3000); // 3초 뒤에 이동
 
     return () => clearTimeout(timer);
   }, [navigate]);
