@@ -8,6 +8,13 @@ import { useAuth } from '../../hooks/useAuth';
 import useCharacterStore from '../../store/useCharacterStore';
 
 export const Character = ({ imageUrl, name, characterId, handleClickCharacter }) => {
+
+    const navigate = useNavigate();
+
+    const handleClickCharacter = () => {
+        console.log(name)
+        navigate('/LetterPage', { state: { characterId, name } });
+    }
     return (
         <div className="character" onClick={() => handleClickCharacter(characterId)}>
             <img src={imageUrl} alt={name} className="character-img" />
