@@ -26,8 +26,8 @@ export const updateLetter = async ({ data }) => {
 }
 
 // 편지를 삭제하는 API
-export const deleteLetter = async ({ data }) => {
-
+export const deleteLetters = async (characterId) => {
+  return await request.delete(`/character/${characterId}/letters`);
 }
 
 // inboxLetter를 조회하는 API
