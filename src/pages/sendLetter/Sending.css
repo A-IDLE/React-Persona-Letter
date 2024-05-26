@@ -1,9 +1,342 @@
-/* 새 날개짓 */
-.hidden {
-    display: none;
+.owl {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: 35%; /* Adjust the size as needed */
+  height: 25%; /* Adjust the size as needed */
+  animation: moveOwl 2s infinite linear; /* Total duration for one complete cycle */
+} 
+/* --- 2초로 변경되었어요 --- */
+
+
+/*  ==== 1 ==== */
+
+@keyframes moveOwl {
+  0% {
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  10% {
+    top: 30%;
+    left: 25%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  23% {
+    top: 30%;
+    left: 59%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  28% {
+    top: 30%;
+    left: 60%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  33% {
+    top: 30%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  38% {
+    top: 30%;
+    left: 54%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  40% {
+    top: 30%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  43% {
+    top: 30%;
+    left: 56.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  45% {
+    top: 30%;
+    left: 57%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  51% {
+    top: 30%;
+    left: 56.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    top: 30%;
+    left: 56.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
-.owl {
-  width: 40%;
-  height: 40%;
+
+/*  ==== 2 ==== */
+
+/* @keyframes moveOwl {
+  0% {
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  5% {
+    top: 31%;
+    left: 31%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  10% {
+    top: 34%;
+    left: 32%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  15% {
+    top: 37%;
+    left: 33%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  20% {
+    top: 42%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    top: 37%;
+    left: 35%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  30% {
+    top: 34%;
+    left: 36%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  35% {
+    top: 31%;
+    left: 37%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  40% {
+    top: 30%;
+    left: 38%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  45% {
+    top: 31%;
+    left: 39%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  50% {
+    top: 34%;
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  55% {
+    top: 37%;
+    left: 41%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  60% {
+    top: 41%;
+    left: 42%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  65% {
+    top: 37%;
+    left: 43%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  70% {
+    top: 34%;
+    left: 44%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    top: 31%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  80% {
+    top: 30%;
+    left: 46%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  85% {
+    top: 31%;
+    left: 47%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  90% {
+    top: 34%;
+    left: 48%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  95% {
+    top: 37%;
+    left: 49%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  } */
+
+
+  
+/*  ==== 3 ==== */
+
+/* @keyframes moveOwl {
+  0% {
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  6.25% {
+    top: 31%;
+    left: 31%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  12.5% {
+    top: 34%;
+    left: 32%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  18.75% {
+    top: 37%;
+    left: 33%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    top: 42%;
+    left: 34%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  31.25% {
+    top: 37%;
+    left: 35%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  37.5% {
+    top: 34%;
+    left: 36%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  43.75% {
+    top: 31%;
+    left: 37%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  50% {
+    top: 30%;
+    left: 38%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  56.25% {
+    top: 31%;
+    left: 39%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  62.5% {
+    top: 34%;
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  68.75% {
+    top: 37%;
+    left: 41%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    top: 42%;
+    left: 42%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  81.25% {
+    top: 37%;
+    left: 43%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  87.5% {
+    top: 34%;
+    left: 44%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  93.75% {
+    top: 31%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    top: 30%;
+    left: 46%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }  */
 }
+
+
+
+
+
+
+
+
+
+/* ==== 원본 ====
+@keyframes moveOwl {
+  0% {
+    top: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  12.5% {
+    top: 35%;
+    left: 31.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    top: 40%;
+    left: 35%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  37.5% {
+    top: 35%;
+    left: 37.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  50% {
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  62.5% {
+    top: 35%;
+    left: 42.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  87.5% {
+    top: 35%;
+    left: 47.5%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+ */
+
+/* @keyframes moveOwl {
+  0% {
+    top: 20%;
+  }
+  50% {
+    top: 40%;
+  }
+  100% {
+    top: 20%;
+  }
+} */
