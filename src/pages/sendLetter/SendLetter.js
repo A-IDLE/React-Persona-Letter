@@ -140,6 +140,10 @@ const SendLetter = () => {
     setShowTutorial(true);
   };
 
+  const handleClickHeader = () => {
+    navigate('/');
+  } 
+
   return (
     <div>
       {/* <button className="tutorialButton" onClick={handleShowTutorial}>?</button> */}
@@ -160,7 +164,9 @@ const SendLetter = () => {
             <p className="sendHighlightText">작성한 편지를 전송할 수 있어요</p>
         </div>
       )}
-      <HomeButton name="Persona Letter" />
+      <div className="header_send" onClick={handleClickHeader}>
+          <h1 className="header-title_send">Persona Letter</h1>
+      </div>
       <img
         src={isOpen ? "/images/sendLetter/opened_envelope.png" : "/images/sendLetter/closed_envelope.png"}
         alt="편지함"
@@ -195,11 +201,11 @@ const SendLetter = () => {
         </>
       )}
       <div className="sendLetterContainer">
-      <div className="charNameContainer">
+      {/* <div className="charNameContainer">
         <div className="charName">
           To. {name}
         </div>
-      </div>
+      </div> */}
       <textarea
         className="letter"
         value={letterContent}
@@ -207,7 +213,8 @@ const SendLetter = () => {
       />
     </div>
       {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
-      <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} />
+      {/* <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} /> */}
+      <div className="send"onClick={handleSendLetter} >Send</div>
     </div>
   );
 };

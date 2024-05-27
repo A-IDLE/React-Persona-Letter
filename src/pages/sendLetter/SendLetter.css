@@ -10,7 +10,7 @@
 .mailbox {
   position: absolute;
   top: 65%;
-  left: 10%;
+  left: 18%;
   cursor: pointer;
   width: 20rem;
 }
@@ -28,14 +28,18 @@
   top: 82%;
   left: 83%;
   cursor: pointer;
+  color: #5a4632;
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
 }
 
 .sendLetterContainer {
   width: 30%;
   position: absolute;
-  top: 10%;
-  left: 65%;
-  transform: translateX(-50%);
+  top: 15%;
+  /* left: 65%; */
+  right: 15%;
+  /* transform: translateX(-50%); */
 }
 
 .charNameContainer {
@@ -64,7 +68,9 @@
   height: 42rem;
   resize: none;
   padding: 0.5rem 1rem;
-  font-size: 1.8em; /* 폰트 크기 설정 */
+  font-size: 20px;
+  font-family: "Caveat", cursive;
+  color: #1A1514;
   background-color: #F2E7D1; /* 배경색 설정 */
   background-attachment: local;
   background-image:
@@ -115,8 +121,8 @@
   max-height: 45%;
   position: absolute;
   top: 15%;
-  left: 5%;
-  text-align: center;
+  left: 10%;
+  text-align: left;
   overflow-y: auto;
   white-space: pre-wrap;
   font-family: Caveat, cursive;
@@ -135,16 +141,19 @@
   color: #666;
   overflow-y: auto;
   white-space: pre-wrap;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .cardButtons {
   position: absolute;
   width: 35rem;
   top: 65%;
-  left: 5%;
+  left: 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px;
 }
 
 .cardButtons button {
@@ -207,7 +216,7 @@
 
 .mailboxHighlight {
   top: 83%;
-  left: 18%;
+  left: 25%;
   width: 11rem;
   height: 9rem;
   transform: translate(-50%, -50%);
@@ -295,4 +304,21 @@
   left: 25%;
   cursor: pointer;
   z-index: 1002;
+}
+
+.header_send {
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
+.header-title_send {
+  font-size: 42px;
+  font-family: "Amatic SC", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #65564E;
+  top: 14px;
+  left: 80px;
+  position: absolute;
 }
