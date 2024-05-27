@@ -20,7 +20,7 @@ function formatDateTime(isoString) {
       hour: '2-digit', minute: '2-digit', second: '2-digit',
       hour12: false
     };
-    return new Intl.DateTimeFormat('en-US', options).format(date);
+    return new Intl.DateTimeFormat('ko-KR', options).format(date).replace(/\./g, '').replace(/ /g, '').replace(/:/g, ':').replace(/(\d{4})(\d{2})(\d{2})/, '$1.$2.$3 ');
 }
   
 function MailAppInbox() {
@@ -31,7 +31,9 @@ function MailAppInbox() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { characterId } = location.state || {};
+    const { characterId, name } = location.state || {}; // location.state에서 characterId와 name 가져오기
+
+    
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
@@ -40,9 +42,10 @@ function MailAppInbox() {
         const accessToken = localStorage.getItem("accessToken");
         const receptionStatus = "receiving";
         
-        setCharacterName(characterName);
+        setCharacterName(name);
 
-        console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
+        console.log("@@@@@User, CharacterID", userId, characterId);
+        console.log("character name: ", characterName)
 
         if (userId && characterId && accessToken) {
             // inboxLetter API를 사용하여 편지 목록을 가져옵니다.
@@ -70,21 +73,26 @@ function MailAppInbox() {
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox', {state: { characterId }});
+        navigate('/outbox', {state: { characterId, name }}); // characterId와 name 함께 전달
     };
 
     const navigateToInbox = () => {
-        navigate('/inbox', {state: { characterId }});
+        navigate('/inbox', {state: { characterId, name }}); // characterId와 name 함께 전달
     };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
+    const handleClickHeader = () => {
+        navigate('/');
+      } 
+
     return (
-        <div>
-            <div className="header">Persona Letter</div>
-            
+        <div className='inbox_section'>
+            <div className="header_inbox" onClick={handleClickHeader}>
+                <h1 className="header-title_inbox">Persona Letter</h1>
+            </div>            
             <div className="main-container">
                 <div className="sidebar">
                     <div className="contact active">{CharacterName}</div>

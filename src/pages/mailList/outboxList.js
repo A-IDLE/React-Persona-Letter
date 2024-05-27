@@ -33,7 +33,7 @@ function MailAppOutbox() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { characterId } = location.state || {};
+    const { characterId, name } = location.state || {}; // location.state에서 characterId와 name 가져오기
 
     useEffect(() => {
         const userId = localStorage.getItem("userId");
@@ -42,9 +42,10 @@ function MailAppOutbox() {
         const accessToken = localStorage.getItem("accessToken");
         const receptionStatus = "sending";
 
-        setCharacterName(characterName);
+        setCharacterName(name);
 
-        console.log("@@@@@User, CharacterID, CharacterName:", userId, characterId, CharacterName);
+        console.log("@@@@@User, CharacterID", userId, characterId);
+        console.log("character name: ", characterName)
 
         if (userId && characterId && accessToken) {
             // outboxLetter API를 사용하여 편지 목록을 가져옵니다.
@@ -68,23 +69,29 @@ function MailAppOutbox() {
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
+        navigate(`/letter/${letterId}`);
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox', {state: { characterId }}); 
-    };
-    const navigateToInbox = () => {
-        navigate('/inbox', {state: { characterId }}); 
+        navigate('/outbox', {state: { characterId, name }}); // characterId와 name 함께 전달
     };
 
+    const navigateToInbox = () => {
+        navigate('/inbox', {state: { characterId, name }}); // characterId와 name 함께 전달
+    };
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
+    const handleClickHeader = () => {
+        navigate('/');
+      } 
     return (
-        <div>
+        <div className='inbox_section'>
             
-            <div className="header">Persona Letter</div>
+            <div className="header_inbox" onClick={handleClickHeader}>
+                <h1 className="header-title_inbox">Persona Letter</h1>
+            </div>
             
             <div className="main-container">
                

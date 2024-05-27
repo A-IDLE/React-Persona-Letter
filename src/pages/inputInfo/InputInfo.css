@@ -1,35 +1,258 @@
-.input_wrapper{
-    display: flex;
-    justify-content: center;
-    flex-direction: column; 
-    align-items: center;
-    background-color: #D5D3CD;
-    gap: 20px;
-    /* height: 100vh; */
-    overflow-x: auto;
-}
-@media (max-width: 1200px) { /* 화면 크기에 따라 조정 가능 */
-    .input_wrapper {
-        min-width: 1200px; /* 컨테이너의 최소 너비를 설정 */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
-.info_header {
-    color: #1B1513;
-    padding: 15px 20px;
-    text-align: left;
-    font-size: 32px;
-    font-family: 'Caveat', cursive; /* Using Google Fonts for Caveat */
-    border-bottom: none;
-    position: absolute; 
-    left: 20px;
-    top: 20px;
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D5D3CD;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
 
-  }
-.info_letter_section{
-    width: 650px;
-    height: 800px;
-    perspective: 1000px;
+.info_input_section {
+    width: 860px;
+    height: 440px;
+    /* background-image: url('/images/info/post_card2.PNG');  배경 이미지 설정 */
+    background-size: cover;  /* 이미지를 섹션 크기에 맞추어 채움 */
+    background-position: center;  /* 이미지를 가운데에 배치 */
+    top: 200px; /* 각 섹션을 더 아래로 내립니다 */
+    margin-bottom: 40px;
+    transition: transform 1s ease-in-out;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    position: absolute;
+    opacity: 0;  /* 처음에는 숨김 */
+    z-index: 1; /* 앞쪽에 위치하게 설정 */
+    box-shadow: 3px 3px 6px 1px #afaeae;
+}
+.info_letter_section {
+    width: 860px;
+    height: 440px;
     background-color: #F1EDE2;
+    top: 200px; /* 각 섹션을 더 아래로 내립니다 */
+    margin-bottom: 40px;
+    transition: transform 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0;  /* 처음에는 숨김 */
+    z-index: 1; /* 앞쪽에 위치하게 설정 */
+    box-shadow: 3px 3px 6px 1px #afaeae;
+}
+.letter_cover_section {
+    width: 860px;
+    height: 440px;
+    background-color: #F1EDE2;
+    top: 200px; /* 각 섹션을 더 아래로 내립니다 */
+    margin-bottom: 40px;
+    transition: transform 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 0;  /* 처음에는 숨김 */
+    box-shadow: 3px 3px 6px 1px #afaeae;
+}
+.letter_cover_img{
+    width: 820px;
+    height: 400px;
+    /* background-image: url('/images/info/cover_img2.jpg');  */
+    background-size: cover;  
+    background-position: center; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 64%;
+}
+.info_letter_text, .info_input_text {
+    color: #1A1514;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    margin: 20px;
+}
+.info_input_text{
+    position: relative;
+    top: 170px;
+    left: 50px;
+}
+.name_input{
+    margin-left: 37px;
+    color: #1A1514;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    width: 200px;
+}
+.nickname_input{
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #1A1514;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    width: 200px;
+}
+.letter_cover_text_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.letter_cover_text {
+    color: #1A1514;
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    margin: 20px;
+    position: relative; /* 텍스트를 부모 컨테이너 안에 위치시킴 */
+}
+.section-0 .letter_cover_section {
+    transform: translateY(0);
+    opacity: 1;  /* 보임 */
+}
+
+.section-0 .info_letter_section {
+    transform: translateY(520px);  /* margin과 height를 고려한 위치 조정 */
+    animation: none;  /* 처음에는 애니메이션 없음 */
+}
+
+.section-0 .info_input_section {
+    transform: translateY(1040px);  /* margin과 height를 고려한 위치 조정 */
+}
+
+.section-1 .letter_cover_section {
+    transform: translateY(-520px);  /* margin과 height를 고려한 위치 조정 */
+}
+
+.section-1 .info_letter_section {
+    transform: translateY(0);
+    animation: fadeInUp 1s forwards;  /* 아래서부터 페이드 인하며 올라오는 애니메이션 */
+    opacity: 1;  /* 애니메이션 동안 보이도록 설정 */
+}
+
+.section-1 .info_input_section {
+    transform: translateY(520px);  /* margin과 height를 고려한 위치 조정 */
+}
+
+.section-2 .letter_cover_section {
+    transform: translateY(-1040px);  /* margin과 height를 고려한 위치 조정 */
+}
+
+.section-2 .info_letter_section {
+    transform: translateY(-520px);  /* margin과 height를 고려한 위치 조정 */
+}
+
+.section-2 .info_input_section {
+    transform: translateY(0);
+    animation: fadeInUp 1s forwards;  /* 아래서부터 페이드 인하며 올라오는 애니메이션 */
+    opacity: 1;  /* 애니메이션 동안 보이도록 설정 */
+}
+
+.section-1.reverse .letter_cover_section,
+.section-1.reverse .info_letter_section,
+.section-2.reverse .info_letter_section,
+.section-2.reverse .info_input_section {
+    animation: fadeInDown 1s forwards;  /* 위에서부터 페이드 인하며 내려오는 애니메이션 */
+}
+
+.next_button, .prev_button {
+    position: fixed;  /* fixed로 변경하여 섹션 영역 밖으로 위치시킴 */
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #F1EDE2;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 10;  /* 버튼이 항상 최상위에 위치하도록 설정 */
+}
+
+.prev_button {
+    top: -60px;  /* 화면 상단에 위치 */
+    left: 50%;  /* 화면 가운데 정렬 */
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+}
+.next_button {
+    bottom: -100px;  /* 화면 상단에 위치 */
+    left: 50%;  /* 화면 가운데 정렬 */
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+}
+.next_button_img {
+    width: 40px;
+    height: 20px;
+}
+.prev_button_img {
+    width: 40px;
+    height: 20px;
+}
+
+@media (max-width: 1200px) {
+    .input_wrapper {
+        min-width: 1200px;
+    }
+}
+
+.info_reply_button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 0;
+    position: relative;
+    margin-left: 400px;
     margin-top: 100px;
-    margin-bottom: 100px;
+    width: 60px;
+    cursor: pointer;
+}
+.info_reply_button:hover {
+box-shadow: inset 0 -10px 0 #cbc2c2; 
+}
+
+.info_reply_text{
+    color: #1A1514;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    display: inline;
+}
+.header_info {
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
+.header-title_info {
+    font-size: 42px;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
+    top: 7px;
+    left: 80px;
+    position: absolute;
 }

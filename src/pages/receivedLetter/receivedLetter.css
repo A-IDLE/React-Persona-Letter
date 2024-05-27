@@ -84,7 +84,7 @@
     font-family: "Nanum Gothic", sans-serif;  
     font-size: 16px; 
 }
-.letter_buttons{
+.a_letter_buttons{
     display: flex;  
     position: absolute; 
     bottom: 50px;
@@ -95,14 +95,15 @@
 }
 .letter_content{
     font-family: "Caveat", cursive;
-    font-size: 16px;
+    font-size: 20px;
     white-space: pre-wrap; 
     padding: 30px;
     margin-top: 20px;
+    color: #1A1514;
 }
 .image_comment{
     font-family: "Caveat", cursive;
-    font-size: 16px;
+    font-size: 20px;
     position: absolute; 
     bottom: 100px;
     right: 50px;

@@ -16,26 +16,45 @@ body {
 .header {
     margin-bottom: 50px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
 
 .header-title {
-    font-size: 3em;
-    font-family: Caveat, cursive;
-    color: #5a4632;
+    font-size: 42px;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
+    top: 14px;
+    left: 80px;
+    position: absolute;
+    cursor: pointer;
 }
 
-.header-paragraph {
-    font-size: 1em;
-    font-family: 'Cursive', serif;
-    color: #766953;
-    margin: 10px 0;
+.intro_phrase {
+    font-size: 28px;
+    font-family: "Caveat", cursive;
+    color: #1B1513;
+    font-weight: bold;
+    margin-top: 100px;
 }
-
+.intro_explanation {
+    font-size: 20px;
+    font-family: "Caveat", cursive;
+    color: #1A1514;
+}
 .buttons {
     margin: 20px 0;
     display: flex;
     justify-content: center;
 }
-
+.logout_button{
+    top: 54px;
+    right: 80px;
+    position: absolute;
+    font-family: 'Cursive', serif;
+    cursor: pointer;
+    color: #1A1514;
+}
 .button {
     padding: 10px 20px;
     font-size: 0.8em;
