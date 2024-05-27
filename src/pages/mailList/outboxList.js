@@ -48,16 +48,17 @@ function MailAppOutbox() {
         console.log("character name: ", characterName)
 
         if (userId && characterId && accessToken) {
-            // outboxLetter API를 사용하여 편지 목록을 가져옵니다.
+            // inboxLetter API를 사용하여 편지 목록을 가져옵니다.
             getLettersByReceptionStatus(characterId, receptionStatus)
               .then(data => {
-                  // data가 배열인지 확인하고 설정합니다.
                   if (Array.isArray(data)) {
-                  setLetters(data);
-                  setLoading(false); // 로딩 상태를 해제합니다.
+                      // 편지 목록을 created_time 기준으로 내림차순 정렬합니다.
+                      const sortedLetters = data.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+                      setLetters(sortedLetters);
+                      setLoading(false); // 로딩 상태를 해제합니다.
                   } else {
-                  console.error("Invalid response format for letters:", data);
-                  setLoading(false); // 오류 발생 시 로딩 상태를 해제합니다.
+                      console.error("Invalid response format for letters:", data);
+                      setLoading(false); // 오류 발생 시 로딩 상태를 해제합니다.
                   }
               })
               .catch(error => {
