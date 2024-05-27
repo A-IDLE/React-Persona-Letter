@@ -22,6 +22,12 @@ const SendLetter = () => {
   const { characterId } = location.state || {};
 
   useEffect(() => {
+    // 폰트 로드
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    
     // userId를 받아옴
     const storedUserId = localStorage.getItem("userId");
     setUserId(storedUserId);
@@ -140,6 +146,38 @@ const SendLetter = () => {
     setShowTutorial(true);
   };
 
+  const handleClickHeader = () => {
+    navigate('/');
+  } 
+
+  const handleClearContent = () => {
+    setLetterContent("");
+  };
+  
+  // 한글 텍스트 감지 함수
+  const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+
+    useEffect(() => {
+      const letterTextarea = document.querySelector('.letter');
+      const letterCard = document.querySelector('.letterCard');
+
+      if (letterTextarea) {
+        if (isKorean(letterContent)) {
+          letterTextarea.classList.add('korean');
+        } else {
+          letterTextarea.classList.remove('korean');
+        }
+      }
+
+      if (letterCard) {
+        if (letters.length > 0 && isKorean(letters[currentIndex].letter_content)) {
+          letterCard.classList.add('korean');
+        } else {
+          letterCard.classList.remove('korean');
+        }
+      }
+    }, [letterContent, letters, currentIndex]);
+    
   return (
     <div>
       {/* <button className="tutorialButton" onClick={handleShowTutorial}>?</button> */}
@@ -160,7 +198,9 @@ const SendLetter = () => {
             <p className="sendHighlightText">작성한 편지를 전송할 수 있어요</p>
         </div>
       )}
-      <HomeButton name="Persona Letter" />
+      <div className="header_send" onClick={handleClickHeader}>
+          <h1 className="header-title_send">Persona Letter</h1>
+      </div>
       <img
         src={isOpen ? "/images/sendLetter/opened_envelope.png" : "/images/sendLetter/closed_envelope.png"}
         alt="편지함"
@@ -194,12 +234,12 @@ const SendLetter = () => {
           </div>
         </>
       )}
-      <div className="sendLetterContainer">
-      <div className="charNameContainer">
+      <div className={`sendLetterContainer ${isOpen ? 'right-15' : 'right-50'}`}>
+      {/* <div className="charNameContainer">
         <div className="charName">
           To. {name}
         </div>
-      </div>
+      </div> */}
       <textarea
         className="letter"
         value={letterContent}
@@ -207,7 +247,13 @@ const SendLetter = () => {
       />
     </div>
       {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
-      <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} />
+      {/* <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} /> */}
+      {!isOpen && (
+        <>
+          <div className="send" onClick={handleSendLetter}>Send a letter</div>
+          <div className="clear_letter" onClick={handleClearContent}>Clear the content</div>
+        </>
+      )}
     </div>
   );
 };
