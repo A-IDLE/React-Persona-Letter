@@ -18,6 +18,12 @@
         transform: translateY(0);
     }
 }
+/* 한국어 텍스트에 적용될 스타일 */
+.korean {
+    font-family: "Nanum Brush Script", cursive !important;
+    font-weight: 400;
+    font-style: normal;
+}
 .input_wrapper {
     display: flex;
     flex-direction: column;
