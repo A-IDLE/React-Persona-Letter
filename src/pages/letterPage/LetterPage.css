@@ -139,11 +139,11 @@
   position: absolute;
   top: 5%;
   left: 5%;
-  text-align: center;
+  text-align: left;
   overflow-y: auto;
   white-space: pre-wrap;
   font-family: Caveat, cursive;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .paper::-webkit-scrollbar {
