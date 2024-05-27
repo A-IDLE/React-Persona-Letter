@@ -19,6 +19,13 @@ function Inputinfo() {
     console.log("characterId: ", characterId);
 
     useEffect(() => {
+
+        // 폰트 로드
+        const link = document.createElement('link');
+        link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
+
         const token = localStorage.getItem("accessToken");
 
         if (token) {
@@ -32,6 +39,28 @@ function Inputinfo() {
             });
         }
     }, []);
+
+    useEffect(() => {
+        const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+        const nameInput = document.querySelector('.name_input');
+        const nicknameInput = document.querySelector('.nickname_input');
+
+        if (nameInput) {
+            if (isKorean(newUserName || userName)) {
+                nameInput.classList.add('korean');
+            } else {
+                nameInput.classList.remove('korean');
+            }
+        }
+
+        if (nicknameInput) {
+            if (isKorean(newUserNickname || userNickname)) {
+                nicknameInput.classList.add('korean');
+            } else {
+                nicknameInput.classList.remove('korean');
+            }
+        }
+    }, [newUserName, userName, newUserNickname, userNickname]);
 
     const handleUpdateUserInfo = async () => {
         if (tokenData) {
