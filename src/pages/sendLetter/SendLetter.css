@@ -23,7 +23,7 @@
 }
 
 .send {
-  width: 6rem;
+  width: 5rem;
   position: absolute;
   top: 82%;
   left: 83%;
@@ -240,16 +240,16 @@
 }
 
 .sendHighlight {
-  top: 87%;
-  left: 85.5%;
-  width: 5rem;
-  height: 5.5rem;
+  top: 86%;
+  left: 85.2%;
+  width: 4rem;
+  height: 4.5rem;
   transform: translate(-50%, -50%);
 }
 
 .sendHighlightText {
   position: absolute;
-  top: 55%;
+  top: 52%;
   left: 83%;
   width: 20rem;
   text-align: center;
@@ -260,8 +260,8 @@
 
 .arrow2 {
   position: absolute;
-  top: 60%;
-  left: 89%;
+  top: 57%;
+  left: 88%;
   z-index: 1002;
 }
 
