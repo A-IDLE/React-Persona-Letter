@@ -1,9 +1,10 @@
 /* LetterPage.css */
+
 .letterContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;  /* Full height of the viewport */
+  height: 80vh;  /* Full height of the viewport */
   background-color: #D5D3CD;  /* Light grey background */
 }
 
@@ -22,7 +23,7 @@
 }
 
 .letterButton {
-  margin: 10px 0;  /* Space between buttons vertically */
+  margin: 5px 0;  /* Space between buttons vertically */
   padding: 8px 20px;  /* Smaller padding for a thinner button look */
   background-color: rgba(101, 86, 78, 0.8); /* Using RGBA for transparency */  /* No background color for a minimal look */
   border: 1px solid #ccc;  /* Light grey border */
@@ -36,7 +37,7 @@
 }
 
 .letterButton:hover {
-  border-color: yellow;  /* Darker border on hover for interaction feedback */
+  border-color: white;  /* Darker border on hover for interaction feedback */
 }
 
 .homeButton {
@@ -78,7 +79,6 @@
 }
 
 .modal {
-  /* background: white; */
   background: rgba(0, 0, 0, 0);
   width: 50%;
   height: 80%;
@@ -89,6 +89,14 @@
   display: flex;
   justify-content: flex-end; /* Align content to the right */
   position: relative; /* Relative positioning for the paper */
+}
+
+.hermione {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 30%;
+  height: auto;
 }
 
 .modalContent {
@@ -133,3 +141,15 @@
   width: 10px;
 }
 
+.buttonContainer {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonContainer div {
+  margin: 5px 0; /* Add some space between the buttons */
+}

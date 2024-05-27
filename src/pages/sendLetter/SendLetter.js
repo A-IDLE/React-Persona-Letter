@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getLetterList, writeLetter, updateStatusLetter } from "../../apis/letterApi";
 import { getCharacterName } from "../../apis/characterApi";
+import { ButtonContainer, HomeButton } from "../letterPage/LetterPage";
 import "./SendLetter.css";
 
 // 편지 작성 페이지
@@ -129,27 +130,6 @@ const SendLetter = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + letters.length) % letters.length);
   };
 
-  // 홈으로
-  const HomeButtonContainer = () => {
-    return (
-      <div className='homeButton'>
-          <HomeButton name="Persona Letter" />
-      </div>
-    )
-  }
-  
-  const HomeButton = ({ name, onClick }) => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-      navigate('/');
-    } 
-    return (
-      <div className='homeButton' onClick={handleClick}>
-        {name}
-      </div>
-    );
-  }
-
   // 튜토리얼 닫기
   const handleCloseTutorial = () => {
     setShowTutorial(false);
@@ -180,7 +160,7 @@ const SendLetter = () => {
             <p className="sendHighlightText">작성한 편지를 전송할 수 있어요</p>
         </div>
       )}
-      <HomeButtonContainer />
+      <HomeButton name="Persona Letter" />
       <img
         src={isOpen ? "/images/sendLetter/opened_envelope.png" : "/images/sendLetter/closed_envelope.png"}
         alt="편지함"
@@ -215,17 +195,19 @@ const SendLetter = () => {
         </>
       )}
       <div className="sendLetterContainer">
+      <div className="charNameContainer">
         <div className="charName">
           To. {name}
         </div>
-        <textarea
-          className="letter"
-          value={letterContent}
-          onChange={handleInputChange}
-        />
       </div>
-      <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" />
-      <img src="/images/sendLetter/paperAirplane.png" alt="종이비행기" className="paperAirplane" onClick={handleSendLetter} />
+      <textarea
+        className="letter"
+        value={letterContent}
+        onChange={handleInputChange}
+      />
+    </div>
+      {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
+      <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} />
     </div>
   );
 };

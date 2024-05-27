@@ -1,300 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
 .table {
-    width: 80%;
-    height: 700px;
-    margin-left: 10%;
-    margin-top: 10%;
+  width: 80%;
+  height: 700px;
+  margin-left: 10%;
+  margin-top: 10%;
 }
 
 .mailbox {
-    position: absolute;
-    top: 70%;
-    left: 10%;
-    cursor: pointer;
-    width: 20rem;
+  position: absolute;
+  top: 65%;
+  left: 10%;
+  cursor: pointer;
+  width: 20rem;
 }
 
 .FountainPen {
-    width: 20rem;
-    position: absolute;
-    top: 65%;
-    left: 75%;
+  width: 20rem;
+  position: absolute;
+  top: 65%;
+  left: 75%;
 }
 
-.paperAirplane {
-    width: 20rem;
-    position: absolute;
-    top: 80%;
-    left: 80%;
-    cursor: pointer;
+.send {
+  width: 5rem;
+  position: absolute;
+  top: 82%;
+  left: 83%;
+  cursor: pointer;
 }
 
 .sendLetterContainer {
-    width: 30%;
-    position: absolute;
-    top: 10rem;
-    left: 65%;
-    transform: translateX(-50%);
+  width: 30%;
+  position: absolute;
+  top: 10%;
+  left: 65%;
+  transform: translateX(-50%);
+}
+
+.charNameContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.charName {
+  font-size: 30px;
+  text-align: left;
+  font-family: Caveat, cursive;
+  color: #5a4632;
+  padding-bottom: 0.5rem;
+}
+
+.reset {
+  cursor: pointer;
+  width: 5rem;
+  height: auto;
 }
 
 .letter {
-    width: 100%;
-    height: 45rem;
-    resize: none;
-    padding: 0.5rem 1rem;
-    font-size: 1.8em; /* 폰트 크기 설정 */
-    background-color: #F2E7D1; /* 배경색 설정 */
-    background-attachment: local;
-    background-image:
-      linear-gradient(to right, #F2E7D1 22px, transparent 22px),
-      linear-gradient(to left, #F2E7D1 22px, transparent 22px),
-      repeating-linear-gradient(#F2E7D1, #F2E7D1 24px, #ccc 24px, #ccc 25px, #F2E7D1 25px);
-    line-height: 1.53rem; /* 줄 간격 설정 */
-    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 42rem;
+  resize: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.8em; /* 폰트 크기 설정 */
+  background-color: #F2E7D1; /* 배경색 설정 */
+  background-attachment: local;
+  background-image:
+    linear-gradient(to right, #F2E7D1 22px, transparent 22px),
+    linear-gradient(to left, #F2E7D1 22px, transparent 22px),
+    repeating-linear-gradient(#F2E7D1, #F2E7D1 24px, #ccc 24px, #ccc 25px, #F2E7D1 25px);
+  line-height: 1.53rem; /* 줄 간격 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .letter::-webkit-scrollbar {
-    width: 1px;
-}
-
-.charName { /* 추가된 스타일 */
-    font-size: 5em;
-    margin-bottom: 1rem;
-    text-align: left;
-    font-family: Caveat, cursive;
-    color: #5a4632;
-    /* border-bottom: 2px solid #5a4632; 밑줄 추가 */
-    padding-bottom: 0.5rem; /* 텍스트와 밑줄 사이 간격 조절 */
+  width: 1px;
 }
 
 .displayedLetter {
-    background: #F2E7D1;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 35rem;
-    min-height: 50%;
-    max-height: 50%;
-    position: absolute;
-    top: 15%;
-    left: 5%;
-    text-align: center;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    font-family: Caveat, cursive;
-    font-size: 2rem;
+  background: #F2E7D1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 35rem;
+  min-height: 45%;
+  max-height: 45%;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  text-align: center;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: Caveat, cursive;
+  font-size: 20px;
 }
 
 .displayedLetter::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 .letterCard {
-    background: #F2E7D1;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 35rem;
-    min-height: 50%;
-    max-height: 50%;
-    position: absolute;
-    top: 15%;
-    left: 5%;
-    text-align: center;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    font-family: Caveat, cursive;
-    font-size: 2rem;
+  background: #F2E7D1;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 35rem;
+  min-height: 45%;
+  max-height: 45%;
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  text-align: center;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: Caveat, cursive;
+  font-size: 20px;
 }
 
-/* 스크롤바 스타일링 */
 .letterCard::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 .letterCard h3 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .letterCard p {
-    color: #666;
-    overflow-y: auto;
-    white-space: pre-wrap;
+  color: #666;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 .cardButtons {
-    position: absolute;
-    width: 35rem;
-    top: 70%;
-    left: 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: absolute;
+  width: 35rem;
+  top: 65%;
+  left: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cardButtons button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.homeButton {
-    font-size: 5rem;
-    font-family: Caveat, cursive;
-    color: #5a4632;
-    margin: 2rem;
-    cursor: pointer;
-}
-
-/* 튜토리얼 */
 .tutorialOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center;
-    align-items: center; */
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .tutorialContent {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 500px;
-    z-index: 1001;
-    position: relative;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  z-index: 1001;
+  position: relative;
 }
 
 .tutorialContent h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .tutorialContent button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .highlight {
-    position: absolute;
-    border: 2px solid white;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-    z-index: 1001;
-    font-size: 20px;
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  z-index: 1001;
+  font-size: 20px;
 }
 
 .mailboxHighlight {
-    top: 85%;
-    left: 16.5%;
-    width: 12rem;
-    height: 10rem;
-    transform: translate(-50%, -50%);
+  top: 83%;
+  left: 18%;
+  width: 11rem;
+  height: 9rem;
+  transform: translate(-50%, -50%);
 }
 
 .arrow1 {
-    position: absolute;
-    top: 60%;
-    left: 10%;
-    z-index: 1002;
+  position: absolute;
+  top: 57%;
+  left: 10%;
+  z-index: 1002;
 }
 
 .mailboxHighlightText {
-    position: absolute;
-    top: 55%;
-    left: 10%;
-    width: 20rem;
-    text-align: center;
-    color: white;
-    z-index: 1003;
-    font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 20rem;
+  text-align: center;
+  color: white;
+  z-index: 1003;
+  font-size: 20px;
 }
 
-
 .letterHighlight {
-    top: 55%;
-    left: 65.5%;
-    width: 50rem;
-    height: 50rem;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 66%;
+  width: 38rem;
+  height: 46rem;
+  transform: translate(-50%, -50%);
 }
 
 .sendHighlight {
-    top: 88%;
-    left: 88%;
-    width: 10rem;
-    height: 10rem;
-    transform: translate(-50%, -50%);
+  top: 86%;
+  left: 85.2%;
+  width: 4rem;
+  height: 4.5rem;
+  transform: translate(-50%, -50%);
 }
 
 .sendHighlightText {
-    position: absolute;
-    top: 55%;
-    left: 85%;
-    width: 20rem;
-    text-align: center;
-    color: white;
-    z-index: 1003;
-    font-size: 20px;
+  position: absolute;
+  top: 52%;
+  left: 83%;
+  width: 20rem;
+  text-align: center;
+  color: white;
+  z-index: 1003;
+  font-size: 20px;
 }
 
 .arrow2 {
-    position: absolute;
-    top: 60%;
-    left: 93%;
-    z-index: 1002;
+  position: absolute;
+  top: 57%;
+  left: 88%;
+  z-index: 1002;
 }
 
 .tutorialButton {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 1002;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1002;
 }
 
 .closeTutorial {
-    position: absolute;
-    top: 4rem;
-    right: 4rem;
-    background: none;
-    border: none;
-    font-size: 3rem;
-    cursor: pointer;
-    z-index: 1002;
-    color: red;
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 1002;
+  color: red;
 }
 
 .helpIcon {
-    width: 3rem;
-    position: absolute;
-    top: 85%;
-    left: 22%;
-    cursor: pointer;
-    z-index: 1002;
+  width: 3rem;
+  position: absolute;
+  top: 85%;
+  left: 25%;
+  cursor: pointer;
+  z-index: 1002;
 }
