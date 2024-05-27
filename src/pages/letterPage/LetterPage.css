@@ -1,15 +1,18 @@
 /* LetterPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
 .letterContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;  /* Full height of the viewport */
   background-color: #D5D3CD;  /* Light grey background */
+  left: 10rem;
 }
 
 .letterImage {
-  max-width: 512px;
-  max-height: 512px;
+  /* max-width: 512px;
+  max-height: 512px; */
   margin-right: 50px; /* Space between image and buttons */
   cursor: pointer; /* Add cursor pointer to indicate clickable */
 }
@@ -22,7 +25,7 @@
 }
 
 .letterButton {
-  margin: 10px 0;  /* Space between buttons vertically */
+  margin: 5px 0;  /* Space between buttons vertically */
   padding: 8px 20px;  /* Smaller padding for a thinner button look */
   background-color: rgba(101, 86, 78, 0.8); /* Using RGBA for transparency */  /* No background color for a minimal look */
   border: 1px solid #ccc;  /* Light grey border */
@@ -36,15 +39,20 @@
 }
 
 .letterButton:hover {
-  border-color: yellow;  /* Darker border on hover for interaction feedback */
+  border-color: white;  /* Darker border on hover for interaction feedback */
 }
 
 .homeButton {
-  font-size: 5rem;
-  font-family: Caveat, cursive;
-  color: #5a4632;
-  margin: 2rem;
-  cursor: pointer;
+  font-size: 42px;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
+    top: 3%;
+    left: 5%;
+    position: absolute;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 /* 편지 흔들 */
@@ -62,6 +70,8 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: 4;
   animation-fill-mode: forwards; /* 애니메이션 끝난 후 마지막 상태 유지 */
+  width: 896px;
+  height: auto;
 }
 
 /* 모달 스타일 */
@@ -78,7 +88,6 @@
 }
 
 .modal {
-  /* background: white; */
   background: rgba(0, 0, 0, 0);
   width: 50%;
   height: 80%;
@@ -89,6 +98,14 @@
   display: flex;
   justify-content: flex-end; /* Align content to the right */
   position: relative; /* Relative positioning for the paper */
+}
+
+.hermione {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 30%;
+  height: auto;
 }
 
 .modalContent {
@@ -122,14 +139,26 @@
   position: absolute;
   top: 5%;
   left: 5%;
-  text-align: center;
+  text-align: left;
   overflow-y: auto;
   white-space: pre-wrap;
   font-family: Caveat, cursive;
-  font-size: 2rem;
+  font-size: 20px;
 }
 
 .paper::-webkit-scrollbar {
   width: 10px;
 }
 
+.buttonContainer {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonContainer div {
+  margin: 5px 0; /* Add some space between the buttons */
+}

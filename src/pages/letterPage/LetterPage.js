@@ -3,10 +3,6 @@ import './LetterPage.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getLetterList, updateStatusLetter } from '../../apis/letterApi';  // API 함수 임포트
 
-// 페이지 기능
-// 캐릭터한테 편지가 도착해있으면 편지지가 흔들리는데 기준은 read_status가 false면 흔들리고 true면 흔들리지 않음,
-// 편지지를 클릭할 시 가장 마지막으로 받은 편지가 화면에 출력되며, 그 편지는 read_status를 false(안읽은상태)에서true(읽은상태)로 바꿔줌
-
 export function LetterPage() {
   const [letters, setLetters] = useState([]);
   const [hasUnreadLetters, setHasUnreadLetters] = useState(false);
@@ -17,22 +13,17 @@ export function LetterPage() {
   const [letterContent, setLetterContent] = useState("");  // 선택된 편지 내용을 저장할 상태
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅
 
-  // reception_status이 receiving이면서 read_status가 false인 편지
   const checkUnreadLetters = (letters) => {
     const unreadExists = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
     setHasUnreadLetters(unreadExists);  // 상태 업데이트
   };
 
-  // 캐릭터가 변경 될 때 실행되는 useEffect
   useEffect(() => {
-    // 편지 목록을 가져오는 함수
     const fetchLetters = async (characterId) => {
       try {
         const response = await getLetterList(characterId);  // API 호출로 편지 목록 가져오기
         const sortedLetters = response.data.sort((a, b) => new Date(b.received_at) - new Date(a.received_at));  // 최신순으로 정렬
         setLetters(sortedLetters);  // 정렬된 편지 목록 상태 업데이트
-
-        console.log("fetchLetters response:", sortedLetters);
 
         checkUnreadLetters(sortedLetters);  // 읽지 않은 편지가 있는지 여부 확인
       } catch (error) {
@@ -43,24 +34,15 @@ export function LetterPage() {
     fetchLetters(characterId);  // 편지 목록 가져오기
   }, [characterId]);
 
-  // 편지가 변동될 때 실행되는 useEffect
-  // 편지의 개수가 동일하면 실행되지 않음
   useEffect(() => {
     checkUnreadLetters(letters);  // 읽지 않은 편지가 있는지 여부 확인
   }, [letters]);
 
-  // 모달 창 열림/닫힘을 토글하는 함수
   const toggleModal = async () => {
     if (!isModalOpen) {
-      // 가장 최근에 온 편지 찾기
-      console.log("before set modal is open", isModalOpen);
-
-      // 모달창에서 내가 마지막으로 받은 편지를 띄어준다
       const latestLetter = letters.filter(letter => letter.reception_status === 'receiving')[letters.filter(letter => letter.reception_status === 'receiving').length - 1];
-      setLetterContent(latestLetter ? latestLetter.letter_content : "No new letters");  // 편지가 없으면 No new letters 출력
+      setLetterContent(latestLetter ? latestLetter.letter_content : "No new letters");
 
-      // letter의 id와 latestLetter의 id가 동일할 시 read_status의 상태를 true로 변경함
-      // 여기가 편지의 읽음처리를 담당함
       if (latestLetter && !latestLetter.read_status) {
         try {
           await updateStatusLetter(latestLetter.letter_id);
@@ -75,12 +57,10 @@ export function LetterPage() {
       }
     }
     setIsModalOpen(!isModalOpen);  // 모달 창 상태 토글
-    console.log("after set modal open: ", isModalOpen);
   };
 
-  // "답장하기" 버튼 클릭 시 호출되는 함수
   const handleReply = () => {
-    navigate('/SendLetter', { state: { characterId, name } });  // /SendLetter 페이지로 이동 캐릭터의 id와 이름을 넘겨줌
+    navigate('/SendLetter', { state: { characterId, name } });
   };
 
   return (
@@ -91,16 +71,17 @@ export function LetterPage() {
 
       <div className='letterContainer'>
         <LetterImage shake={hasUnreadLetters} onClick={toggleModal} />  {/* 편지 이미지 컴포넌트 */}
-        <ButtonContainer characterId={characterId} name={name}/>  {/* 버튼 컨테이너 컴포넌트 */}
+        {/* <ButtonContainer characterId={characterId} name={name} />  버튼 컨테이너 컴포넌트 */}
 
         {isModalOpen && (  // 모달 창이 열려있을 때
           <Modal onClose={toggleModal}>
             <div className="modalContent">
               <div className="paper">
                 {letterContent}  {/* 편지 내용 표시 */}
-                <button onClick={handleReply}>답장하기</button>  {/* 답장하기 버튼 */}
               </div>
             </div>
+            <img src="/images/sendLetter/hermione1.png" alt="Letter Image" className='hermione'/>
+            <ButtonContainer characterId={characterId} name={name} />  {/* 모달 창 안에 버튼 컨테이너 사용 */}
           </Modal>
         )}
       </div>
@@ -164,12 +145,11 @@ function LetterImage({ shake, onClick }) {
   );
 }
 
+// 버튼 컨테이너 컴포넌트
 function ButtonContainer({ characterId, name }) {
-
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-    console.log("레터페이지 캐릭아이디 : " + name)
     navigate(path, { state: { characterId, name } });
   };
 
@@ -181,10 +161,6 @@ function ButtonContainer({ characterId, name }) {
       <div onClick={() => handleClick("/inbox")}>
         <LetterButton name="편지함" />
       </div>
-      {/* <div onClick={() => handleClick("/outbox")}>
-        <LetterButton name="보낸 편지함" />
-      </div>
-      <LetterButton name="뒤로가기" onClick={returnHandler} /> */}
     </div>
   );
 }
@@ -204,10 +180,8 @@ function Modal({ children, onClose }) {
 // 홈 버튼 컨테이너 컴포넌트
 function HomeButtonContainer() {
   return (
-    <div className='homeButton'>
-        <HomeButton name="Persona Letter" />
-    </div>
-  )
+    <HomeButton name="Persona Letter" />
+  );
 }
 
 // 편지 버튼 컴포넌트
@@ -224,22 +198,33 @@ export const HomeButton = ({ name, onClick }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/');
-  } 
+  };
   return (
     <div className='homeButton' onClick={handleClick}>
       {name}
     </div>
   );
-}
+};
 
-const writeLetterHandler = () => {
-  console.log('Write Letter');
-}
+// 리셋 버튼 컴포넌트
+export const ResetButton = ({ name, onClick }) => {
+  const handleReset = () => {
+    console.log("리셋");
+    const userConfirmed = window.confirm("캐릭터와의 기억과 편지 내용을 모두 제거하는 버튼입니다. 하시겠습니까?");
+    
+    if (userConfirmed) {
+        // 사용자가 "예"를 선택한 경우 실행할 코드
+        console.log("사용자가 예를 선택했습니다.");
+        // 여기서 캐릭터와의 기억과 편지 내용을 제거하는 코드를 추가합니다.
+    } else {
+        // 사용자가 "아니오"를 선택한 경우 실행할 코드
+        console.log("사용자가 아니오를 선택했습니다.");
+    }
+  }
 
-const letterHistoryHandler = () => {
-  console.log('Letter History');
-}
-
-const returnHandler = () => {
-  console.log('Return');
+  return (
+    <button className='resetButton' onClick={handleReset}>
+      {name}
+    </button>
+  );
 }
