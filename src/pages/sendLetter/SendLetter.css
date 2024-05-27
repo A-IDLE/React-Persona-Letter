@@ -70,7 +70,7 @@
   background-image:
     linear-gradient(to right, #F2E7D1 22px, transparent 22px),
     linear-gradient(to left, #F2E7D1 22px, transparent 22px),
-    repeating-linear-gradient(#F2E7D1, #F2E7D1 24px, #ccc 24px, #ccc 25px, #F2E7D1 25px);
+    repeating-linear-gradient(#F2E7D1, #F2E7D1 24px, #ccc 24px, #ccc 24px, #F2E7D1 25px);
   line-height: 1.53rem; /* 줄 간격 설정 */
   overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
   border: 1px solid #ccc;

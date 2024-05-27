@@ -180,9 +180,7 @@ function Modal({ children, onClose }) {
 // 홈 버튼 컨테이너 컴포넌트
 function HomeButtonContainer() {
   return (
-    <div className='homeButton'>
-      <HomeButton name="Persona Letter" />
-    </div>
+    <HomeButton name="Persona Letter" />
   );
 }
 
