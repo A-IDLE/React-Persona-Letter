@@ -206,9 +206,8 @@ const SendLetter = () => {
         onChange={handleInputChange}
       />
     </div>
-      <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" />
-      <img src="/images/sendLetter/paperAirplane.png" alt="종이비행기" className="paperAirplane" onClick={handleSendLetter} />
-      <ButtonContainer characterId={characterId} name={name} />
+      {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
+      <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} />
     </div>
   );
 };

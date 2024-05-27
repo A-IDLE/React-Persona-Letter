@@ -146,7 +146,7 @@ function LetterImage({ shake, onClick }) {
 }
 
 // 버튼 컨테이너 컴포넌트
-export function ButtonContainer({ characterId, name }) {
+function ButtonContainer({ characterId, name }) {
   const navigate = useNavigate();
 
   const handleClick = (path) => {

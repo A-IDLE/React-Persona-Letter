@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;  /* Full height of the viewport */
+  height: 80vh;  /* Full height of the viewport */
   background-color: #D5D3CD;  /* Light grey background */
 }
 
