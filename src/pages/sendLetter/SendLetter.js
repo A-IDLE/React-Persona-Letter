@@ -22,6 +22,12 @@ const SendLetter = () => {
   const { characterId } = location.state || {};
 
   useEffect(() => {
+    // 폰트 로드
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    
     // userId를 받아옴
     const storedUserId = localStorage.getItem("userId");
     setUserId(storedUserId);
