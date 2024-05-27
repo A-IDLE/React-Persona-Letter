@@ -144,6 +144,34 @@ const SendLetter = () => {
     navigate('/');
   } 
 
+  const handleClearContent = () => {
+    setLetterContent("");
+  };
+  
+  // 한글 텍스트 감지 함수
+  const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+
+    useEffect(() => {
+      const letterTextarea = document.querySelector('.letter');
+      const letterCard = document.querySelector('.letterCard');
+
+      if (letterTextarea) {
+        if (isKorean(letterContent)) {
+          letterTextarea.classList.add('korean');
+        } else {
+          letterTextarea.classList.remove('korean');
+        }
+      }
+
+      if (letterCard) {
+        if (letters.length > 0 && isKorean(letters[currentIndex].letter_content)) {
+          letterCard.classList.add('korean');
+        } else {
+          letterCard.classList.remove('korean');
+        }
+      }
+    }, [letterContent, letters, currentIndex]);
+    
   return (
     <div>
       {/* <button className="tutorialButton" onClick={handleShowTutorial}>?</button> */}
@@ -200,7 +228,7 @@ const SendLetter = () => {
           </div>
         </>
       )}
-      <div className="sendLetterContainer">
+      <div className={`sendLetterContainer ${isOpen ? 'right-15' : 'right-50'}`}>
       {/* <div className="charNameContainer">
         <div className="charName">
           To. {name}
@@ -214,7 +242,12 @@ const SendLetter = () => {
     </div>
       {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
       {/* <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} /> */}
-      <div className="send"onClick={handleSendLetter} >Send</div>
+      {!isOpen && (
+        <>
+          <div className="send" onClick={handleSendLetter}>Send a letter</div>
+          <div className="clear_letter" onClick={handleClearContent}>Clear the content</div>
+        </>
+      )}
     </div>
   );
 };
