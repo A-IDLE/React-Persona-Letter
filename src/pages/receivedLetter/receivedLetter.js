@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import './receivedLetter.css'
 import { getALetter } from '../../apis/letterApi';
 
@@ -14,28 +14,14 @@ function ReceivedLetter() {
     const [letter, setLetter] = useState(null);
     const letterContentRef = useRef(null);
     const [letterSectionHeight, setLetterSectionHeight] = useState('800px');
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchLetter = async () => {
-    //       try {
-    //         const response = await axios.get(`http://localhost:9000/getALetter/${letterId}`);
-    //         console.log("API Response:", response.data);  // 로그 추가
-    //         setLetter(response.data);
-    //       } catch (error) {
-    //         console.error('Failed to fetch letter', error);
-    //       }
-    //     };
-    
-    //     if (letterId) {
-    //       fetchLetter();
-    //     }
-    //   }, [letterId]);
-
-      useEffect(() => {
+    useEffect(() => {
         const fetchLetter = async () => {
             try {
                 const response = await getALetter(letterId);
-                console.log(response)
+                console.log(response);
                 setLetter(response.data);
             } catch (error) {
                 console.error('Error fetching letter', error);
@@ -47,19 +33,24 @@ function ReceivedLetter() {
         }
     }, [letterId]);
 
-    // letter_content의 높이를 계산하여 letter_section의 높이를 설정
     useEffect(() => {
         if (letterContentRef.current) {
             const newHeight = letterContentRef.current.offsetHeight + 150;
             setLetterSectionHeight(newHeight < 900 ? '800px' : `${newHeight}px`);
         }
-    }, [letter]); // letter 데이터가 업데이트 될 때마다 실행
-      
+    }, [letter]);
+
+    const showButtons = location.state?.from === 'inbox';
+
+    const handleReplyClick = () => {
+        navigate('/SendLetter', { state: { characterId: letter.character_id } });
+    };
+
     return (
         <section className='received_wrapper'>
             <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
                 <div className='image_front'>
-                    <img src="/images/receivedLetter/image_example.png" className='image_section'></img>
+                    <img src="/images/receivedLetter/image_example.png" className='image_section' alt="letter front"></img>
                 </div>
                 <div className='image_back'>
                     <div className='back_frame'>
@@ -71,12 +62,15 @@ function ReceivedLetter() {
                 <div className='letter_content' ref={letterContentRef}>
                     {letter && letter.letter_content}
                 </div>
-                <div className='a_letter_buttons'>
-                    <span className='translation_button'>번역하기</span>
-                    <span className='reply_button'>답장하기</span>
-                </div>
+                {showButtons && (
+                    <div className='a_letter_buttons'>
+                        
+                        <span className='reply_button' onClick={handleReplyClick}>답장하기</span>
+                    </div>
+                )}
             </div>
         </section>
     );
 }
+
 export default ReceivedLetter;

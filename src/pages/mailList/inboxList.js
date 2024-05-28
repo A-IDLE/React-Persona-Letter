@@ -34,11 +34,8 @@ function MailAppInbox() {
     const location = useLocation();
     const { characterId, name } = location.state || {}; // location.state에서 characterId와 name 가져오기
 
-    
-
     useEffect(() => {
         const userId = localStorage.getItem("userId");
-        // const characterId = localStorage.getItem("characterId");
         const characterName = localStorage.getItem("characterName");
         const accessToken = localStorage.getItem("accessToken");
         const receptionStatus = "receiving";
@@ -46,7 +43,7 @@ function MailAppInbox() {
         setCharacterName(name);
 
         console.log("@@@@@User, CharacterID", userId, characterId);
-        console.log("character name: ", characterName)
+        console.log("character name: ", characterName);
 
         if (userId && characterId && accessToken) {
             // inboxLetter API를 사용하여 편지 목록을 가져옵니다.
@@ -67,20 +64,19 @@ function MailAppInbox() {
                   setLoading(false); // 오류 발생 시 로딩 상태를 해제합니다.
               });
           }
-    }, []);
-   
+    }, [characterId, name]);
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
-        navigate(`/letter/${letterId}`);
+        navigate(`/letter/${letterId}`, { state: { from: 'inbox' } });
     };
 
     const navigateToOutbox = () => {
-        navigate('/outbox', {state: { characterId, name }}); // characterId와 name 함께 전달
+        navigate('/outbox', { state: { characterId, name } }); // characterId와 name 함께 전달
     };
 
     const navigateToInbox = () => {
-        navigate('/inbox', {state: { characterId, name }}); // characterId와 name 함께 전달
+        navigate('/inbox', { state: { characterId, name } }); // characterId와 name 함께 전달
     };
 
     const handleSearchChange = (event) => {
@@ -89,7 +85,7 @@ function MailAppInbox() {
 
     const handleClickHeader = () => {
         navigate('/');
-      } 
+    };
 
     return (
         <div className='inbox_section'>
@@ -101,9 +97,9 @@ function MailAppInbox() {
                     <div className="contact active">{CharacterName}</div>
                     <div className="contact" onClick={navigateToInbox}>Inbox</div>
                     <div className="contact" onClick={navigateToOutbox}>Outbox</div>
-                    <div className="menu-item">My page</div>
+                    {/* <div className="menu-item">My page</div> */}
+                    <Logout className="menu-item" />
                     <ResetButton characterId={characterId}/>
-                    <Logout className="menu-item"/>
                 </div>
                 
                 <div className="content">
