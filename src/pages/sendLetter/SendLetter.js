@@ -195,7 +195,7 @@ const SendLetter = () => {
           </div>
           <div className="highlight sendHighlight"/>
             <img src="/images/sendLetter/Arrow2.png" alt="편지함 화살표" className="arrow2"/>
-            <p className="sendHighlightText">작성한 편지를 전송할 수 있어요</p>
+            <p className="sendHighlightText">작성한 편지를 전송하거나 지울 수 있어요</p>
         </div>
       )}
       <div className="header_send" onClick={handleClickHeader}>
@@ -220,7 +220,7 @@ const SendLetter = () => {
           </div>
           <div className="cardButtons">
             <button onClick={prevLetter}>{"<"}</button>
-            <button onClick={selectLetter}>선택</button>
+            {/* <button onClick={selectLetter}>선택</button> */}
             <button onClick={nextLetter}>{">"}</button>
           </div>
         </>
