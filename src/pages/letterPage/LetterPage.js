@@ -11,6 +11,7 @@ export function LetterPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);  // 모달 창의 열림/닫힘 상태를 저장할 상태
   const [letterContent, setLetterContent] = useState("");  // 선택된 편지 내용을 저장할 상태
+  const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅
 
   const checkUnreadLetters = (letters) => {
@@ -19,6 +20,12 @@ export function LetterPage() {
   };
 
   useEffect(() => {
+    // 폰트 로드
+    const link = document.createElement('link');
+    link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+
     const fetchLetters = async (characterId) => {
       try {
         const response = await getLetterList(characterId);  // API 호출로 편지 목록 가져오기
@@ -56,12 +63,16 @@ export function LetterPage() {
         }
       }
     }
+
     setIsModalOpen(!isModalOpen);  // 모달 창 상태 토글
   };
 
   const handleReply = () => {
     navigate('/SendLetter', { state: { characterId, name } });
   };
+
+  // 한글 텍스트 감지 함수
+  const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
 
   return (
     <>
@@ -76,7 +87,7 @@ export function LetterPage() {
         {isModalOpen && (  // 모달 창이 열려있을 때
           <Modal onClose={toggleModal}>
             <div className="modalContent">
-              <div className="paper">
+              <div className={`paper ${isKorean(letterContent) ? 'korean' : ''}`}>
                 {letterContent}  {/* 편지 내용 표시 */}
               </div>
             </div>
