@@ -3,11 +3,14 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import './receivedLetter.css'
 import { getALetter } from '../../apis/letterApi';
 
+
 function ReceivedLetter() {
     const [flipped, setFlipped] = useState(false);
 
     const handleFlip = () => {
-        setFlipped(!flipped);
+        if (location.state?.from === 'inbox') {
+            setFlipped(!flipped);
+        }
     };
 
     const { letterId } = useParams();
@@ -50,13 +53,21 @@ function ReceivedLetter() {
         <section className='received_wrapper'>
             <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
                 <div className='image_front'>
-                    <img src="/images/receivedLetter/image_example.png" className='image_section' alt="letter front"></img>
+                    <img 
+                        // inbox가 아닐 때 표시할 이미지 설정
+                        src={location.state?.from !== 'inbox' ? "/images/receivedLetter/Absolutely_In_Love.jpeg" : "/images/receivedLetter/image_example.png"} 
+                        className='image_section' 
+                        alt="letter front">
+                    </img>
                 </div>
-                <div className='image_back'>
-                    <div className='back_frame'>
-                        <div className='image_comment'>Found this in Hogsmeade</div>
+                {/* inbox가 아닐 때 back 이미지를 표시하지 않음 */}
+                {location.state?.from === 'inbox' && (
+                    <div className='image_back'>
+                        <div className='back_frame'>
+                            <div className='image_comment'>Found this in Hogsmeade</div>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
             <div className='letter_section' style={{ height: letterSectionHeight }}>
                 <div className='letter_content' ref={letterContentRef}>
@@ -64,7 +75,6 @@ function ReceivedLetter() {
                 </div>
                 {showButtons && (
                     <div className='a_letter_buttons'>
-                        
                         <span className='reply_button' onClick={handleReplyClick}>답장하기</span>
                     </div>
                 )}
