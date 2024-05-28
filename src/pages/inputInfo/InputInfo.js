@@ -33,7 +33,12 @@ function Inputinfo() {
             setTokenData(tokenData);
 
             getUserInfo().then(response => {
-                setUserName(response.data.name || response.data.email);
+                const fetchedUserName = response.data.name || response.data.email;
+                setUserName(fetchedUserName);
+                setNewUserName(fetchedUserName); // 초기 newUserName을 가져온 userName으로 설정
+                const fetchedUserNickname = response.data.nickname || '';
+                setUserNickname(fetchedUserNickname);
+                setNewUserNickname(fetchedUserNickname); // 초기 newUserNickname을 가져온 userNickname으로 설정
             }).catch(error => {
                 console.error("Error fetching user info:", error);
             });
@@ -149,14 +154,14 @@ function Inputinfo() {
                     <input
                         className='name_input'
                         type="text"
-                        value={newUserName || userName}
+                        value={newUserName}
                         onChange={(e) => setNewUserName(e.target.value)}
                     /><br />
                     Nickname : 
                     <input
                         className='nickname_input'
                         type="text"
-                        value={newUserNickname || userNickname}
+                        value={newUserNickname}
                         onChange={(e) => setNewUserNickname(e.target.value)}
                     /><br />
                 </div>
