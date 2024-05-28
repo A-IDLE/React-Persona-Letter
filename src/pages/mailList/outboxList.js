@@ -100,7 +100,7 @@ function MailAppOutbox() {
                     <div className="contact active">{CharacterName}</div>
                     <div className="contact" onClick={navigateToInbox}>Inbox</div>
                     <div className="contact" onClick={navigateToOutbox}>Outbox</div>
-                    <div className="menu-item">My page</div>
+                    {/* <div className="menu-item">My page</div> */}
                     <Logout className="menu-item"/>
                 </div>
                
