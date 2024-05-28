@@ -18,9 +18,9 @@
 }
 
 .buttonContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  /* display: flex;
+  flex-direction: column; */
+  padding: 100px;
   margin-left: 3rem;
 }
 
@@ -44,15 +44,14 @@
 
 .homeButton {
   font-size: 42px;
-    font-family: "Amatic SC", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    color: #65564E;
-    top: 3%;
-    left: 5%;
-    position: absolute;
-    cursor: pointer;
-    white-space: nowrap;
+  font-family: "Amatic SC", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #65564E;
+  top: 21px;
+  left: 40px;
+  position: absolute;
+  white-space: nowrap;
 }
 
 /* 편지 흔들 */
@@ -70,7 +69,7 @@
   animation-timing-function: ease-in-out;
   animation-iteration-count: 4;
   animation-fill-mode: forwards; /* 애니메이션 끝난 후 마지막 상태 유지 */
-  width: 896px;
+  width: 700px;
   height: auto;
 }
 
