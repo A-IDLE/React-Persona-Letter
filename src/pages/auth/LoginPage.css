@@ -20,7 +20,7 @@
 
 .personaLetter {
     margin-top: 10%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 
@@ -51,12 +51,15 @@
     transform: translateY(1px); /* Move button down slightly to mimic a pressing action */
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
 
 
 h1 {
     font-size: 6em;
-    font-family: Caveat, cursive;
-    color: #5a4632;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
 }
 
 

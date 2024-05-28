@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getLettersByReceptionStatus } from "../../apis/letterApi";
 import './inboxList.css'; 
 import { Logout } from '../auth/Logout';
+import { ResetButton } from '../../components/buttons/ResetButton'
 
 // Function to truncate a string with ellipsis if it exceeds a certain length
 function truncateString(str, num) {
@@ -98,6 +99,7 @@ function MailAppInbox() {
                     <div className="contact" onClick={navigateToOutbox}>Outbox</div>
                     {/* <div className="menu-item">My page</div> */}
                     <Logout className="menu-item" />
+                    <ResetButton characterId={characterId}/>
                 </div>
                 
                 <div className="content">
