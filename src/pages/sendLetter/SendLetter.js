@@ -16,7 +16,7 @@ const SendLetter = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
-  const [showTutorial, setShowTutorial] = useState(false);  // 튜토리얼은 기본적으로 숨김 ?아이콘 누를 시 활성화
+  const [showTutorial, setShowTutorial] = useState(false);  // 튜토리얼은 기본적으로 숨김 ?아이콘 누를 시 활성화  
   const navigate = useNavigate();
   const location = useLocation();
   const { characterId } = location.state || {};

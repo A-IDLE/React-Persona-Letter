@@ -1,6 +1,7 @@
 /* LetterPage.css */
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
 
+
 .letterContainer {
   display: flex;
   justify-content: center;
@@ -160,4 +161,10 @@
 
 .buttonContainer div {
   margin: 5px 0; /* Add some space between the buttons */
+}
+
+.korean {
+  font-family: "Nanum Brush Script", cursive !important;
+  font-weight: 400;
+  font-style: normal;
 }
