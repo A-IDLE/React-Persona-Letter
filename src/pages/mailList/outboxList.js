@@ -70,7 +70,7 @@ function MailAppOutbox() {
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
-        navigate(`/letter/${letterId}`);
+        navigate('/sent', { state: { letterId } }); // 상태로 letterId를 전달
     };
 
     const navigateToOutbox = () => {

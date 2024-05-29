@@ -16,7 +16,7 @@
     width: 532px;
     height: 800px;
     perspective: 1000px;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 .image_front, .image_back {
     width: 100%;
@@ -57,14 +57,19 @@
     width: 492px;
     height: 760px;
 }
+.image_section_sent{
+    width: 492px;
+    height: 560px;
+    /* opacity: 60%; */
+}
 .letter_section{
     display: flex;           
     flex-direction: column; 
     position: relative;
     width: 532px;
     border: 1px solid black;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 .translation_button{
     width: 80px;
@@ -93,6 +98,14 @@
     font-family: "Nanum Gothic", sans-serif;
     font-size: 16px; 
 }
+.image_sent_text{
+    font-family: "Caveat", cursive;
+    font-size: 26px;
+    position: absolute;
+    top: 80px;
+    left: 640px;
+    z-index: 1;
+}
 .letter_content{
     font-family: "Caveat", cursive;
     font-size: 20px;
@@ -114,4 +127,19 @@
     font-weight: 400;
     font-style: normal;
   }
-  
+.header_received {
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
+
+.header-title_received {
+    font-size: 42px;
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #65564E;
+    top: 7px;
+    left: 80px;
+    position: absolute;
+}

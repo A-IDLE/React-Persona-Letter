@@ -77,7 +77,7 @@ export function LetterPage() {
   return (
     <>
       <div className='homeButton'>
-        <HomeButtonContainer />  {/* 홈 버튼 컨테이너 컴포넌트 */}
+        <HomeButtonContainer />  
       </div>
 
       <div className='letterContainer'>
@@ -89,10 +89,11 @@ export function LetterPage() {
             <div className="modalContent">
               <div className={`paper ${isKorean(letterContent) ? 'korean' : ''}`}>
                 {letterContent}  {/* 편지 내용 표시 */}
+                <ButtonContainer characterId={characterId} name={name} />  {/* 모달 창 안에 버튼 컨테이너 사용 */}
+
               </div>
             </div>
-            <img src="/images/sendLetter/hermione1.png" alt="Letter Image" className='hermione'/>
-            <ButtonContainer characterId={characterId} name={name} />  {/* 모달 창 안에 버튼 컨테이너 사용 */}
+            {/* <img src="/images/sendLetter/hermione1.png" alt="Letter Image" className='hermione'/> */}
           </Modal>
         )}
       </div>
