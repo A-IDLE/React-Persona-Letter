@@ -109,7 +109,7 @@
   justify-content: center;
   align-items: center;
   white-space: pre-wrap;
-  position: relative; 
+  /* position: relative;  */
 }
 
 .modalBackground {
@@ -140,6 +140,7 @@
   white-space: pre-wrap;
   font-family: Caveat, cursive;
   font-size: 20px;
+  position: relative;
 }
 
 .paper::-webkit-scrollbar {
@@ -153,8 +154,8 @@
   align-items: center;
   white-space: nowrap;
   position: absolute;
-  left: 310px;
-  bottom: 80px;
+  right: 50px;
+  bottom: 40px;
 }
 
 .buttonContainer div {
