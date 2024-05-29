@@ -50,8 +50,10 @@ function MailAppInbox() {
             getLettersByReceptionStatus(characterId, receptionStatus)
               .then(data => {
                   if (Array.isArray(data)) {
+                    const filteredLetters = data.filter(letter => letter.letter_image_status === true);
+
                       // 편지 목록을 created_time 기준으로 내림차순 정렬합니다.
-                      const sortedLetters = data.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+                      const sortedLetters = filteredLetters.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
                       setLetters(sortedLetters);
                       setLoading(false); // 로딩 상태를 해제합니다.
                   } else {
