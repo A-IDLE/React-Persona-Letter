@@ -108,3 +108,10 @@
     bottom: 100px;
     right: 50px;
 }
+
+.korean {
+    font-family: "Nanum Brush Script", cursive !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+  

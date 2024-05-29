@@ -23,6 +23,11 @@ function ReceivedLetter() {
     const [letterSectionHeight, setLetterSectionHeight] = useState('800px');
 
     useEffect(() => {
+        const link = document.createElement('link');
+        link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
+
         if (letterId) {
           receivedLetter(letterId)
             .then(response => {
@@ -54,6 +59,17 @@ function ReceivedLetter() {
     const handleClickHeader = () => {
         navigate('/');
     };
+
+    useEffect(() => {
+        const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+        const letterContent = letter?.letter_content || '';
+
+        if (isKorean(letterContent)) {
+            letterContentRef.current.classList.add('korean');
+        } else {
+            letterContentRef.current.classList.remove('korean');
+        }
+    }, [letter]);
 
     return (
         <section className='received_wrapper'>
