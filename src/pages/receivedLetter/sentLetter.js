@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import './receivedLetter.css'
-import { receivedLetter } from '../../apis/letterApi';
+import { sentLetter } from '../../apis/letterApi';
 
 
-function ReceivedLetter() {
+function SentLetter() {
     const [flipped, setFlipped] = useState(false);
     const location = useLocation();
     const { letterId } = location.state || {}; // 상태에서 letterId 가져오기
@@ -29,7 +29,7 @@ function ReceivedLetter() {
         document.head.appendChild(link);
 
         if (letterId) {
-          receivedLetter(letterId)
+            sentLetter(letterId)
             .then(response => {
               setLetter(response.data);
               setLoading(false);
@@ -73,17 +73,17 @@ function ReceivedLetter() {
 
     return (
         <section className='received_wrapper'>
-                <div className="header_received" onClick={handleClickHeader}>
+            <div className="header_received" onClick={handleClickHeader}>
                 <h1 className="header-title_received">Persona Letter</h1>
             </div>   
+            <div className='image_sent_text'>No sent image yet</div>
             <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
                 <div className='image_front'>
-                    <img 
-                        // 동적 URL을 사용하여 이미지 설정
-                        src={`https://persona-letter.s3.ap-southeast-2.amazonaws.com/letters/${letterId}_0.jpg`} 
-                        className='image_section' 
+                    <div 
+                        style={{backgroundImage: "url('/images/receivedLetter/Absolutely_In_Love.jpeg')"}}
+                        className='image_section_sent' 
                         alt="letter front">
-                    </img>
+                    </div>
                 </div>
 
                 <div className='image_back'>
@@ -107,4 +107,4 @@ function ReceivedLetter() {
     );
 }
 
-export default ReceivedLetter;
+export default SentLetter;
