@@ -17,7 +17,8 @@ const routes = [
   { path: '/LetterPage', component: LetterPage, isPrivate: true },
   { path: '/SendLetter', component: SendLetter, isPrivate: true },
   { path: '/Sending', component: Sending, isPrivate: true },
-  { path: '/letter/:letterId', component: ReceivedLetter, isPrivate: true },
+  { path: '/received', component: ReceivedLetter, isPrivate: true },
+  // { path: '/letter/:letterId', component: ReceivedLetter, isPrivate: true },
   { path: '/login', component: LoginPage, isPrivate: false },
   { path: '/info', component: Inputinfo, isPrivate: false },
   { path: '/test3', component: Test3, isPrivate: false }
