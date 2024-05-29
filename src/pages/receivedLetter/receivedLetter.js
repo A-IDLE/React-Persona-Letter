@@ -49,8 +49,15 @@ function ReceivedLetter() {
         navigate('/SendLetter', { state: { characterId: letter.character_id } });
     };
 
+    const handleClickHeader = () => {
+        navigate('/');
+    };
+
     return (
         <section className='received_wrapper'>
+                <div className="header_inbox" onClick={handleClickHeader}>
+                <h1 className="header-title_inbox">Persona Letter</h1>
+            </div>   
             <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
                 <div className='image_front'>
                     <img 
