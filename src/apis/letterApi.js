@@ -60,3 +60,8 @@ export const getUserInfo = async () => {
 export const getUserName = async () => {
   return await request.get('/getUserName');
 }
+
+// receivedLetter를 조회하는 API
+export const receivedLetter = async (letterId) => {
+  return await request.get(`/received?letter_id=${letterId}`);
+}

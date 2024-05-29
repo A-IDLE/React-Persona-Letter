@@ -68,7 +68,7 @@ function MailAppInbox() {
 
     const handleLetterClick = (letterId) => {
         console.log("clicked letter id:", letterId);
-        navigate(`/letter/${letterId}`, { state: { from: 'inbox' } });
+        navigate('/received', { state: { letterId } }); // 상태로 letterId를 전달
     };
 
     const navigateToOutbox = () => {
