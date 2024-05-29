@@ -1,16 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Caveat:wght@400..700&display=swap');
 
-.table {
-  width: 80%;
-  height: 700px;
-  margin-left: 10%;
-  margin-top: 10%;
-}
+/* 한국어 */
 .korean {
   font-family: "Nanum Brush Script", cursive !important;
   font-weight: 400;
   font-style: normal;
 }
+/* 편지함 */
 .mailbox {
   position: absolute;
   top: 65%;
@@ -19,13 +15,7 @@
   width: 20rem;
 }
 
-.FountainPen {
-  width: 20rem;
-  position: absolute;
-  top: 65%;
-  left: 75%;
-}
-
+/* 전송 */
 .send {
   /* width: 5rem; */
   position: absolute;
@@ -38,6 +28,8 @@
   display: inline;
   box-shadow: inset 0 -15px 0 #e8e8e8;
 }
+
+/* 지우기 */
 .clear_letter{
   /* width: 5rem; */
   position: absolute;
@@ -64,27 +56,8 @@
   right: 37%;
 }
 
-.charNameContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
 
-.charName {
-  font-size: 30px;
-  text-align: left;
-  font-family: Caveat, cursive;
-  color: #5a4632;
-  padding-bottom: 0.5rem;
-}
-
-.reset {
-  cursor: pointer;
-  width: 5rem;
-  height: auto;
-}
-
+/* 편지 */
 .letter {
   width: 460px;
   height: 610px;
@@ -105,33 +78,12 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* 편지지 스크롤바 */
 .letter::-webkit-scrollbar {
   width: 1px;
 }
 
-.displayedLetter {
-  background: #F2E7D1;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 35rem;
-  min-height: 45%;
-  max-height: 45%;
-  position: absolute;
-  top: 15%;
-  left: 5%;
-  text-align: center;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  font-family: Caveat, cursive;
-  font-size: 20px;
-}
-
-.displayedLetter::-webkit-scrollbar {
-  width: 10px;
-}
-
+/* 주고받은 편지내역 */
 .letterCard {
   background: #F2E7D1;
   border: 1px solid #ccc;
@@ -151,14 +103,12 @@
   font-size: 20px;
 }
 
+/* 스크롤바 */
 .letterCard::-webkit-scrollbar {
   width: 10px;
 }
 
-.letterCard h3 {
-  margin-top: 0;
-}
-
+/* 주고받은 편지 내용 */
 .letterCard p {
   color: #666;
   overflow-y: auto;
@@ -167,6 +117,7 @@
   padding-right: 20px;
 }
 
+/* 편지 좌우 보기버튼 */
 .cardButtons {
   position: absolute;
   width: 35rem;
@@ -185,150 +136,164 @@
   font-size: 1.5rem;
 }
 
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
+/* 도움말 css */
+/* 도움말 배경 */
 .tutorialOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  /* 편지함 클릭 전 후 공통 도움말 */
+  /* 도움말 텍스트 */
+  .helpText {
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    z-index: 1001;
+    font-size: 20px;
+  }
+  
+  /* 도움말 편지함 네모칸 */
+  .mailboxTutorial {
+    top: 81%;
+    left: 10%;
+    width: 11rem;
+    height: 10rem;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* 도움말 닫기 버튼 */
+  .closeTutorial {
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
+    z-index: 1002;
+    color: red;
+  }
+  
+  /* 도움말 아이콘 */
+  .helpIcon {
+    width: 3rem;
+    position: absolute;
+    top: 85%;
+    left: 15%;
+    cursor: pointer;
+    z-index: 1002;
+  }
+  
+  /* 편지함 클릭 전 도움말 */
+  /* 도움말 화살표1번 */
+  .beforeArrow1 {
+    position: absolute;
+    top: 57%;
+    left: 2%;
+    z-index: 1002;
+  }
+  
+  /* 도움말 화살표2번 */
+  .beforeArrow2 {
+    position: absolute;
+    top: 23%;
+    left: 82%;
+    z-index: 1002;
+    transform: scaleY(-1);
+  }
 
-.tutorialContent {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 500px;
-  z-index: 1001;
-  position: relative;
-}
+  /* 클릭전 도움말 편지함 문구 */
+  .beforeMailboxHelpText {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    width: 20rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+  }
 
-.tutorialContent h2 {
-  margin-top: 0;
-}
+  /* 클릭 전 편지지 도움말 네모칸 및 문구 */
+  .beforeLetterPaper {
+    top: 51%;
+    left: 47%;
+    width: 35rem;
+    height: 44rem;
+    transform: translate(-50%, -50%);
+  }
 
-.tutorialContent button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-}
+  /* 클릭 전 편지 전송 도움말 네모칸 */
+  .beforeSendHelp {
+    position: absolute;
+    top: 17%;
+    left: 68%;
+    width: 14rem;
+    height: 6rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+  }
 
-.highlight {
-  position: absolute;
-  border: 2px solid white;
-  border-radius: 5px;
-  padding: 10px;
-  color: white;
-  z-index: 1001;
-  font-size: 20px;
-}
+  .beforeSendHelpText {
+    position: absolute;
+    top: 55%;
+    left: 75%;
+    width: 25rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+  }
+  
+  /* 편지함 클릭 후 도움말 */
+  /* 도움말 화살표 1번 */
+  .afterArrow1 {
+    position: absolute;
+    top: 92%;
+    left: 12%;
+    z-index: 1002;
+  }
 
-.mailboxHighlight {
-  top: 83%;
-  left: 10%;
-  width: 11rem;
-  height: 9rem;
-  transform: translate(-50%, -50%);
-}
+  .afterMailboxHelpText {
+    position: absolute;
+    top: 83%;
+    left: 20%;
+    width: 20rem;
+    text-align: center;
+    color: white;
+    z-index: 1003;
+    font-size: 20px;
+  }
+  
+  /* 편지함 클릭 후 작성 편지지 도움말 네모칸 및 문구 */
+  .afterLetterPaper {
+    top: 51%;
+    left: 69%;
+    width: 35rem;
+    height: 44rem;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* 편지함 클릭후 주고 받는 편지 나열 네모칸 */
+  .afterLetters {
+    top: 42%;
+    left: 25.5%;
+    width: 40rem;
+    height: 32rem;
+    transform: translate(-50%, -50%);
+  }
 
-.arrow1 {
-  position: absolute;
-  top: 57%;
-  left: 2%;
-  z-index: 1002;
-}
-
-.mailboxHighlightText {
-  position: absolute;
-  top: 50%;
-  left: 2%;
-  width: 20rem;
-  text-align: center;
-  color: white;
-  z-index: 1003;
-  font-size: 20px;
-}
-
-.letterHighlight {
-  top: 51%;
-  left: 47%;
-  width: 35rem;
-  height: 44rem;
-  transform: translate(-50%, -50%);
-}
-
-.sendHighlight {
-  top: 23%;
-  left: 74%;
-  width: 12rem;
-  height: 7rem;
-  transform: translate(-50%, -50%);
-}
-
-.sendHighlightText {
-  position: absolute;
-  top: 54%;
-  left: 73%;
-  width: 23rem;
-  text-align: center;
-  color: white;
-  z-index: 1003;
-  font-size: 20px;
-}
-
-.arrow2 {
-  position: absolute;
-  top: 25%;
-  left: 80%;
-  z-index: 1002;
-  transform: scaleY(-1);
-}
-
-.tutorialButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 1002;
-}
-
-.closeTutorial {
-  position: absolute;
-  top: 4rem;
-  right: 4rem;
-  background: none;
-  border: none;
-  font-size: 3rem;
-  cursor: pointer;
-  z-index: 1002;
-  color: red;
-}
-
-.helpIcon {
-  width: 3rem;
-  position: absolute;
-  top: 85%;
-  left: 15%;
-  cursor: pointer;
-  z-index: 1002;
-}
-
+/* 홈버튼 */
 .header_send {
   margin-bottom: 50px;
   cursor: pointer;

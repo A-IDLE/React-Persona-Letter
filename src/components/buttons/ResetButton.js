@@ -1,6 +1,6 @@
 // 리셋 버튼 컴포넌트
 import { deleteLetters } from "../../apis/letterApi";
-
+import "./ResetButton.css"
 
 export const ResetButton = ({characterId }) => {
 
@@ -24,7 +24,8 @@ export const ResetButton = ({characterId }) => {
 
     return (
         <div>
-            <img src="/images/sendLetter/reset.png" alt="종이비행기" className="send" onClick={handleReset} />
+            <img src="/images/inbox/reset.svg" alt="리셋" className="resetButton"/>
+            <div className="resetText" onClick={handleReset}>reset</div>
         </div>
     );
 }
