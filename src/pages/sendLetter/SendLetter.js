@@ -5,9 +5,6 @@ import { getCharacterName } from "../../apis/characterApi";
 import { ButtonContainer, HomeButton } from "../letterPage/LetterPage";
 import "./SendLetter.css";
 
-// 편지 작성 페이지
-// 캐릭터에게 편지를 쓸 수 있는 페이지이며 편지함을 눌러서 보내고 받은 편지를 확인 가능, ? 아이콘 누를 시 가이드 제공
-
 const SendLetter = () => {
   const [letterContent, setLetterContent] = useState("");
   const [displayedLetter, setDisplayedLetter] = useState(null);
@@ -16,47 +13,40 @@ const SendLetter = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
-  const [showTutorial, setShowTutorial] = useState(false);  // 튜토리얼은 기본적으로 숨김 ?아이콘 누를 시 활성화  
+  const [showTutorialBeforeOpen, setShowTutorialBeforeOpen] = useState(false);
+  const [showTutorialAfterOpen, setShowTutorialAfterOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { characterId } = location.state || {};
 
   useEffect(() => {
-    // 폰트 로드
     const link = document.createElement('link');
     link.href = "https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap";
     link.rel = "stylesheet";
     document.head.appendChild(link);
-    
-    // userId를 받아옴
+
     const storedUserId = localStorage.getItem("userId");
     setUserId(storedUserId);
-    // 캐릭터 아이디가 존재하면 캐릭터 이름을 받아옴
+
     if (characterId) {
       fetchCharacterName(characterId);
     }
   }, [characterId]);
 
-  // 캐릭터 이름 가져오기
   const fetchCharacterName = async (characterId) => {
     try {
-      const characterName = await getCharacterName(characterId); // 캐릭터 이름을 가져오는 API 호출
-      setName(characterName); // 가져온 이름을 상태에 저장
+      const characterName = await getCharacterName(characterId);
+      setName(characterName);
       console.log("Fetched character name:", characterName);
     } catch (error) {
       console.error("Failed to fetch character name:", error);
     }
   };
 
-  // 작성한 편지의 데이터 전송
   const handleInputChange = (event) => {
     setLetterContent(event.target.value);
   };
 
-  // console.log("characterId: ", characterId);
-  // console.log("characterName: ", name);
-
-  // 편지 작성
   const handleSendLetter = async () => {
     if (letterContent.trim() === "") {
       alert("편지 내용을 작성해 주세요.");
@@ -76,7 +66,6 @@ const SendLetter = () => {
           reception_status: "sending",
           read_status: true,
         };
-        // console.log(data)
         await writeLetter(data);
       } catch (error) {
         alert("전송 실패:", error.message);
@@ -84,13 +73,11 @@ const SendLetter = () => {
     }
   };
 
-  // 편지함에서 편지 선택
   const selectLetter = async () => {
     if (letters.length > 0) {
       const selectedLetter = letters[currentIndex];
       setDisplayedLetter(selectedLetter);
 
-      // 만약 read_status가 0인 편지를 선택시 read_status가 1로 변경됨
       if (!selectedLetter.read_status) {
         try {
           await updateStatusLetter(selectedLetter.letter_id);
@@ -106,7 +93,6 @@ const SendLetter = () => {
     }
   };
 
-  // 편지함 닫기
   const closeLetter = () => {
     setDisplayedLetter(null);
   };
@@ -126,24 +112,28 @@ const SendLetter = () => {
     }
   }, [userId, characterId, isOpen]);
 
-  // 다음편지
   const nextLetter = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % letters.length);
   };
 
-  // 이전편지
   const prevLetter = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + letters.length) % letters.length);
   };
 
-  // 튜토리얼 닫기
-  const handleCloseTutorial = () => {
-    setShowTutorial(false);
+  const handleCloseTutorialBeforeOpen = () => {
+    setShowTutorialBeforeOpen(false);
   };
 
-  // 튜토리얼 열기
-  const handleShowTutorial = () => {
-    setShowTutorial(true);
+  const handleShowTutorialBeforeOpen = () => {
+    setShowTutorialBeforeOpen(true);
+  };
+
+  const handleCloseTutorialAfterOpen = () => {
+    setShowTutorialAfterOpen(false);
+  };
+
+  const handleShowTutorialAfterOpen = () => {
+    setShowTutorialAfterOpen(true);
   };
 
   const handleClickHeader = () => {
@@ -154,49 +144,65 @@ const SendLetter = () => {
     setLetterContent("");
   };
   
-  // 한글 텍스트 감지 함수
   const isKorean = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
 
-    useEffect(() => {
-      const letterTextarea = document.querySelector('.letter');
-      const letterCard = document.querySelector('.letterCard');
+  useEffect(() => {
+    const letterTextarea = document.querySelector('.letter');
+    const letterCard = document.querySelector('.letterCard');
 
-      if (letterTextarea) {
-        if (isKorean(letterContent)) {
-          letterTextarea.classList.add('korean');
-        } else {
-          letterTextarea.classList.remove('korean');
-        }
+    if (letterTextarea) {
+      if (isKorean(letterContent)) {
+        letterTextarea.classList.add('korean');
+      } else {
+        letterTextarea.classList.remove('korean');
       }
+    }
 
-      if (letterCard) {
-        if (letters.length > 0 && isKorean(letters[currentIndex].letter_content)) {
-          letterCard.classList.add('korean');
-        } else {
-          letterCard.classList.remove('korean');
-        }
+    if (letterCard) {
+      if (letters.length > 0 && isKorean(letters[currentIndex].letter_content)) {
+        letterCard.classList.add('korean');
+      } else {
+        letterCard.classList.remove('korean');
       }
-    }, [letterContent, letters, currentIndex]);
-    
+    }
+  }, [letterContent, letters, currentIndex]);
+
   return (
     <div>
-      {/* <button className="tutorialButton" onClick={handleShowTutorial}>?</button> */}
-      <img src="/images/sendLetter/helpIcon.png" alt="도움말" className="helpIcon" onClick={handleShowTutorial} />
-      {showTutorial && (
+      <img src="/images/sendLetter/helpIcon.png" alt="도움말" className="helpIcon" onClick={isOpen ? handleShowTutorialAfterOpen : handleShowTutorialBeforeOpen} />
+      {showTutorialBeforeOpen && !isOpen && (
+        // 편지함 닫혔을 때 도움말 내용
         <div className="tutorialOverlay">
           <div>
-            <button className="closeTutorial" onClick={handleCloseTutorial}>X</button>
+            <button className="closeTutorial" onClick={handleCloseTutorialBeforeOpen}>X</button>
           </div>
-          <div className="highlight mailboxHighlight"/>
-            <img src="/images/sendLetter/Arrow1.png" alt="편지함 화살표" className="arrow1"/>
-            <p className="mailboxHighlightText">주고 받은 편지를 확인 할 수 있어요</p>
-          <div className="highlight letterHighlight">
-            <p>캐릭터에게 편지를 작성할 수 있어요</p>
-          </div>
-          <div className="highlight sendHighlight"/>
-            <img src="/images/sendLetter/Arrow2.png" alt="편지함 화살표" className="arrow2"/>
-            <p className="sendHighlightText">작성한 편지를 전송하거나 지울 수 있어요</p>
+          <div className="helpText mailboxTutorial"/>
+            <img src="/images/sendLetter/Arrow1.png" alt="편지함 화살표" className="beforeArrow1"/>
+            <p className="beforeMailboxHelpText">주고 받은 편지를 확인 할 수 있어요</p>
+            <div className="helpText beforeLetterPaper">
+              <p>캐릭터에게 편지를 작성할 수 있어요</p>
+            </div>
+          <div className="helpText beforeSendHelp"/>
+            <img src="/images/sendLetter/Arrow2.png" alt="편지함 화살표" className="beforeArrow2"/>
+            <p className="beforeSendHelpText">작성한 편지를 전송하거나 지울 수 있어요</p>
         </div>
+      )}
+      {showTutorialAfterOpen && isOpen && (
+        <div className="tutorialOverlay">
+        <div>
+          <button className="closeTutorial" onClick={handleCloseTutorialAfterOpen}>X</button>
+        </div>
+        {/* 편지함이 열렸을 때의 도움말 내용 */}
+        <div className="helpText mailboxTutorial"/>
+        <img src="/images/sendLetter/Arrow3.png" alt="편지함 화살표" className="afterArrow1"/>
+        <p className="afterMailboxHelpText">편지함을 열고 닫을 수 있습니다</p>
+        <div className="helpText afterLetterPaper">
+          <p>캐릭터에게 편지를 작성할 수 있어요</p>
+        </div>
+        <div className="helpText afterLetters">
+          <p>주고 받은 편지를 확인할 수 있어요</p>
+        </div>
+      </div>
       )}
       <div className="header_send" onClick={handleClickHeader}>
           <h1 className="header-title_send">Persona Letter</h1>
@@ -220,7 +226,6 @@ const SendLetter = () => {
           </div>
           <div className="cardButtons">
             <button onClick={prevLetter}>{"<"}</button>
-            {/* <button onClick={selectLetter}>선택</button> */}
             <button onClick={nextLetter}>{">"}</button>
           </div>
         </>
@@ -235,19 +240,12 @@ const SendLetter = () => {
         </>
       )}
       <div className={`sendLetterContainer ${isOpen ? 'right-15' : 'right-50'}`}>
-      {/* <div className="charNameContainer">
-        <div className="charName">
-          To. {name}
-        </div>
-      </div> */}
       <textarea
         className="letter"
         value={letterContent}
         onChange={handleInputChange}
       />
     </div>
-      {/* <img src="/images/sendLetter/FountainPen.png" alt="만년필" className="FountainPen" /> */}
-      {/* <img src="/images/sendLetter/send.png" alt="종이비행기" className="send" onClick={handleSendLetter} /> */}
       {!isOpen && (
         <>
           <div className="send" onClick={handleSendLetter}>Send a letter</div>

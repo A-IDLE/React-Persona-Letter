@@ -1,0 +1,19 @@
+  .resetButton {
+    width: 20px;
+    height: auto;
+    position: absolute;
+    top: 17.5%;
+    left: 92%;
+  }
+  
+  .resetText {
+    color: #5a4632;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    margin-left: 28px;
+    position: absolute;
+    top: 16.5%;
+    left: 92%;
+    cursor: pointer;
+  }
+  

@@ -18,13 +18,6 @@
   cursor: pointer; /* Add cursor pointer to indicate clickable */
 }
 
-.buttonContainer {
-  /* display: flex;
-  flex-direction: column; */
-  padding: 100px;
-  margin-left: 3rem;
-}
-
 .letterButton {
   margin: 5px 0;  /* Space between buttons vertically */
   padding: 8px 20px;  /* Smaller padding for a thinner button look */
@@ -104,8 +97,10 @@
   position: absolute;
   top: 5%;
   right: 5%;
-  width: 30%;
-  height: auto;
+  /* width:  246px;
+  height: 380px; */
+  width: 368px;
+  height: 570px;
 }
 
 .modalContent {
@@ -150,17 +145,19 @@
   width: 10px;
 }
 
+
 .buttonContainer {
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  top : 72%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  margin-left: 3rem;
+  white-space: nowrap;
 }
 
 .buttonContainer div {
-  margin: 5px 0; /* Add some space between the buttons */
+  margin-right: 1rem;
 }
 
 .korean {
