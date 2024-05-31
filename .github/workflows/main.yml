@@ -1,4 +1,4 @@
-name: Persona Letter React CI/CD
+name: Persona Letter React 
 
 on:
   # main branch에 푸쉬할 때
