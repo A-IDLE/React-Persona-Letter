@@ -20,7 +20,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} <<EOF
           cd ~/Persona_Letter
-          sudo rm -r ./React-Perona-Letter/
+          sudo rm -r ~/Persona_Letter/React-Persona-Letter/
           git clone https://github.com/A-IDLE/React-Persona-Letter.git
           cd ~/Persona_Letter/React-Persona-Letter/
           npm i
@@ -28,4 +28,5 @@ jobs:
           npm run build
           sudo cp -rf ~/Persona_Letter/React-Persona-Letter/build/ ~/../../usr/local/my-app/
           sudo systemctl reload nginx
+      
         EOF
