@@ -86,7 +86,7 @@ export const Main = () => {
         <>
             <div className="container">
                 <div className="header">
-                    <h1 className="header-title" onClick={handleClickHeader}>Persona Letter CI/CD</h1>
+                    <h1 className="header-title" onClick={handleClickHeader}>Persona Letter</h1>
                 </div>
                 <div className='main_intro'>
                     <p className="intro_phrase">
