@@ -78,35 +78,33 @@ function ReceivedLetter() {
 
   return (
     <section className='received_wrapper'>
-      <div className="header_received" onClick={handleClickHeader}>
-        <h1 className="header-title_received">Persona Letter</h1>
-      </div>
-      <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
-        <div className='image_front'>
-          <img
-            src={imageUrl ? `https://persona-letter.s3.ap-southeast-2.amazonaws.com${imageUrl}` : `https://persona-letter.s3.ap-southeast-2.amazonaws.com/letters/${letterId}_0.jpg`}
-            className='image_section'
-            alt="letter front">
-          </img>
-        </div>
+            <div className="header_received" onClick={handleClickHeader}>
+                <h1 className="header-title_received">Persona Letter</h1>
+            </div>   
+            <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
+                <div className='image_front'>
+                    <img 
+                        src={`https://persona-letter.s3.ap-southeast-2.amazonaws.com/letters/${letterId}_0.jpg`} 
+                        className='image_section' 
+                        alt="letter front"
+                    />
+                </div>
 
-        <div className='image_back'>
-          <div className='back_frame'>
-            <div className='image_comment'>Found this in Hogsmeade</div>
-          </div>
-        </div>
-      </div>
-      <div className='letter_section' style={{ height: letterSectionHeight }}>
-        <div className='letter_content' ref={letterContentRef}>
-          {letter && letter.letter_content}
-        </div>
-        {showButtons && (
-          <div className='a_letter_buttons'>
-            <span className='reply_button' onClick={handleReplyClick}>답장하기</span>
-          </div>
-        )}
-      </div>
-    </section>
+                <div className='image_back'>
+                    <div className='back_frame'>
+                        <div className='image_comment'>Found this in Hogsmeade</div>
+                    </div>
+                </div>
+            </div>
+            <div className='letter_section' style={{ height: letterSectionHeight }}>
+                <div className='letter_content' ref={letterContentRef}>
+                    {letter && letter.letter_content}
+                </div>
+                <div className='a_letter_buttons'>
+                    <span className='reply_button' onClick={handleReplyClick}>답장하기</span>
+                </div>
+            </div>
+        </section>
   );
 }
 
