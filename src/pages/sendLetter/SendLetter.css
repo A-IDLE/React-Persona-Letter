@@ -318,3 +318,11 @@
   left: 80px;
   position: absolute;
 }
+
+/* Media Queries */
+@media (max-width: 1400px) {
+  .send,
+  .clear_letter {
+    left: 50px;
+  }
+}
