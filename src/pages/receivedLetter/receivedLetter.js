@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './receivedLetter.css';
-import { receivedLetter } from '../../apis/letterApi';
+import { receivedLetter, updateStatusLetter } from '../../apis/letterApi';
 
 function ReceivedLetter() {
   const [flipped, setFlipped] = useState(false);
@@ -37,6 +37,10 @@ function ReceivedLetter() {
           .then(response => {
             setLetter(response.data);
             setLoading(false);
+            // 편지 읽음 처리
+            updateStatusLetter(letterId, true).catch(error => {
+              console.error("Error updating letter status:", error);
+            });
           })
           .catch(error => {
             console.error("Error fetching the letter:", error);
