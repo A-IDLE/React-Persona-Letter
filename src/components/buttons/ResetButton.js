@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./ResetButton.css"
 
 export const ResetButton = ({ characterId, onReset }) => {
-    const navigate = useNavigate();
 
     const handleReset = async () => {
         console.log("리셋");
