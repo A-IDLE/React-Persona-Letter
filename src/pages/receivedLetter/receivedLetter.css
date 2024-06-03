@@ -4,7 +4,7 @@
     /* align-items: center; */
     background-color: #F1EDE2;
     gap: 100px;
-    /* height: 100vh; */
+    height: 100vh;
     overflow-x: auto;
 }
 @media (max-width: 1200px) { /* 화면 크기에 따라 조정 가능 */
