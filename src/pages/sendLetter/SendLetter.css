@@ -29,6 +29,11 @@
   box-shadow: inset 0 -15px 0 #e8e8e8;
 }
 
+.send:hover{
+    color: white;
+    /* background: yellow; */
+}
+
 /* 지우기 */
 .clear_letter{
   /* width: 5rem; */
@@ -40,6 +45,9 @@
   font-family: 'Caveat', cursive;
   font-size: 28px;
   box-shadow: inset 0 -15px 0 #e8e8e8;
+}
+.clear_letter:hover{
+    color: white;
 }
 .sendLetterContainer {
   width: 30%;
