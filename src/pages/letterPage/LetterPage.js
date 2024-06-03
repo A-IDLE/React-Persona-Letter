@@ -16,7 +16,7 @@ export function LetterPage() {
   const navigate = useNavigate();  // 페이지 이동을 위한 useNavigate 훅
 
   const checkUnreadLetters = (letters) => {
-    const unreadExists = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status);
+    const unreadExists = letters.some(letter => letter.reception_status === 'receiving' && !letter.read_status && letter.letter_image_status === true);
     setHasUnreadLetters(unreadExists);  // 상태 업데이트
     if (unreadExists) {
       setNotification(true);
@@ -39,7 +39,7 @@ export function LetterPage() {
         setLetters(sortedLetters);  // 정렬된 편지 목록 상태 업데이트
         checkUnreadLetters(sortedLetters);  // 읽지 않은 편지가 있는지 여부 확인
 
-        const latestLetter = sortedLetters.find(letter => letter.reception_status === 'receiving' && !letter.read_status);
+        const latestLetter = sortedLetters.find(letter => letter.reception_status === 'receiving' && !letter.read_status && letter.letter_image_status === true);
         setLatestLetter(latestLetter);
         setLetterContent(latestLetter ? latestLetter.letter_content : "");
       } catch (error) {
@@ -52,7 +52,11 @@ export function LetterPage() {
 
   const handleLetterClick = () => {
     if (latestLetter) {
-      navigate('/received', { state: { letterId: latestLetter.letter_id, letterContent: latestLetter.letter_content, imageUrl: `/letters/${latestLetter.letter_id}_0.jpg` } });
+      updateStatusLetter(latestLetter.letter_id, true).then(() => {
+        navigate('/received', { state: { letterId: latestLetter.letter_id, letterContent: latestLetter.letter_content, imageUrl: `/letters/${latestLetter.letter_id}_0.jpg` } });
+      }).catch(error => {
+        console.error("Error updating letter status:", error);
+      });
     }
   };
 
