@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import './receivedLetter.css'
+import { useLocation, useNavigate } from 'react-router-dom';
+import './receivedLetter.css';
 import { sentLetter } from '../../apis/letterApi';
-
 
 function SentLetter() {
     const [flipped, setFlipped] = useState(false);
@@ -10,7 +9,7 @@ function SentLetter() {
     const { letterId } = location.state || {}; // 상태에서 letterId 가져오기
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
     const handleFlip = () => {
         if (location.state?.from === 'inbox') {
@@ -30,18 +29,18 @@ function SentLetter() {
 
         if (letterId) {
             sentLetter(letterId)
-            .then(response => {
-              setLetter(response.data);
-              setLoading(false);
-            })
-            .catch(error => {
-              console.error("Error fetching the letter:", error);
-              setLoading(false);
-            });
+                .then(response => {
+                    setLetter(response.data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error("Error fetching the letter:", error);
+                    setLoading(false);
+                });
         } else {
-          setLoading(false);
+            setLoading(false);
         }
-      }, [letterId]);
+    }, [letterId]);
 
     useEffect(() => {
         if (letterContentRef.current) {
@@ -49,6 +48,21 @@ function SentLetter() {
             setLetterSectionHeight(newHeight < 900 ? '800px' : `${newHeight}px`);
         }
     }, [letter]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 1300) {
+                setIsHeaderVisible(false);
+            } else {
+                setIsHeaderVisible(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // 초기 실행
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const showButtons = location.state?.from === 'inbox';
 
@@ -73,14 +87,15 @@ function SentLetter() {
 
     return (
         <section className='received_wrapper'>
-            <div className="header_received" onClick={handleClickHeader}>
-                <h1 className="header-title_received">Persona Letter</h1>
-            </div>   
-            <div className='image_sent_text'>No sent image yet</div>
+            {isHeaderVisible && (
+                <div className="header_received" onClick={handleClickHeader}>
+                    <h1 className="header-title_received">Persona Letter</h1>
+                </div>
+            )}
             <div className={`image_card ${flipped ? 'flipped' : ''}`} onClick={handleFlip}>
                 <div className='image_front'>
                     <div 
-                        style={{backgroundImage: "url('/images/receivedLetter/Absolutely_In_Love.jpeg')"}}
+                        style={{ backgroundImage: "url('/images/receivedLetter/Absolutely_In_Love.jpeg')" }}
                         className='image_section_sent' 
                         alt="letter front">
                     </div>
@@ -91,7 +106,7 @@ function SentLetter() {
                         <div className='image_comment'>Found this in Hogsmeade</div>
                     </div>
                 </div>
-
+                <div className='image_sent_text'>No sent image yet</div>
             </div>
             <div className='letter_section' style={{ height: letterSectionHeight }}>
                 <div className='letter_content' ref={letterContentRef}>
