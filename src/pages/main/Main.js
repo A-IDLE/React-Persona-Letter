@@ -3,7 +3,7 @@ import { getCharacters } from "../../apis/characterApi";
 import { getUserName } from '../../apis/letterApi';
 import './Main.css';
 import { Logout } from '../auth/Logout';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import useCharacterStore from '../../store/useCharacterStore';
 
@@ -48,8 +48,10 @@ export const Main = () => {
     const [characterList, setCharacterList] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { characters, fetchCharacters } = useCharacterStore();
+    const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const loginStatus = useAuth();
 
@@ -78,6 +80,19 @@ export const Main = () => {
         fetchCharacters();
     }, [loginStatus, fetchCharacters]);
 
+    useEffect(() => {
+        if (location.state && location.state.message) {
+            setMessage(location.state.message);
+
+            // 5초 후에 메시지를 지우기
+            const timer = setTimeout(() => {
+                setMessage('');
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [location.state]);
+
     const handleClickHeader = () => {
         navigate('/');
       } 
@@ -98,6 +113,7 @@ export const Main = () => {
                         reality and fiction. Dive into a unique experience by sending the first letter!                    
                     </p>
                 </div>
+                {message && <div className="notification">{message}</div>}
                     <div className="buttons">
                         {isLoggedIn ? (
                             <Logout className="logout_button" />
